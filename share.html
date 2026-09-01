@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>🛒 ক্রয়-বিক্রয় | Buy & Sell</title>
 
-<!-- =========================
-     APP & SHARE URL
-========================= -->
-
+<!-- Facebook / WhatsApp / Messenger Preview -->
 <meta property="og:type" content="website">
 
 <meta property="og:title"
 content="🛒 ক্রয়-বিক্রয় | Buy & Sell">
 
 <meta property="og:description"
-content="সহজে পণ্য কিনুন, বিক্রি করুন এবং User-to-User লেনদেন করুন।">
+content="সহজে পণ্য কিনুন, বিক্রি করুন ও User-to-User লেনদেন করুন।">
 
 <meta property="og:url"
 content="https://kroybikroy190-ux.github.io/Kroybikroy/share.html">
@@ -25,8 +22,8 @@ content="https://kroybikroy190-ux.github.io/Kroybikroy/share.html">
 <meta property="og:image"
 content="https://raw.githubusercontent.com/kroybikroy190-ux/Kroybikroy/refs/heads/main/share.png">
 
-<meta property="og:image:secure_url"
-content="https://raw.githubusercontent.com/kroybikroy190-ux/Kroybikroy/refs/heads/main/share.png">
+<meta property="og:image:alt"
+content="ক্রয়-বিক্রয় অ্যাপ">
 
 <meta property="og:image:type"
 content="image/png">
@@ -37,18 +34,10 @@ content="1200">
 <meta property="og:image:height"
 content="630">
 
-<meta property="og:image:alt"
-content="ক্রয়-বিক্রয় অ্যাপ">
 
-<!-- =========================
-     FACEBOOK
-========================= -->
-
-<meta property="fb:app_id" content="">
-
-<!-- =========================
-     TWITTER / X
-========================= -->
+<!-- WhatsApp / Telegram / অন্যান্য -->
+<meta name="description"
+content="সহজে পণ্য কিনুন, বিক্রি করুন ও User-to-User লেনদেন করুন।">
 
 <meta name="twitter:card"
 content="summary_large_image">
@@ -57,88 +46,45 @@ content="summary_large_image">
 content="🛒 ক্রয়-বিক্রয় | Buy & Sell">
 
 <meta name="twitter:description"
-content="সহজে পণ্য কিনুন, বিক্রি করুন এবং User-to-User লেনদেন করুন।">
+content="সহজে পণ্য কিনুন, বিক্রি করুন ও User-to-User লেনদেন করুন।">
 
 <meta name="twitter:image"
 content="https://raw.githubusercontent.com/kroybikroy190-ux/Kroybikroy/refs/heads/main/share.png">
 
-<!-- =========================
-     CANONICAL
-========================= -->
-
-<link rel="canonical"
-href="https://kroybikroy190-ux.github.io/Kroybikroy/share.html">
 
 <style>
-
 *{
     box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
 }
 
 body{
     margin:0;
     min-height:100vh;
-    font-family:
-        Arial,
-        "Noto Sans Bengali",
-        sans-serif;
-    background:
-        linear-gradient(
-            180deg,
-            #eef4ff 0%,
-            #f7faff 50%,
-            #eef3f9 100%
-        );
+    background:#eef3f9;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
     color:#182235;
 }
 
 .container{
-    width:min(900px,94%);
+    width:94%;
+    max-width:700px;
     margin:auto;
-    padding:22px 0 45px;
+    padding:25px 0 40px;
     text-align:center;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    margin-bottom:20px;
-}
-
-.logo{
-    font-size:32px;
-    font-weight:800;
+h1{
     margin:5px 0 8px;
+    font-size:28px;
 }
 
 .subtitle{
-    margin:0;
+    margin:0 0 20px;
     color:#667085;
-    font-size:17px;
-    line-height:1.7;
+    font-size:16px;
 }
 
-/* =========================
-   POSTER
-========================= */
-
-.poster-box{
-    width:100%;
-    max-width:700px;
-    margin:20px auto;
-    padding:8px;
-    background:#ffffff;
-    border-radius:22px;
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.13);
-}
-
+/* Poster */
 .poster-link{
     display:block;
     text-decoration:none;
@@ -148,182 +94,32 @@ body{
     display:block;
     width:100%;
     height:auto;
-    max-height:650px;
-    object-fit:contain;
-    border-radius:17px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-/* =========================
-   CLICK MESSAGE
-========================= */
-
-.click-text{
-    margin:15px 0;
-    font-size:16px;
-    font-weight:700;
-    color:#2563eb;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.buttons{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    margin-top:18px;
-}
-
-.btn{
-    border:0;
-    border-radius:13px;
-    padding:13px 18px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
+/* Open App */
+.open-app{
+    display:block;
+    margin:20px auto 0;
+    padding:15px 20px;
+    background:#16a34a;
+    color:white;
     text-decoration:none;
-    display:inline-block;
-    transition:.2s;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.btn:hover{
-    transform:translateY(-2px);
+.open-app:active{
+    transform:scale(.98);
 }
 
-/* App */
-
-.app{
-    background:#16a34a;
-    color:#fff;
-}
-
-/* Share */
-
-.share{
-    background:#2563eb;
-    color:#fff;
-}
-
-/* WhatsApp */
-
-.whatsapp{
-    background:#16a34a;
-    color:#fff;
-}
-
-/* Telegram */
-
-.telegram{
-    background:#159bd7;
-    color:#fff;
-}
-
-/* Facebook */
-
-.facebook{
-    background:#1877f2;
-    color:#fff;
-}
-
-/* Messenger */
-
-.messenger{
-    background:#7c3aed;
-    color:#fff;
-}
-
-/* SMS */
-
-.sms{
-    background:#9333ea;
-    color:#fff;
-}
-
-/* Copy */
-
-.copy{
-    background:#344054;
-    color:#fff;
-}
-
-/* =========================
-   INFO BOX
-========================= */
-
-.info{
-    margin:25px auto 0;
-    max-width:700px;
-    padding:18px;
-    border-radius:17px;
-    background:#ffffff;
-    box-shadow:0 7px 25px rgba(0,0,0,.08);
-}
-
-.info-title{
-    font-size:20px;
-    font-weight:800;
-    margin-bottom:8px;
-}
-
-.info-text{
-    color:#667085;
-    font-size:15px;
-    line-height:1.7;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-    margin-top:25px;
+.hint{
+    margin-top:14px;
     color:#667085;
     font-size:14px;
 }
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-    .container{
-        width:94%;
-        padding-top:15px;
-    }
-
-    .logo{
-        font-size:27px;
-    }
-
-    .subtitle{
-        font-size:15px;
-    }
-
-    .poster-box{
-        max-width:100%;
-        padding:5px;
-        border-radius:18px;
-    }
-
-    .poster{
-        max-height:560px;
-        border-radius:14px;
-    }
-
-    .buttons{
-        gap:8px;
-    }
-
-    .btn{
-        padding:12px 14px;
-        font-size:14px;
-    }
-
-}
-
 </style>
 
 </head>
@@ -332,274 +128,40 @@ body{
 
 <div class="container">
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <h1>🛒 ক্রয়-বিক্রয়</h1>
 
-    <div class="header">
+    <p class="subtitle">
+        সহজে পণ্য কিনুন, বিক্রি করুন ও User-to-User লেনদেন করুন।
+    </p>
 
-        <div class="logo">
-            🛒 ক্রয়-বিক্রয়
-        </div>
-
-        <p class="subtitle">
-            সহজে পণ্য কিনুন, বিক্রি করুন এবং
-            User-to-User লেনদেন করুন
-        </p>
-
-    </div>
-
-
-    <!-- =========================
-         POSTER
-    ========================== -->
-
-    <div class="poster-box">
-
-        <a
-            class="poster-link"
-            href="https://kroybikroy190-ux.github.io/Kroybikroy/"
-            target="_blank"
-            rel="noopener"
+    <!-- ছবিতে ক্লিক করলে মূল User App খুলবে -->
+    <a
+        class="poster-link"
+        href="https://kroybikroy190-ux.github.io/Kroybikroy/"
+        target="_blank"
+        rel="noopener"
+    >
+        <img
+            class="poster"
+            src="https://raw.githubusercontent.com/kroybikroy190-ux/Kroybikroy/refs/heads/main/share.png"
+            alt="ক্রয়-বিক্রয় | Buy & Sell"
         >
+    </a>
 
-            <img
-                class="poster"
-                src="https://raw.githubusercontent.com/kroybikroy190-ux/Kroybikroy/refs/heads/main/share.png"
-                alt="🛒 ক্রয়-বিক্রয় অ্যাপ"
-                loading="eager"
-            >
+    <a
+        class="open-app"
+        href="https://kroybikroy190-ux.github.io/Kroybikroy/"
+        target="_blank"
+        rel="noopener"
+    >
+        🛒 অ্যাপ খুলুন
+    </a>
 
-        </a>
-
-    </div>
-
-
-    <div class="click-text">
-        👆 পোস্টারে ক্লিক করলে সরাসরি অ্যাপ খুলবে
-    </div>
-
-
-    <!-- =========================
-         BUTTONS
-    ========================== -->
-
-    <div class="buttons">
-
-        <!-- APP -->
-
-        <a
-            class="btn app"
-            href="https://kroybikroy190-ux.github.io/Kroybikroy/"
-            target="_blank"
-            rel="noopener"
-        >
-            🛒 অ্যাপ খুলুন
-        </a>
-
-
-        <!-- SYSTEM SHARE -->
-
-        <button
-            class="btn share"
-            onclick="shareApp()"
-        >
-            📤 শেয়ার করুন
-        </button>
-
-
-        <!-- WHATSAPP -->
-
-        <a
-            class="btn whatsapp"
-            target="_blank"
-            rel="noopener"
-            href="https://wa.me/?text=%F0%9F%9B%92%20%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC-%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%20%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A7%81%E0%A6%A8%20%F0%9F%91%87%0Ahttps%3A%2F%2Fkroybikroy190-ux.github.io%2FKroybikroy%2Fshare.html"
-        >
-            🟢 WhatsApp
-        </a>
-
-
-        <!-- TELEGRAM -->
-
-        <a
-            class="btn telegram"
-            target="_blank"
-            rel="noopener"
-            href="https://t.me/share/url?url=https%3A%2F%2Fkroybikroy190-ux.github.io%2FKroybikroy%2Fshare.html&text=%F0%9F%9B%92%20%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC-%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%20%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A7%81%E0%A6%A8"
-        >
-            🔵 Telegram
-        </a>
-
-
-        <!-- FACEBOOK -->
-
-        <a
-            class="btn facebook"
-            target="_blank"
-            rel="noopener"
-            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fkroybikroy190-ux.github.io%2FKroybikroy%2Fshare.html"
-        >
-            🔵 Facebook
-        </a>
-
-
-        <!-- MESSENGER -->
-
-        <a
-            class="btn messenger"
-            target="_blank"
-            rel="noopener"
-            href="https://www.facebook.com/dialog/send?link=https%3A%2F%2Fkroybikroy190-ux.github.io%2FKroybikroy%2Fshare.html"
-        >
-            💬 Messenger
-        </a>
-
-
-        <!-- SMS -->
-
-        <a
-            class="btn sms"
-            href="sms:?body=%F0%9F%9B%92%20%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC-%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%20%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A7%81%E0%A6%A8%20%F0%9F%91%87%0Ahttps%3A%2F%2Fkroybikroy190-ux.github.io%2FKroybikroy%2Fshare.html"
-        >
-            ✉️ SMS
-        </a>
-
-
-        <!-- COPY -->
-
-        <button
-            class="btn copy"
-            onclick="copyLink()"
-        >
-            🔗 লিংক কপি
-        </button>
-
-    </div>
-
-
-    <!-- =========================
-         INFO
-    ========================== -->
-
-    <div class="info">
-
-        <div class="info-title">
-            🛒 ক্রয়-বিক্রয় অ্যাপ
-        </div>
-
-        <div class="info-text">
-
-            সহজে পণ্য কেনাকাটা, বিক্রি,
-            User-to-User লেনদেন,
-            পণ্য Request এবং অন্যান্য সুবিধা
-            একসাথে ব্যবহার করুন।
-
-            <br><br>
-
-            📤 Facebook • WhatsApp • Telegram • Messenger • SMS
-            সহ বিভিন্ন মাধ্যমে শেয়ার করুন।
-
-        </div>
-
-    </div>
-
-
-    <div class="footer">
-        © ক্রয়-বিক্রয় | Buy & Sell
+    <div class="hint">
+        👆 উপরের ছবিতে ক্লিক করেও অ্যাপে প্রবেশ করতে পারবেন
     </div>
 
 </div>
-
-
-<script>
-
-/* =================================
-   মূল অ্যাপের লিংক
-================================= */
-
-const APP_URL =
-"https://kroybikroy190-ux.github.io/Kroybikroy/";
-
-
-/* =================================
-   Facebook/WhatsApp/Telegram-এর
-   জন্য Share Page
-================================= */
-
-const SHARE_URL =
-"https://kroybikroy190-ux.github.io/Kroybikroy/share.html";
-
-
-/* =================================
-   SYSTEM SHARE
-================================= */
-
-async function shareApp(){
-
-    const shareData = {
-
-        title:"🛒 ক্রয়-বিক্রয় | Buy & Sell",
-
-        text:
-        "🛒 ক্রয়-বিক্রয় অ্যাপ দেখুন। " +
-        "সহজে পণ্য কিনুন, বিক্রি করুন এবং " +
-        "User-to-User লেনদেন করুন।",
-
-        url:SHARE_URL
-
-    };
-
-    if(navigator.share){
-
-        try{
-
-            await navigator.share(shareData);
-
-        }catch(error){
-
-            console.log("Share cancelled");
-
-        }
-
-    }else{
-
-        copyLink();
-
-    }
-
-}
-
-
-/* =================================
-   COPY SHARE LINK
-================================= */
-
-async function copyLink(){
-
-    try{
-
-        await navigator.clipboard.writeText(SHARE_URL);
-
-        alert(
-            "✅ শেয়ার লিংক কপি হয়েছে!\n\n" +
-            "এখন Facebook, WhatsApp, Telegram বা SMS-এ পেস্ট করুন।"
-        );
-
-    }
-
-    catch(error){
-
-        prompt(
-            "এই লিংকটি কপি করুন:",
-            SHARE_URL
-        );
-
-    }
-
-}
-
-</script>
 
 </body>
 </html>
