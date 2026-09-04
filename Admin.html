@@ -1,1 +1,946 @@
-<script language=javascript>document.write(unescape('%3C%21doctype%20html%3E%0A%3Chtml%20lang%3D%22bn%22%3E%0A%3Chead%3E%0A%3Cmeta%20charset%3D%22utf-8%22%3E%0A%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice-width%2Cinitial-scale%3D1%2Cviewport-fit%3Dcover%22%3E%0A%3Ctitle%3E%uD83D%uDEE0%uFE0F%20%u0995%u09CD%u09B0%u09AF%u09BC-%u09AC%u09BF%u0995%u09CD%u09B0%u09AF%u09BC%20Admin%3C/title%3E%0A%3Cstyle%3E%0A*%7Bbox-sizing%3Aborder-box%7D%0Abody%7Bmargin%3A0%3Bbackground%3A%23eef2f7%3Bcolor%3A%23182230%3Bfont-family%3AArial%2Csystem-ui%2Csans-serif%7D%0Aheader%7Bposition%3Asticky%3Btop%3A0%3Bz-index%3A20%3Bbackground%3A%23fff%3Bborder-bottom%3A1px%20solid%20%23e4e7ec%3Bpadding%3A12px%2016px%7D%0A.brand%7Bfont-size%3A21px%3Bfont-weight%3A800%7D.muted%7Bcolor%3A%23667085%3Bfont-size%3A12px%7D%0Amain%7Bmax-width%3A900px%3Bmargin%3Aauto%3Bpadding%3A12px%2012px%2090px%7D%0A.top%7Bdisplay%3Aflex%3Bjustify-content%3Aspace-between%3Balign-items%3Acenter%3Bgap%3A10px%7D%0A.grid%7Bdisplay%3Agrid%3Bgrid-template-columns%3Arepeat%282%2C1fr%29%3Bgap%3A12px%7D%0A.card%7Bbackground%3A%23fff%3Bborder-radius%3A20px%3Bpadding%3A16px%3Bmargin-bottom%3A12px%3Bbox-shadow%3A0%203px%2014px%20%2310182812%7D%0A.tile%7Bmin-height%3A125px%3Bdisplay%3Aflex%3Bflex-direction%3Acolumn%3Balign-items%3Acenter%3Bjustify-content%3Acenter%3Btext-align%3Acenter%3Bfont-weight%3A800%3Bfont-size%3A19px%3Bcursor%3Apointer%7D%0A.tile%20.ico%7Bfont-size%3A42px%3Bmargin-bottom%3A7px%7D.stat%7Bfont-size%3A27px%3Bfont-weight%3A900%7D%0A.small%7Bfont-size%3A12px%3Bcolor%3A%23667085%7D%0Ainput%2Cselect%2Ctextarea%7Bwidth%3A100%25%3Bpadding%3A12px%3Bborder%3A1px%20solid%20%23d0d5dd%3Bborder-radius%3A11px%3Bmargin%3A5px%200%2010px%3Bfont-size%3A15px%3Bbackground%3A%23fff%7D%0Atextarea%7Bmin-height%3A90px%3Bresize%3Avertical%7D%0Abutton%2C.btn%7Bborder%3A0%3Bborder-radius%3A11px%3Bpadding%3A11px%2014px%3Bbackground%3A%23344054%3Bcolor%3A%23fff%3Bfont-weight%3A800%3Bcursor%3Apointer%3Btext-decoration%3Anone%3Bdisplay%3Ainline-block%7D%0A.ok%7Bbackground%3A%2316834b%7D.danger%7Bbackground%3A%23c62828%7D.blue%7Bbackground%3A%23175cd3%7D.purple%7Bbackground%3A%237435df%7D.light%7Bbackground%3A%23eef2f6%3Bcolor%3A%23344054%7D%0A.full%7Bwidth%3A100%25%7D.row%7Bdisplay%3Aflex%3Bgap%3A8px%3Balign-items%3Acenter%3Bjustify-content%3Aspace-between%7D.wrap%7Bdisplay%3Aflex%3Bgap%3A7px%3Bflex-wrap%3Awrap%7D%0Anav%7Bposition%3Afixed%3Bbottom%3A0%3Bleft%3A0%3Bright%3A0%3Bbackground%3A%23fff%3Bborder-top%3A1px%20solid%20%23ddd%3Bdisplay%3Aflex%3Boverflow%3Aauto%3Bz-index%3A30%7D%0Anav%20button%7Bmin-width%3A78px%3Bbackground%3A%23fff%3Bcolor%3A%23475467%3Bborder-radius%3A0%3Bpadding%3A8px%205px%3Bfont-size%3A11px%7D%0Anav%20button%20b%7Bdisplay%3Ablock%3Bfont-size%3A21px%7D.hidden%7Bdisplay%3Anone%21important%7D%0A.item%7Bborder%3A1px%20solid%20%23eaecf0%3Bborder-radius%3A14px%3Bpadding%3A12px%3Bmargin%3A8px%200%3Bbackground%3A%23fff%7D%0A.badge%7Bdisplay%3Ainline-block%3Bborder-radius%3A999px%3Bpadding%3A4px%208px%3Bfont-size%3A11px%3Bbackground%3A%23fff3cd%7D%0A.approved%7Bbackground%3A%23dcfce7%7D.rejected%7Bbackground%3A%23fee2e2%7D.active%7Bbackground%3A%23dbeafe%7D%0A.product%7Bborder%3A1px%20solid%20%23e2e7ef%3Bborder-radius%3A16px%3Bpadding%3A13px%3Bmargin%3A9px%200%7D%0A.product%20img%7Bwidth%3A78px%3Bheight%3A78px%3Bobject-fit%3Acover%3Bborder-radius%3A12px%3Bfloat%3Aleft%3Bmargin-right%3A12px%3Bbackground%3A%23eee%7D%0A.clear%7Bclear%3Aboth%7D%0A.rates%7Bdisplay%3Agrid%3Bgrid-template-columns%3Arepeat%283%2C1fr%29%3Bgap%3A7px%3Bmargin-top%3A10px%7D%0A.rate%7Bbackground%3A%23f4f7fb%3Bborder-radius%3A11px%3Bpadding%3A9px%3Bfont-size%3A12px%7D%0A.rate%20b%7Bdisplay%3Ablock%3Bfont-size%3A17px%3Bmargin-top%3A3px%7D%0A.modal%7Bposition%3Afixed%3Binset%3A0%3Bbackground%3A%230008%3Bdisplay%3Aflex%3Balign-items%3Aflex-end%3Bz-index%3A50%7D%0A.modalbox%7Bbackground%3A%23fff%3Bwidth%3A100%25%3Bmax-height%3A90vh%3Boverflow%3Aauto%3Bborder-radius%3A22px%2022px%200%200%3Bpadding%3A18px%7D%0A.login%7Bmin-height%3A100vh%3Bdisplay%3Aflex%3Balign-items%3Acenter%3Bjustify-content%3Acenter%3Bpadding%3A20px%7D%0A.loginbox%7Bwidth%3A100%25%3Bmax-width%3A430px%7D%0A.chatbox%7Bheight%3A44vh%3Bmin-height%3A240px%3Boverflow%3Aauto%3Bpadding%3A8px%3Bbackground%3A%23f8fafc%3Bborder-radius%3A12px%7D%0A@media%28min-width%3A650px%29%7B.modal%7Balign-items%3Acenter%7D.modalbox%7Bmax-width%3A560px%3Bborder-radius%3A22px%7D%7D%0A@media%28max-width%3A650px%29%7B.grid%2C.rates%7Bgrid-template-columns%3A1fr%7D.top%20.brand%7Bfont-size%3A18px%7D%7D%0A%3C/style%3E%0A%3C/head%3E%0A%3Cbody%3E%0A%0A%3Cdiv%20id%3D%22login%22%20class%3D%22login%22%3E%0A%20%20%3Cdiv%20class%3D%22card%20loginbox%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22brand%22%3E%uD83D%uDC51%20%u0995%u09CD%u09B0%u09AF%u09BC-%u09AC%u09BF%u0995%u09CD%u09B0%u09AF%u09BC%20Admin%3C/div%3E%0A%20%20%20%20%3Cp%20class%3D%22muted%22%3EFirebase%20Admin%20Login%3C/p%3E%0A%20%20%20%20%3Cinput%20id%3D%22email%22%20type%3D%22email%22%20placeholder%3D%22Admin%20Gmail%22%3E%0A%20%20%20%20%3Cinput%20id%3D%22password%22%20type%3D%22password%22%20placeholder%3D%22Admin%20Password%20/%20PIN%22%3E%0A%20%20%20%20%3Cbutton%20class%3D%22blue%20full%22%20onclick%3D%22adminLogin%28%29%22%3E%uD83D%uDD10%20Login%3C/button%3E%0A%20%20%20%20%3Cp%20id%3D%22loginMsg%22%20class%3D%22small%22%3E%3C/p%3E%0A%20%20%3C/div%3E%0A%3C/div%3E%0A%0A%3Cdiv%20id%3D%22app%22%20class%3D%22hidden%22%3E%0A%3Cheader%3E%0A%20%20%3Cdiv%20class%3D%22top%22%3E%0A%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22brand%22%3E%uD83D%uDC51%20%u0995%u09CD%u09B0%u09AF%u09BC-%u09AC%u09BF%u0995%u09CD%u09B0%u09AF%u09BC%20Admin%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20id%3D%22adminText%22%20class%3D%22muted%22%3EVerified%20Admin%3C/div%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%20%20%3Cbutton%20class%3D%22danger%22%20onclick%3D%22adminLogout%28%29%22%3E%uD83D%uDEAA%20Logout%3C/button%3E%0A%20%20%3C/div%3E%0A%3C/header%3E%0A%0A%3Cmain%3E%0A%3Csection%20id%3D%22home%22%3E%0A%20%20%3Cdiv%20class%3D%22grid%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDC65%20Users%3C/div%3E%3Cdiv%20id%3D%22cUsers%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDCE6%20Products%3C/div%3E%3Cdiv%20id%3D%22cProducts%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDCB0%20Pending%20Deposit%3C/div%3E%3Cdiv%20id%3D%22cDeposits%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDCB8%20Pending%20Withdraw%3C/div%3E%3Cdiv%20id%3D%22cWithdraws%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDCAC%20Customer%20Service%3C/div%3E%3Cdiv%20id%3D%22cSupport%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20class%3D%22small%22%3E%uD83D%uDD11%20PIN%20Recovery%3C/div%3E%3Cdiv%20id%3D%22cRecovery%22%20class%3D%22stat%22%3E0%3C/div%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22grid%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27users%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDC65%3C/div%3EUsers%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27products%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCE6%3C/div%3EProducts%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27deposits%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCB0%3C/div%3EDeposit%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27depositSettings%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCF2%3C/div%3EDeposit%20Settings%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27referral%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83C%uDF81%3C/div%3EReferral%20System%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27withdraws%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCB8%3C/div%3EWithdraw%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27support%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCAC%3C/div%3ECustomer%20Service%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27recovery%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDD11%3C/div%3EPIN%20Recovery%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27history%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCDC%3C/div%3EHistory%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27notice%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%uD83D%uDCE2%3C/div%3ENotice%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22card%20tile%22%20onclick%3D%22showPage%28%27telegram%27%29%22%3E%3Cdiv%20class%3D%22ico%22%3E%u2708%uFE0F%3C/div%3ETelegram%3C/div%3E%0A%3Cdiv%20id%3D%22directTelegramBox%22%20style%3D%22margin-top%3A14px%3Bpadding%3A14px%3Bborder%3A1px%20solid%20%23ddd%3Bborder-radius%3A12px%3Bbackground%3A%23fafafa%3B%22%3E%0A%20%20%3Cdiv%20style%3D%22font-weight%3A700%3Bmargin-bottom%3A8px%3B%22%3E%uD83D%uDCF2%20%u09B8%u09B0%u09BE%u09B8%u09B0%u09BF%20Telegram%20Bot%3C/div%3E%0A%20%20%3Cinput%20id%3D%22telegramBotUsername%22%20type%3D%22text%22%20placeholder%3D%22@KroyBikroyAdmin2026Bot%22%0A%20%20%20%20%20%20%20%20%20value%3D%22@KroyBikroyAdmin2026Bot%22%0A%20%20%20%20%20%20%20%20%20style%3D%22width%3A100%25%3Bbox-sizing%3Aborder-box%3Bpadding%3A11px%3Bborder%3A1px%20solid%20%23ccc%3Bborder-radius%3A9px%3Bmargin-bottom%3A9px%3B%22%3E%0A%20%20%3Cbutton%20type%3D%22button%22%20onclick%3D%22openDirectTelegram%28%29%22%0A%20%20%20%20%20%20%20%20%20%20style%3D%22width%3A100%25%3Bpadding%3A11px%3Bborder%3A0%3Bborder-radius%3A9px%3Bcursor%3Apointer%3B%22%3E%0A%20%20%20%20%u2708%uFE0F%20Telegram%20Bot-%u098F%20%u09AA%u09CD%u09B0%u09AC%u09C7%u09B6%20%u0995%u09B0%u09C1%u09A8%0A%20%20%3C/button%3E%0A%3C/div%3E%0A%3Cscript%3E%0Afunction%20openDirectTelegram%28%29%7B%0A%20%20let%20u%20%3D%20%28document.getElementById%28%27telegramBotUsername%27%29%3F.value%20%7C%7C%20%27%27%29.trim%28%29%3B%0A%20%20%20u%20%3D%20u.replace%28/%5Ehttps%3F%3A%5C/%5C/%28t%5C.me%5C/%29%3F/i%2C%27%27%29.replace%28/%5E@/%2C%27%27%29.split%28/%5B%3F%23%5Cs%5D/%29%5B0%5D%3B%0A%20%20if%28%21u%29%7B%0A%20%20%20%20alert%28%27%u0986%u0997%u09C7%20Telegram%20Bot%20Username%20%u09A6%u09BF%u09A8%u0964%27%29%3B%0A%20%20%20%20return%3B%0A%20%20%7D%0A%20%20window.open%28%27https%3A//t.me/%27%20+%20encodeURIComponent%28u%29%2C%20%27_blank%27%2C%20%27noopener%2Cnoreferrer%27%29%3B%0A%7D%0A%3C/script%3E%0A%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22users%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%3Ch2%3E%uD83D%uDC65%20Users%3C/h2%3E%0A%20%20%20%20%3Cinput%20id%3D%22userSearch%22%20placeholder%3D%22%uD83D%uDD0E%20%u09A8%u09BE%u09AE%20/%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20/%20UID%20Search%22%20oninput%3D%22renderUsers%28%29%22%3E%0A%20%20%20%20%3Cdiv%20id%3D%22usersList%22%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22products%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Ch2%3E%uD83D%uDCE6%20Add%20Product%3C/h2%3E%0A%20%20%20%20%3Cinput%20id%3D%22pName%22%20placeholder%3D%22Product%20Name%22%3E%0A%20%20%20%20%3Cselect%20id%3D%22pCategory%22%3E%0A%20%20%20%20%20%20%3Coption%3E%u09B6%u09BE%u09B0%u09CD%u099F%3C/option%3E%3Coption%3E%u09AA%u09CD%u09AF%u09BE%u09A8%u09CD%u099F%3C/option%3E%3Coption%3E%u09B2%u09C1%u0999%u09CD%u0997%u09BF%3C/option%3E%0A%20%20%20%20%20%20%3Coption%3E%u099C%u09C1%u09A4%u09BE%3C/option%3E%3Coption%3E%u099F%u09C1%u09AA%u09BF%3C/option%3E%3Coption%3E%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%3C/option%3E%0A%20%20%20%20%20%20%3Coption%3E%u099F%u09BF%u09AD%u09BF%3C/option%3E%3Coption%3E%u09AA%u09CD%u09B2%u09BF%u099C%3C/option%3E%3Coption%3E%u0985%u09A8%u09CD%u09AF%u09BE%u09A8%u09CD%u09AF%3C/option%3E%0A%20%20%20%20%3C/select%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDC65%20User%20%u2192%20User%20Rate%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22pUU%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20placeholder%3D%22%u09AF%u09C7%u09AE%u09A8%3A%2070%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDC51%20User%20%u2192%20Admin%20Rate%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22pUA%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20placeholder%3D%22%u09AF%u09C7%u09AE%u09A8%3A%2065%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDED2%20Admin%20%u2192%20User%20Rate%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22pAU%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20placeholder%3D%22%u09AF%u09C7%u09AE%u09A8%3A%2075%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDCE6%20Stock%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22pStock%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%221%22%20placeholder%3D%22Stock%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDDBC%uFE0F%20Product%20Image%20URL%20%28%u09AC%u09B0%u09CD%u09A4%u09AE%u09BE%u09A8%20%u09AC%u09CD%u09AF%u09AC%u09B8%u09CD%u09A5%u09BE%u0987%20%u09A5%u09BE%u0995%u09AC%u09C7%29%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22pImage%22%20type%3D%22url%22%20placeholder%3D%22https%3A//...%22%3E%0A%20%20%20%20%3Ctextarea%20id%3D%22pDesc%22%20placeholder%3D%22Description%22%3E%3C/textarea%3E%0A%20%20%20%20%3Cbutton%20class%3D%22ok%20full%22%20onclick%3D%22addProduct%28%29%22%3E%u2795%20Add%20Product%3C/button%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%3Ch3%3E%uD83C%uDFF7%uFE0F%20Category%20Filter%3C/h3%3E%3Cdiv%20class%3D%22wrap%22%20id%3D%22catButtons%22%3E%3C/div%3E%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%3Ch2%20style%3D%22margin%3A0%22%3E%uD83D%uDCCB%20Products%3C/h2%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22refresh%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20id%3D%22productsList%22%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22deposits%22%20class%3D%22hidden%22%3E%3Cdiv%20class%3D%22card%22%3E%0A%20%20%3Cdiv%20class%3D%22row%22%3E%3Ch2%3E%uD83D%uDCB0%20Deposits%3C/h2%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22refresh%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%3C/div%3E%0A%20%20%3Cdiv%20id%3D%22depositList%22%3E%3C/div%3E%0A%3C/div%3E%3C/section%3E%0A%0A%3Csection%20id%3D%22depositSettings%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Ch2%20style%3D%22margin%3A0%22%3E%uD83D%uDCF2%20Deposit%20Payment%20Settings%3C/h2%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22muted%22%3EUser%20Deposit%20%u0995%u09B0%u09BE%u09B0%20%u09B8%u09AE%u09DF%20%u09AF%u09C7%20Send%20Money%20%u09A8%u09AE%u09CD%u09AC%u09B0%u0997%u09C1%u09B2%u09CB%20%u09A6%u09C7%u0996%u09BE%u09AC%u09C7%u0964%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22loadDepositSettings%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%0A%20%20%20%20%3Clabel%3E%uD83D%uDFE3%20bKash%20%u2014%20Send%20Money%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22depBkash%22%20type%3D%22tel%22%20inputmode%3D%22numeric%22%20placeholder%3D%2201XXXXXXXXX%22%3E%0A%0A%20%20%20%20%3Clabel%3E%uD83D%uDFE0%20Nagad%20%u2014%20Send%20Money%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22depNagad%22%20type%3D%22tel%22%20inputmode%3D%22numeric%22%20placeholder%3D%2201XXXXXXXXX%22%3E%0A%0A%20%20%20%20%3Clabel%3E%uD83D%uDD35%20Rocket%20%u2014%20Send%20Money%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22depRocket%22%20type%3D%22tel%22%20inputmode%3D%22numeric%22%20placeholder%3D%2201XXXXXXXXX%22%3E%0A%0A%20%20%20%20%3Clabel%3E%uD83D%uDCDD%20Deposit%20Instructions%3C/label%3E%0A%20%20%20%20%3Ctextarea%20id%3D%22depInstruction%22%20placeholder%3D%22%u0989%u09A6%u09BE%u09B9%u09B0%u09A3%3A%20%u09A8%u09BF%u09B0%u09CD%u09A6%u09BF%u09B7%u09CD%u099F%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20Send%20Money%20%u0995%u09B0%u09C7%20Transaction%20ID%20%u09A6%u09BF%u09A8%u0964%22%3E%3C/textarea%3E%0A%0A%20%20%20%20%3Cbutton%20class%3D%22ok%20full%22%20onclick%3D%22saveDepositSettings%28%29%22%3E%uD83D%uDCBE%20Deposit%20Settings%20Save%3C/button%3E%0A%20%20%20%20%3Cp%20class%3D%22small%22%20style%3D%22margin-bottom%3A0%22%3E%0A%20%20%20%20%20%20%u26A0%uFE0F%20%u098F%u0996%u09BE%u09A8%u09C7%20%u09B6%u09C1%u09A7%u09C1%20%u0986%u09AA%u09A8%u09BE%u09B0%20%u09AC%u09CD%u09AF%u09AC%u09B8%u09BE%u09B0%20Deposit%20%u0997%u09CD%u09B0%u09B9%u09A3%u09C7%u09B0%20%u09A8%u09AE%u09CD%u09AC%u09B0%20%u0993%20%u09A8%u09BF%u09B0%u09CD%u09A6%u09C7%u09B6%u09A8%u09BE%20%u09B0%u09BE%u0996%u09C1%u09A8%u0964%20User%20Deposit%20Request-%u098F%20Method%20%u0993%20TXID%20%u09AA%u09BE%u09A0%u09BE%u09AC%u09C7%2C%20%u09A4%u09BE%u09B0%u09AA%u09B0%20Admin%20%u09AF%u09BE%u099A%u09BE%u0987%20%u0995%u09B0%u09C7%20Approve/Reject%20%u0995%u09B0%u09AC%u09C7%u09A8%u0964%0A%20%20%20%20%3C/p%3E%0A%20%20%3C/div%3E%0A%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Ch3%3E%uD83D%uDC40%20User-%u098F%u09B0%20%u0995%u09BE%u099B%u09C7%20%u09AF%u09C7%u09AD%u09BE%u09AC%u09C7%20%u09A6%u09C7%u0996%u09BE%u09AC%u09C7%3C/h3%3E%0A%20%20%20%20%3Cdiv%20id%3D%22depositPreview%22%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22referral%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%3Ch2%20style%3D%22margin%3A0%22%3E%uD83C%uDF81%20Referral%20System%3C/h2%3E%3Cdiv%20class%3D%22muted%22%3EReferral%20commission%20%u0993%20%u09AA%u09CD%u09B0%u09A5%u09AE%20%u09B8%u09AB%u09B2%20Deposit%20bonus%20%u098F%u0996%u09BE%u09A8%20%u09A5%u09C7%u0995%u09C7%20%u09A8%u09BF%u09DF%u09A8%u09CD%u09A4%u09CD%u09B0%u09A3%20%u0995%u09B0%u09C1%u09A8%u0964%3C/div%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22loadReferralSettings%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDCB0%20Referral%20Commission%20%28%25%29%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22refCommissionPercent%22%20type%3D%22number%22%20min%3D%220%22%20max%3D%22100%22%20step%3D%220.01%22%20placeholder%3D%221%22%3E%0A%20%20%20%20%3Clabel%3E%uD83C%uDF81%20First%20Successful%20Deposit%20Bonus%20%28%u09F3%29%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22refFirstDepositBonus%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20placeholder%3D%2210%22%3E%0A%20%20%20%20%3Cbutton%20class%3D%22ok%20full%22%20onclick%3D%22saveReferralSettings%28%29%22%3E%uD83D%uDCBE%20Referral%20Settings%20Save%3C/button%3E%0A%20%20%20%20%3Cp%20class%3D%22small%22%20style%3D%22margin-bottom%3A0%22%3E%u09A8%u09BF%u09DF%u09AE%3A%20%u09AA%u09CD%u09B0%u09A4%u09BF%u099F%u09BF%20Admin-Approved%20Deposit-%u098F%u09B0%20%u0989%u09AA%u09B0%20%u09A8%u09BF%u09B0%u09CD%u09A7%u09BE%u09B0%u09BF%u09A4%20%25%20Referrer%20%u09AA%u09BE%u09AC%u09C7%u0964%20%u0995%u09CB%u09A8%u09CB%20Referred%20User-%u098F%u09B0%20%u09AA%u09CD%u09B0%u09A5%u09AE%20%u09B8%u09AB%u09B2%20Deposit-%u098F%20%u098F%u0995%u09AC%u09BE%u09B0%20Bonus%20%u09AF%u09CB%u0997%20%u09B9%u09AC%u09C7%u0964%20Pending/Rejected%20Deposit-%u098F%20%u0995%u09CB%u09A8%u09CB%20%u0995%u09AE%u09BF%u09B6%u09A8%20%u09B9%u09AC%u09C7%20%u09A8%u09BE%u0964%3C/p%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Ch3%3E%uD83D%uDCCA%20Referral%20Overview%3C/h3%3E%0A%20%20%20%20%3Cdiv%20id%3D%22referralOverview%22%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22withdraws%22%20class%3D%22hidden%22%3E%3Cdiv%20class%3D%22card%22%3E%0A%20%20%3Cdiv%20class%3D%22row%22%3E%3Ch2%3E%uD83D%uDCB8%20Withdraws%3C/h2%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22refresh%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%3C/div%3E%0A%20%20%3Cdiv%20id%3D%22withdrawList%22%3E%3C/div%3E%0A%3C/div%3E%3C/section%3E%0A%0A%3Csection%20id%3D%22history%22%20class%3D%22hidden%22%3E%3Cdiv%20class%3D%22card%22%3E%0A%20%20%3Cdiv%20class%3D%22row%22%3E%3Ch2%3E%uD83D%uDCDC%20History%3C/h2%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22refresh%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%3C/div%3E%0A%20%20%3Cdiv%20id%3D%22historyList%22%3E%3C/div%3E%0A%3C/div%3E%3C/section%3E%0A%0A%3Csection%20id%3D%22recovery%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%3Ch2%20style%3D%22margin%3A0%22%3E%uD83D%uDD11%20PIN%20Recovery%20Requests%3C/h2%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22muted%22%3E%u09A4%u09A5%u09CD%u09AF%20%u09AE%u09BF%u09B2%u09BF%u09DF%u09C7%20Verified%20%u09B9%u09B2%u09C7%20User-%u098F%u09B0%20%u09B8%u09A0%u09BF%u0995%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20SMS%20%u09AA%u09BE%u09A0%u09BE%u09AC%u09C7%u09A8%u0964%3C/div%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22renderPinRecovery%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%3Cdiv%20id%3D%22recoveryList%22%3E%3C/div%3E%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22support%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%3Ch2%20style%3D%22margin%3A0%22%3E%uD83D%uDCAC%20Customer%20Service%3C/h2%3E%3Cdiv%20class%3D%22muted%22%3EOne%20User%20at%20a%20Time%20%u2022%20Live%20%u2022%20%u09B8%u09B0%u09CD%u09AC%u09CB%u099A%u09CD%u099A%20%u09EB%u09E6%u099F%u09BF%20Message%20%u09B0%u09BE%u0996%u09BE%20%u09B9%u09AC%u09C7%3C/div%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22renderSupport%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%20id%3D%22supportStatusBox%22%3ELoading...%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%3Ch3%3E%u23F3%20Waiting%20Queue%3C/h3%3E%3Cdiv%20id%3D%22supportQueue%22%3E%3C/div%3E%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%3Ch3%3E%uD83D%uDCAC%20Active%20Chat%3C/h3%3E%3Cdiv%20id%3D%22supportActive%22%3E%3C/div%3E%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22telegram%22%20class%3D%22hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%3Cdiv%3E%3Ch2%20style%3D%22margin%3A0%22%3E%u2708%uFE0F%20Telegram%20Settings%3C/h2%3E%3Cdiv%20class%3D%22muted%22%3EPIN%20Recovery%20%u09A4%u09A5%u09CD%u09AF%20Admin-%u098F%u09B0%20Telegram%20Bot-%u098F%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%u09B0%20%u099C%u09A8%u09CD%u09AF%20%u098F%u0996%u09BE%u09A8%u09C7%20Bot%20Token%20%u0993%20Chat%20ID%20%u098F%u0995%u09AC%u09BE%u09B0%20%u09B8%u0982%u09B0%u0995%u09CD%u09B7%u09A3%20%u0995%u09B0%u09C1%u09A8%u0964%3C/div%3E%3C/div%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22loadTelegramSettings%28%29%22%3E%uD83D%uDD04%20Refresh%3C/button%3E%3C/div%3E%0A%20%20%20%20%3Clabel%3E%uD83E%uDD16%20Telegram%20Bot%20Token%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22tgToken%22%20type%3D%22password%22%20placeholder%3D%22123456%3AABC...%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDCAC%20Telegram%20Chat%20ID%3C/label%3E%0A%20%20%20%20%3Cinput%20id%3D%22tgChatId%22%20placeholder%3D%22%u09AF%u09C7%u09AE%u09A8%3A%20123456789%20%u09AC%u09BE%20-100...%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22wrap%22%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22ok%22%20onclick%3D%22saveTelegramSettings%28%29%22%3E%uD83D%uDCBE%20Save%3C/button%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22testTelegram%28%29%22%3E%uD83D%uDCE8%20Test%20Message%3C/button%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22light%22%20onclick%3D%22clearTelegramSettings%28%29%22%3E%uD83D%uDDD1%uFE0F%20Clear%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%20%20%3Cp%20class%3D%22small%22%3E%uD83D%uDD12%20Token%20Firebase-%u098F%20%u09B0%u09BE%u0996%u09BE%20%u09B9%u09AC%u09C7%20%u09A8%u09BE%3B%20%u098F%u0987%20Admin%20browser-%u098F%u09B0%20Local%20Storage-%u098F%20%u09B0%u09BE%u0996%u09BE%20%u09B9%u09AC%u09C7%u0964%20%u0985%u09A8%u09CD%u09AF%20%u09A1%u09BF%u09AD%u09BE%u0987%u09B8%u09C7%20Admin%20Panel%20%u0996%u09C1%u09B2%u09B2%u09C7%20%u0986%u09AC%u09BE%u09B0%20Token/Chat%20ID%20%u09A6%u09BF%u09A4%u09C7%20%u09B9%u09AC%u09C7%u0964%3C/p%3E%0A%20%20%3C/div%3E%0A%20%20%3Cdiv%20class%3D%22card%22%3E%0A%20%20%20%20%3Ch3%3E%uD83D%uDCE8%20PIN%20Recovery%20Telegram%3C/h3%3E%0A%20%20%20%20%3Cp%20class%3D%22muted%22%3ERecovery%20Requests%20%u09A5%u09C7%u0995%u09C7%20%3Cb%3E%uD83D%uDCE8%20Telegram%3C/b%3E%20%u099A%u09BE%u09AA%u09B2%u09C7%20%u098F%u0987%20%u09B8%u0982%u09B0%u0995%u09CD%u09B7%u09BF%u09A4%20Token%20%u0993%20Chat%20ID%20%u09AC%u09CD%u09AF%u09AC%u09B9%u09BE%u09B0%20%u0995%u09B0%u09C7%20%u0986%u09AC%u09C7%u09A6%u09A8%u099F%u09BF%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09B9%u09AC%u09C7%u0964%3C/p%3E%0A%20%20%3C/div%3E%0A%3C/section%3E%0A%0A%3Csection%20id%3D%22notice%22%20class%3D%22hidden%22%3E%3Cdiv%20class%3D%22card%22%3E%0A%20%20%3Ch2%3E%uD83D%uDCE2%20Notice%3C/h2%3E%0A%20%20%3Ctextarea%20id%3D%22noticeText%22%20placeholder%3D%22User%20App-%u098F%20%u09AF%u09C7%20Notice%20%u09A6%u09C7%u0996%u09BE%u09A4%u09C7%20%u099A%u09BE%u09A8%20%u09B2%u09BF%u0996%u09C1%u09A8%22%3E%3C/textarea%3E%0A%20%20%3Cbutton%20class%3D%22purple%20full%22%20onclick%3D%22saveNotice%28%29%22%3E%uD83D%uDCE2%20Publish%20Notice%3C/button%3E%0A%3C/div%3E%3C/section%3E%0A%3C/main%3E%0A%0A%3Cnav%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27home%27%29%22%3E%3Cb%3E%uD83C%uDFE0%3C/b%3EHome%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27products%27%29%22%3E%3Cb%3E%uD83D%uDCE6%3C/b%3EProducts%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27depositSettings%27%29%22%3E%3Cb%3E%uD83D%uDCF2%3C/b%3EDeposit%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27users%27%29%22%3E%3Cb%3E%uD83D%uDC65%3C/b%3EUsers%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27history%27%29%22%3E%3Cb%3E%uD83D%uDCDC%3C/b%3EHistory%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27support%27%29%22%3E%3Cb%3E%uD83D%uDCAC%3C/b%3ESupport%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27recovery%27%29%22%3E%3Cb%3E%uD83D%uDD11%3C/b%3ERecovery%3C/button%3E%0A%20%20%3Cbutton%20onclick%3D%22showPage%28%27telegram%27%29%22%3E%3Cb%3E%u2708%uFE0F%3C/b%3ETelegram%3C/button%3E%0A%3C/nav%3E%0A%3C/div%3E%0A%0A%3Cdiv%20id%3D%22modal%22%20class%3D%22modal%20hidden%22%3E%0A%20%20%3Cdiv%20class%3D%22modalbox%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%3Ch3%20id%3D%22modalTitle%22%3EConfirm%3C/h3%3E%3Cbutton%20class%3D%22light%22%20onclick%3D%22closeModal%28%29%22%3E%u2715%3C/button%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20id%3D%22modalBody%22%3E%3C/div%3E%3Cdiv%20id%3D%22modalActions%22%20class%3D%22wrap%22%3E%3C/div%3E%0A%20%20%3C/div%3E%0A%3C/div%3E%0A%0A%3Cscript%20src%3D%22https%3A//www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js%22%3E%3C/script%3E%0A%3Cscript%20src%3D%22https%3A//www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js%22%3E%3C/script%3E%0A%3Cscript%20src%3D%22https%3A//www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js%22%3E%3C/script%3E%0A%3Cscript%3E%0Aconst%20firebaseConfig%3D%7B%0A%20%20apiKey%3A%22AIzaSyC4GPSSXQwBUNsqIs65X_3JRlpTCchFZO0%22%2C%0A%20%20authDomain%3A%22kroy-bikroy-3a17e.firebaseapp.com%22%2C%0A%20%20databaseURL%3A%22https%3A//kroy-bikroy-3a17e-default-rtdb.asia-southeast1.firebasedatabase.app%22%2C%0A%20%20projectId%3A%22kroy-bikroy-3a17e%22%2C%0A%20%20storageBucket%3A%22kroy-bikroy-3a17e.firebasestorage.app%22%2C%0A%20%20messagingSenderId%3A%22691712503323%22%2C%0A%20%20appId%3A%221%3A691712503323%3Aweb%3A9c8986c988d7f978ecd2be%22%0A%7D%3B%0Aconst%20ADMIN_UID%3D%222JmHhZztOtgRIK1kzyBgR828HSz2%22%3B%0Afirebase.initializeApp%28firebaseConfig%29%3B%0Aconst%20auth%3Dfirebase.auth%28%29%2Cdb%3Dfirebase.database%28%29%3B%0Aconst%20%24%3Did%3D%3Edocument.getElementById%28id%29%3B%0Aconst%20money%3Dn%3D%3E%22%u09F3%22+Number%28n%7C%7C0%29.toLocaleString%28%22en-BD%22%2C%7BminimumFractionDigits%3A2%2CmaximumFractionDigits%3A2%7D%29%3B%0Aconst%20esc%3Ds%3D%3EString%28s%3F%3F%22%22%29.replace%28/%5B%26%3C%3E%22%27%5D/g%2Cm%3D%3E%28%7B%22%26%22%3A%22%26amp%3B%22%2C%22%3C%22%3A%22%26lt%3B%22%2C%22%3E%22%3A%22%26gt%3B%22%2C%22%5C%22%22%3A%22%26quot%3B%22%2C%22%27%22%3A%22%26%2339%3B%22%7D%5Bm%5D%29%29%3B%0Aconst%20vals%3Dx%3D%3Ex%3FObject.entries%28x%29.map%28%28%5Bid%2Cv%5D%29%3D%3E%28%7Bid%2C...%28v%7C%7C%7B%7D%29%7D%29%29%3A%5B%5D%3B%0Alet%20data%3D%7Busers%3A%7B%7D%2Cproducts%3A%7B%7D%2Cdeposits%3A%7B%7D%2Cwithdrawals%3A%7B%7D%2Ctransactions%3A%7B%7D%2CproductRequests%3A%7B%7D%2CpinRecoveryRequests%3A%7B%7D%2CcustomerService%3A%7Bqueue%3A%7B%7D%7D%7D%3B%0Alet%20productFilter%3D%22all%22%2CsupportActiveUid%3D%22%22%2CsupportMessagesRef%3Dnull%2CsupportMessagesCb%3Dnull%3B%0Aconst%20CATS%3D%5B%22%u09B6%u09BE%u09B0%u09CD%u099F%22%2C%22%u09AA%u09CD%u09AF%u09BE%u09A8%u09CD%u099F%22%2C%22%u09B2%u09C1%u0999%u09CD%u0997%u09BF%22%2C%22%u099C%u09C1%u09A4%u09BE%22%2C%22%u099F%u09C1%u09AA%u09BF%22%2C%22%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%22%2C%22%u099F%u09BF%u09AD%u09BF%22%2C%22%u09AA%u09CD%u09B2%u09BF%u099C%22%2C%22%u0985%u09A8%u09CD%u09AF%u09BE%u09A8%u09CD%u09AF%22%5D%3B%0A%0Afunction%20showPage%28id%29%7B%0A%20%20document.querySelectorAll%28%22main%20section%22%29.forEach%28s%3D%3Es.classList.add%28%22hidden%22%29%29%3B%0A%20%20%24%28id%29.classList.remove%28%22hidden%22%29%3B%0A%20%20if%28id%3D%3D%3D%22home%22%29refresh%28%29%3B%0A%20%20if%28id%3D%3D%3D%22users%22%29renderUsers%28%29%3B%0A%20%20if%28id%3D%3D%3D%22products%22%29renderProducts%28%29%3B%0A%20%20if%28id%3D%3D%3D%22deposits%22%29renderDeposits%28%29%3B%0A%20%20if%28id%3D%3D%3D%22depositSettings%22%29loadDepositSettings%28%29%3B%0A%20%20if%28id%3D%3D%3D%22referral%22%29loadReferralSettings%28%29%3B%0A%20%20if%28id%3D%3D%3D%22withdraws%22%29renderWithdraws%28%29%3B%0A%20%20if%28id%3D%3D%3D%22history%22%29renderHistory%28%29%3B%0A%20%20if%28id%3D%3D%3D%22recovery%22%29renderPinRecovery%28%29%3B%0A%20%20if%28id%3D%3D%3D%22support%22%29renderSupport%28%29%3B%0A%7D%0Afunction%20closeModal%28%29%7B%24%28%22modal%22%29.classList.add%28%22hidden%22%29%7D%0Afunction%20modal%28title%2Cbody%2Cactions%29%7B%0A%20%20%24%28%22modalTitle%22%29.textContent%3Dtitle%3B%24%28%22modalBody%22%29.innerHTML%3Dbody%3B%24%28%22modalActions%22%29.innerHTML%3Dactions%3B%0A%20%20%24%28%22modal%22%29.classList.remove%28%22hidden%22%29%3B%0A%7D%0A%0Aasync%20function%20adminLogin%28%29%7B%0A%20%20const%20msg%3D%24%28%22loginMsg%22%29%3Bmsg.textContent%3D%22%u23F3%20Login%20%u09B9%u099A%u09CD%u099B%u09C7...%22%3B%0A%20%20try%7B%0A%20%20%20%20const%20e%3D%24%28%22email%22%29.value.trim%28%29%2Cp%3D%24%28%22password%22%29.value%3B%0A%20%20%20%20if%28%21e%7C%7C%21p%29throw%20Error%28%22Email%20%u098F%u09AC%u0982%20Password%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20%20%20const%20c%3Dawait%20auth.signInWithEmailAndPassword%28e%2Cp%29%3B%0A%20%20%20%20if%28c.user.uid%21%3D%3DADMIN_UID%29%7Bawait%20auth.signOut%28%29%3Bthrow%20Error%28%22%u098F%u0987%20account%20Admin%20%u09B9%u09BF%u09B8%u09C7%u09AC%u09C7%20%u0985%u09A8%u09C1%u09AE%u09CB%u09A6%u09BF%u09A4%20%u09A8%u09DF%u0964%22%29%3B%7D%0A%20%20%7Dcatch%28e%29%7Bmsg.textContent%3D%22%u274C%20%22+%28e.message%7C%7C%22Login%20failed%22%29%7D%0A%7D%0Aasync%20function%20adminLogout%28%29%7Bawait%20setAdminOffline%28%29%3Bawait%20auth.signOut%28%29%7D%0Aauth.onAuthStateChanged%28async%20u%3D%3E%7B%0A%20%20if%28u%26%26u.uid%3D%3D%3DADMIN_UID%29%7B%0A%20%20%20%20%24%28%22login%22%29.classList.add%28%22hidden%22%29%3B%24%28%22app%22%29.classList.remove%28%22hidden%22%29%3B%0A%20%20%20%20%24%28%22adminText%22%29.textContent%3D%22%uD83D%uDFE2%20Admin%20Online%20%u2022%20%22+u.uid%3B%0A%20%20%20%20await%20setupAdminPresence%28%29%3Bawait%20refresh%28%29%3BrenderSupport%28%29%3B%0A%20%20%7Delse%7B%0A%20%20%20%20await%20setAdminOffline%28%29%3B%24%28%22app%22%29.classList.add%28%22hidden%22%29%3B%24%28%22login%22%29.classList.remove%28%22hidden%22%29%3B%0A%20%20%7D%0A%7D%29%3B%0A%0Alet%20presenceRef%3Dnull%2CpresenceHeartbeat%3Dnull%2CpresenceConnCb%3Dnull%3B%0Aasync%20function%20setAdminOffline%28%29%7B%0A%20%20try%7B%0A%20%20%20%20if%28presenceHeartbeat%29clearInterval%28presenceHeartbeat%29%3B%0A%20%20%20%20presenceHeartbeat%3Dnull%3B%0A%20%20%20%20if%28presenceConnCb%26%26db%29db.ref%28%22.info/connected%22%29.off%28%22value%22%2CpresenceConnCb%29%3B%0A%20%20%20%20presenceConnCb%3Dnull%3B%0A%20%20%20%20if%28presenceRef%29await%20presenceRef.update%28%7Bonline%3Afalse%2ClastSeenAt%3ADate.now%28%29%2CactiveUid%3Anull%2CactiveName%3Anull%2CactivePhone%3Anull%2CactiveAt%3Anull%7D%29%3B%0A%20%20%7Dcatch%28e%29%7B%7D%0A%7D%0Aasync%20function%20setupAdminPresence%28%29%7B%0A%20%20presenceRef%3Ddb.ref%28%22customerService/status%22%29%3B%0A%20%20const%20connected%3Ddb.ref%28%22.info/connected%22%29%3B%0A%20%20presenceConnCb%3Dasync%20snap%3D%3E%7B%0A%20%20%20%20if%28snap.val%28%29%21%3D%3Dtrue%29return%3B%0A%20%20%20%20try%7B%0A%20%20%20%20%20%20await%20presenceRef.onDisconnect%28%29.update%28%7Bonline%3Afalse%2ClastSeenAt%3Afirebase.database.ServerValue.TIMESTAMP%2CactiveUid%3Anull%2CactiveName%3Anull%2CactivePhone%3Anull%2CactiveAt%3Anull%7D%29%3B%0A%20%20%20%20%20%20await%20presenceRef.update%28%7Bonline%3Atrue%2CadminUid%3AADMIN_UID%2ClastSeenAt%3ADate.now%28%29%7D%29%3B%0A%20%20%20%20%20%20if%28presenceHeartbeat%29clearInterval%28presenceHeartbeat%29%3B%0A%20%20%20%20%20%20presenceHeartbeat%3DsetInterval%28%28%29%3D%3E%7Bif%28document.visibilityState%21%3D%3D%22hidden%22%29presenceRef.update%28%7Bonline%3Atrue%2ClastSeenAt%3ADate.now%28%29%7D%29.catch%28%28%29%3D%3E%7B%7D%29%7D%2C5000%29%3B%0A%20%20%20%20%7Dcatch%28e%29%7B%7D%0A%20%20%7D%3B%0A%20%20connected.on%28%22value%22%2CpresenceConnCb%29%3B%0A%7D%0Afunction%20adminIsOnline%28s%29%7B%0A%20%20const%20last%3DNumber%28s%3F.lastSeenAt%7C%7C0%29%3B%0A%20%20return%20s%3F.online%3D%3D%3Dtrue%26%26last%3E0%26%26%28Date.now%28%29-last%29%3C15000%3B%0A%7D%0A%0Aasync%20function%20refresh%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20paths%3D%5B%22users%22%2C%22products%22%2C%22deposits%22%2C%22withdrawals%22%2C%22transactions%22%2C%22productRequests%22%2C%22pinRecoveryRequests%22%2C%22customerService/queue%22%5D%3B%0A%20%20%20%20const%20ss%3Dawait%20Promise.all%28paths.map%28p%3D%3Edb.ref%28p%29.once%28%22value%22%29%29%29%3B%0A%20%20%20%20paths.forEach%28%28p%2Ci%29%3D%3Edata%5Bp%5D%3Dss%5Bi%5D.exists%28%29%3Fss%5Bi%5D.val%28%29%3A%7B%7D%29%3B%0A%20%20%20%20%24%28%22cUsers%22%29.textContent%3Dvals%28data.users%29.length%3B%0A%20%20%20%20%24%28%22cProducts%22%29.textContent%3Dvals%28data.products%29.length%3B%0A%20%20%20%20%24%28%22cDeposits%22%29.textContent%3Dvals%28data.deposits%29.filter%28x%3D%3Ex.status%3D%3D%3D%22pending%22%29.length%3B%0A%20%20%20%20%24%28%22cWithdraws%22%29.textContent%3Dvals%28data.withdrawals%29.filter%28x%3D%3Ex.status%3D%3D%3D%22pending%22%29.length%3B%0A%20%20%20%20%24%28%22cRecovery%22%29.textContent%3Dvals%28data.pinRecoveryRequests%29.filter%28x%3D%3Ex.status%3D%3D%3D%22pending%22%29.length%3B%0A%20%20%20%20if%28%21%24%28%22products%22%29.classList.contains%28%22hidden%22%29%29renderProducts%28%29%3B%0A%20%20%20%20if%28%21%24%28%22deposits%22%29.classList.contains%28%22hidden%22%29%29renderDeposits%28%29%3B%0A%20%20%20%20if%28%21%24%28%22withdraws%22%29.classList.contains%28%22hidden%22%29%29renderWithdraws%28%29%3B%0A%20%20%20%20if%28%21%24%28%22history%22%29.classList.contains%28%22hidden%22%29%29renderHistory%28%29%3B%0A%20%20%20%20if%28%21%24%28%22recovery%22%29.classList.contains%28%22hidden%22%29%29renderPinRecovery%28%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22Firebase%20data%20load%20error%3A%20%22+e.message%29%7D%0A%7D%0A%0Afunction%20renderUsers%28%29%7B%0A%20%20const%20q%3D%28%24%28%22userSearch%22%29%3F.value%7C%7C%22%22%29.toLowerCase%28%29%3B%0A%20%20const%20a%3Dvals%28data.users%29.filter%28u%3D%3E%5Bu.name%2Cu.phone%2Cu.uid%2Cu.email%5D.join%28%22%20%22%29.toLowerCase%28%29.includes%28q%29%29%3B%0A%20%20%24%28%22usersList%22%29.innerHTML%3Da.length%3Fa.map%28u%3D%3E%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%uD83D%uDC64%20%24%7Besc%28u.name%7C%7C%22User%22%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCF1%20%24%7Besc%28u.phone%7C%7C%22-%22%29%7D%3Cbr%3E%uD83C%uDD94%20%24%7Besc%28u.uid%7C%7Cu.id%29%7D%3Cbr%3E%uD83D%uDCB0%20%3Cb%3E%24%7Bmoney%28u.balance%29%7D%3C/b%3E%3Cbr%3E%3Cspan%20class%3D%22small%22%3E%24%7Bu.active%3D%3D%3Dfalse%3F%22%uD83D%uDD34%20Disabled%22%3A%22%uD83D%uDFE2%20Active%22%7D%3C/span%3E%3C/div%3E%60%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20User%20%u09AA%u09BE%u0993%u09DF%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%u0964%22%3B%0A%7D%0A%0Afunction%20catButtons%28%29%7B%0A%20%20%24%28%22catButtons%22%29.innerHTML%3D%5B%5B%22all%22%2C%22%u09B8%u09AC%22%5D%2C...CATS.map%28x%3D%3E%5Bx%2Cx%5D%29%5D.map%28%28%5Bv%2Ct%5D%29%3D%3E%60%3Cbutton%20class%3D%22%24%7Bv%3D%3D%3DproductFilter%3F%22blue%22%3A%22light%22%7D%22%20onclick%3D%22setCat%28%27%24%7Besc%28v%29%7D%27%29%22%3E%24%7Bt%7D%3C/button%3E%60%29.join%28%22%22%29%3B%0A%7D%0Afunction%20setCat%28c%29%7BproductFilter%3Dc%3BrenderProducts%28%29%7D%0A%0Afunction%20productRates%28p%29%7B%0A%20%20return%20%7B%0A%20%20%20%20uu%3ANumber%28p.userToUserRate%3F%3Fp.userSellPrice%3F%3Fp.price%3F%3F0%29%2C%0A%20%20%20%20ua%3ANumber%28p.userToAdminRate%3F%3Fp.adminBuyPrice%3F%3F0%29%2C%0A%20%20%20%20au%3ANumber%28p.adminToUserRate%3F%3Fp.adminSellPrice%3F%3Fp.wholesalePrice%3F%3F0%29%0A%20%20%7D%3B%0A%7D%0Afunction%20renderProducts%28%29%7B%0A%20%20catButtons%28%29%3B%0A%20%20const%20a%3Dvals%28data.products%29.filter%28p%3D%3EproductFilter%3D%3D%3D%22all%22%7C%7Cp.category%3D%3D%3DproductFilter%29%3B%0A%20%20%24%28%22productsList%22%29.innerHTML%3Da.length%3Fa.map%28p%3D%3E%7B%0A%20%20%20%20const%20r%3DproductRates%28p%29%3B%0A%20%20%20%20return%20%60%3Cdiv%20class%3D%22product%22%3E%0A%20%20%20%20%20%20%24%7Bp.imageUrl%7C%7Cp.image%3F%60%3Cimg%20src%3D%22%24%7Besc%28p.imageUrl%7C%7Cp.image%29%7D%22%20onerror%3D%22this.style.display%3D%27none%27%22%3E%60%3A%27%27%7D%0A%20%20%20%20%20%20%3Ch3%3E%24%7Besc%28p.name%7C%7C%22Product%22%29%7D%3C/h3%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22muted%22%3E%24%7Besc%28p.category%7C%7C%22-%22%29%7D%20%u2022%20%uD83D%uDCE6%20Stock%3A%20%24%7BNumber%28p.stock%7C%7C0%29%7D%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22rates%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22rate%22%3E%uD83D%uDC65%20User%20%u2192%20User%3Cb%3E%24%7Bmoney%28r.uu%29%7D%3C/b%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22rate%22%3E%uD83D%uDC51%20User%20%u2192%20Admin%3Cb%3E%24%7Bmoney%28r.ua%29%7D%3C/b%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22rate%22%3E%uD83D%uDED2%20Admin%20%u2192%20User%3Cb%3E%24%7Bmoney%28r.au%29%7D%3C/b%3E%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3Cp%3E%24%7Besc%28p.description%7C%7C%22%22%29%7D%3C/p%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%27openProductEdit%28%24%7BJSON.stringify%28p.id%29%7D%2C%24%7BJSON.stringify%28p%29%7D%29%27%3E%u270F%uFE0F%20Edit%3C/button%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22danger%22%20onclick%3D%27deleteProduct%28%24%7BJSON.stringify%28p.id%29%7D%2C%24%7BJSON.stringify%28p.name%7C%7C%22Product%22%29%7D%29%27%3E%uD83D%uDDD1%uFE0F%20Delete%3C/button%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22clear%22%3E%3C/div%3E%0A%20%20%20%20%3C/div%3E%60%3B%0A%20%20%7D%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20Product%20%u09A8%u09C7%u0987%u0964%22%3B%0A%7D%0A%0Aasync%20function%20addProduct%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20name%3D%24%28%22pName%22%29.value.trim%28%29%2Ccategory%3D%24%28%22pCategory%22%29.value%3B%0A%20%20%20%20const%20uu%3DNumber%28%24%28%22pUU%22%29.value%29%2Cua%3DNumber%28%24%28%22pUA%22%29.value%29%2Cau%3DNumber%28%24%28%22pAU%22%29.value%29%3B%0A%20%20%20%20const%20stock%3DNumber%28%24%28%22pStock%22%29.value%29%2Cimage%3D%24%28%22pImage%22%29.value.trim%28%29%2Cdescription%3D%24%28%22pDesc%22%29.value.trim%28%29%3B%0A%20%20%20%20if%28%21name%7C%7Cuu%3C0%7C%7Cua%3C0%7C%7Cau%3C0%7C%7Cstock%3C0%29return%20alert%28%22Product%20%u09A4%u09A5%u09CD%u09AF%20%u09B8%u09A0%u09BF%u0995%u09AD%u09BE%u09AC%u09C7%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20%20%20const%20id%3Ddb.ref%28%22products%22%29.push%28%29.key%3B%0A%20%20%20%20await%20db.ref%28%22products/%22+id%29.set%28%7B%0A%20%20%20%20%20%20name%2Ccategory%2CuserToUserRate%3Auu%2CuserToAdminRate%3Aua%2CadminToUserRate%3Aau%2C%0A%20%20%20%20%20%20userSellPrice%3Auu%2CadminBuyPrice%3Aua%2Cprice%3Auu%2Cstock%2CimageUrl%3Aimage%2Cimage%3Aimage%2C%0A%20%20%20%20%20%20description%2CcreatedAt%3Afirebase.database.ServerValue.TIMESTAMP%2CupdatedAt%3Afirebase.database.ServerValue.TIMESTAMP%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20%24%28%22pName%22%29.value%3D%24%28%22pUU%22%29.value%3D%24%28%22pUA%22%29.value%3D%24%28%22pAU%22%29.value%3D%24%28%22pStock%22%29.value%3D%24%28%22pImage%22%29.value%3D%24%28%22pDesc%22%29.value%3D%22%22%3B%0A%20%20%20%20await%20refresh%28%29%3BrenderProducts%28%29%3Balert%28%22%u2705%20Product%20%u09AF%u09CB%u0997%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Product%20%u09AF%u09CB%u0997%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0A%0Afunction%20openProductEdit%28id%2Cp%29%7B%0A%20%20const%20r%3DproductRates%28p%29%3B%0A%20%20modal%28%22%u270F%uFE0F%20Product%20Edit%22%2C%60%0A%20%20%20%20%3Cinput%20type%3D%22hidden%22%20id%3D%22editProductId%22%20value%3D%22%24%7Besc%28id%29%7D%22%3E%0A%20%20%20%20%3Clabel%3EProduct%20Name%3C/label%3E%3Cinput%20id%3D%22eName%22%20value%3D%22%24%7Besc%28p.name%7C%7C%22%22%29%7D%22%3E%0A%20%20%20%20%3Clabel%3ECategory%3C/label%3E%3Cselect%20id%3D%22eCategory%22%3E%24%7BCATS.map%28c%3D%3E%60%3Coption%20%24%7Bp.category%3D%3D%3Dc%3F%22selected%22%3A%22%22%7D%3E%24%7Bc%7D%3C/option%3E%60%29.join%28%22%22%29%7D%3C/select%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDC65%20User%20%u2192%20User%20Rate%3C/label%3E%3Cinput%20id%3D%22eUU%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20value%3D%22%24%7Br.uu%7D%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDC51%20User%20%u2192%20Admin%20Rate%3C/label%3E%3Cinput%20id%3D%22eUA%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20value%3D%22%24%7Br.ua%7D%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDED2%20Admin%20%u2192%20User%20Rate%3C/label%3E%3Cinput%20id%3D%22eAU%22%20type%3D%22number%22%20min%3D%220%22%20step%3D%220.01%22%20value%3D%22%24%7Br.au%7D%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDCE6%20Stock%3C/label%3E%3Cinput%20id%3D%22eStock%22%20type%3D%22number%22%20min%3D%220%22%20value%3D%22%24%7BNumber%28p.stock%7C%7C0%29%7D%22%3E%0A%20%20%20%20%3Clabel%3E%uD83D%uDDBC%uFE0F%20Image%20URL%3C/label%3E%3Cinput%20id%3D%22eImage%22%20value%3D%22%24%7Besc%28p.imageUrl%7C%7Cp.image%7C%7C%22%22%29%7D%22%3E%0A%20%20%20%20%3Clabel%3EDescription%3C/label%3E%3Ctextarea%20id%3D%22eDesc%22%3E%24%7Besc%28p.description%7C%7C%22%22%29%7D%3C/textarea%3E%0A%20%20%60%2C%60%3Cbutton%20class%3D%22ok%22%20onclick%3D%22saveProductEdit%28%29%22%3E%uD83D%uDCBE%20Save%20Changes%3C/button%3E%3Cbutton%20class%3D%22light%22%20onclick%3D%22closeModal%28%29%22%3ECancel%3C/button%3E%60%29%3B%0A%7D%0Aasync%20function%20saveProductEdit%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20id%3D%24%28%22editProductId%22%29.value%2Cname%3D%24%28%22eName%22%29.value.trim%28%29%2Ccategory%3D%24%28%22eCategory%22%29.value%3B%0A%20%20%20%20const%20uu%3DNumber%28%24%28%22eUU%22%29.value%29%2Cua%3DNumber%28%24%28%22eUA%22%29.value%29%2Cau%3DNumber%28%24%28%22eAU%22%29.value%29%2Cstock%3DNumber%28%24%28%22eStock%22%29.value%29%3B%0A%20%20%20%20const%20image%3D%24%28%22eImage%22%29.value.trim%28%29%2Cdescription%3D%24%28%22eDesc%22%29.value.trim%28%29%3B%0A%20%20%20%20if%28%21id%7C%7C%21name%7C%7Cuu%3C0%7C%7Cua%3C0%7C%7Cau%3C0%7C%7Cstock%3C0%29return%20alert%28%22%u09A4%u09A5%u09CD%u09AF%20%u09B8%u09A0%u09BF%u0995%u09AD%u09BE%u09AC%u09C7%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20%20%20await%20db.ref%28%22products/%22+id%29.update%28%7B%0A%20%20%20%20%20%20name%2Ccategory%2CuserToUserRate%3Auu%2CuserToAdminRate%3Aua%2CadminToUserRate%3Aau%2C%0A%20%20%20%20%20%20userSellPrice%3Auu%2CadminBuyPrice%3Aua%2Cprice%3Auu%2Cstock%2CimageUrl%3Aimage%2Cimage%3Aimage%2C%0A%20%20%20%20%20%20description%2CupdatedAt%3Afirebase.database.ServerValue.TIMESTAMP%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20closeModal%28%29%3Bawait%20refresh%28%29%3BrenderProducts%28%29%3Balert%28%22%u2705%20Product-%u098F%u09B0%20Rate/%u09A4%u09A5%u09CD%u09AF%20%u09AA%u09B0%u09BF%u09AC%u09B0%u09CD%u09A4%u09A8%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Update%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20deleteProduct%28id%2Cname%29%7B%0A%20%20if%28%21confirm%28%60%22%24%7Bname%7D%22%20Product%20%u09B8%u09CD%u09A5%u09BE%u09DF%u09C0%u09AD%u09BE%u09AC%u09C7%20Delete%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%60%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22products/%22+id%29.remove%28%29%3Bawait%20refresh%28%29%3BrenderProducts%28%29%3Balert%28%22%u2705%20Product%20Delete%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20Delete%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0A%0Aasync%20function%20loadReferralSettings%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20s%3D%28await%20db.ref%28%22settings/referral%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20%24%28%22refCommissionPercent%22%29.value%3Ds.commissionPercent%21%3D%3Dundefined%3Fs.commissionPercent%3A1%3B%0A%20%20%20%20%24%28%22refFirstDepositBonus%22%29.value%3Ds.firstDepositBonus%21%3D%3Dundefined%3Fs.firstDepositBonus%3A10%3B%0A%20%20%20%20const%20users%3Dvals%28data.users%29%3B%0A%20%20%20%20const%20referred%3Dusers.filter%28u%3D%3Eu.referredBy%29%3B%0A%20%20%20%20const%20totalCommission%3Dusers.reduce%28%28n%2Cu%29%3D%3En+Number%28u.referralStats%3F.totalCommission%7C%7C0%29%2C0%29%3B%0A%20%20%20%20const%20totalBonus%3Dusers.reduce%28%28n%2Cu%29%3D%3En+Number%28u.referralStats%3F.firstDepositBonuses%7C%7C0%29%2C0%29%3B%0A%20%20%20%20%24%28%22referralOverview%22%29.innerHTML%3D%60%uD83D%uDC65%20Total%20Referral%20Users%3A%20%3Cb%3E%24%7Breferred.length%7D%3C/b%3E%3Cbr%3E%uD83D%uDCB0%20Total%20Referral%20Commission%3A%20%3Cb%3E%24%7Bmoney%28totalCommission%29%7D%3C/b%3E%3Cbr%3E%uD83C%uDF81%20First%20Deposit%20Bonus%20Count%3A%20%3Cb%3E%24%7BtotalBonus%7D%3C/b%3E%60%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Referral%20Settings%20load%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0A%0Aasync%20function%20saveReferralSettings%28%29%7B%0A%20%20const%20commissionPercent%3DNumber%28%24%28%22refCommissionPercent%22%29.value%29%3B%0A%20%20const%20firstDepositBonus%3DNumber%28%24%28%22refFirstDepositBonus%22%29.value%29%3B%0A%20%20if%28%21Number.isFinite%28commissionPercent%29%7C%7CcommissionPercent%3C0%7C%7CcommissionPercent%3E100%7C%7C%21Number.isFinite%28firstDepositBonus%29%7C%7CfirstDepositBonus%3C0%29%20return%20alert%28%22%u274C%20%u09B8%u09A0%u09BF%u0995%20Referral%20Settings%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20try%7B%0A%20%20%20%20await%20db.ref%28%22settings/referral%22%29.set%28%7BcommissionPercent%2CfirstDepositBonus%2CupdatedAt%3Afirebase.database.ServerValue.TIMESTAMP%2CupdatedBy%3AADMIN_UID%7D%29%3B%0A%20%20%20%20alert%28%22%u2705%20Referral%20Settings%20Save%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%0A%20%20%20%20await%20refresh%28%29%3BloadReferralSettings%28%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Save%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0A%0Afunction%20renderDeposits%28%29%7B%0A%20%20const%20a%3Dvals%28data.deposits%29.sort%28%28x%2Cy%29%3D%3E%28y.createdAt%7C%7C0%29-%28x.createdAt%7C%7C0%29%29%3B%0A%20%20%24%28%22depositList%22%29.innerHTML%3Da.length%3Fa.map%28d%3D%3E%60%3Cdiv%20class%3D%22item%22%3E%0A%20%20%20%20%3Cb%3E%uD83D%uDC64%20%24%7Besc%28d.name%7C%7Cdata.users%5Bd.uid%5D%3F.name%7C%7C%22User%22%29%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%uD83D%uDCF1%20%24%7Besc%28d.phone%7C%7Cdata.users%5Bd.uid%5D%3F.phone%7C%7C%22-%22%29%7D%3Cbr%3E%0A%20%20%20%20%uD83D%uDCB0%20Amount%3A%20%3Cb%3E%24%7Bmoney%28d.amount%29%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%uD83D%uDCB3%20%24%7Besc%28d.method%7C%7C%22-%22%29%7D%20%u2022%20TXID%3A%20%24%7Besc%28d.transactionId%7C%7C%22-%22%29%7D%3Cbr%3E%0A%20%20%20%20%uD83D%uDCCC%20%3Cspan%20class%3D%22badge%20%24%7Bd.status%3D%3D%3D%22approved%22%3F%22approved%22%3Ad.status%3D%3D%3D%22rejected%22%3F%22rejected%22%3A%22%22%7D%22%3E%24%7Besc%28d.status%7C%7C%22unknown%22%29%7D%3C/span%3E%0A%20%20%20%20%24%7Bd.status%3D%3D%3D%22pending%22%3F%60%3Cdiv%20class%3D%22wrap%22%20style%3D%22margin-top%3A8px%22%3E%3Cbutton%20class%3D%22ok%22%20onclick%3D%22approveDeposit%28%27%24%7Besc%28d.id%29%7D%27%29%22%3E%u2705%20Approve%3C/button%3E%3Cbutton%20class%3D%22danger%22%20onclick%3D%22rejectDeposit%28%27%24%7Besc%28d.id%29%7D%27%29%22%3E%u274C%20Reject%3C/button%3E%3C/div%3E%60%3A%22%22%7D%0A%20%20%3C/div%3E%60%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20Deposit%20%u09A8%u09C7%u0987%u0964%22%3B%0A%7D%0Aasync%20function%20approveDeposit%28id%29%7B%0A%20%20const%20d%3Ddata.deposits%5Bid%5D%3Bif%28%21d%7C%7Cd.status%21%3D%3D%22pending%22%29return%3B%0A%20%20const%20u%3Ddata.users%5Bd.uid%5D%7C%7C%7B%7D%2Cbefore%3DNumber%28u.balance%7C%7C0%29%2Camount%3DNumber%28d.amount%7C%7C0%29%2Cafter%3Dbefore+amount%3B%0A%20%20modal%28%22%uD83D%uDCB0%20Deposit%20Approve%22%2C%60%u09AC%u09B0%u09CD%u09A4%u09AE%u09BE%u09A8%20Balance%3A%20%3Cb%3E%24%7Bmoney%28before%29%7D%3C/b%3E%3Cbr%3EDeposit%3A%20%3Cb%3E%24%7Bmoney%28amount%29%7D%3C/b%3E%3Cbr%3E%u09A8%u09A4%u09C1%u09A8%20Balance%3A%20%3Cb%3E%24%7Bmoney%28after%29%7D%3C/b%3E%60%2C%60%3Cbutton%20class%3D%22ok%22%20onclick%3D%22confirmDeposit%28%27%24%7Besc%28id%29%7D%27%2C%24%7Bbefore%7D%2C%24%7Bafter%7D%29%22%3EConfirm%20Approve%3C/button%3E%3Cbutton%20class%3D%22light%22%20onclick%3D%22closeModal%28%29%22%3ECancel%3C/button%3E%60%29%3B%0A%7D%0Aasync%20function%20confirmDeposit%28id%2Cbefore%2Cafter%29%7B%0A%20%20const%20d%3Ddata.deposits%5Bid%5D%3B%0A%20%20if%28%21d%7C%7Cd.status%21%3D%3D%22pending%22%29%7BcloseModal%28%29%3Breturn%7D%0A%0A%20%20try%7B%0A%20%20%20%20const%20freshUserSnap%3Dawait%20db.ref%28%22users/%22+d.uid%29.once%28%22value%22%29%3B%0A%20%20%20%20const%20user%3DfreshUserSnap.exists%28%29%3FfreshUserSnap.val%28%29%7C%7C%7B%7D%3A%7B%7D%3B%0A%20%20%20%20const%20currentBalance%3DNumber%28user.balance%7C%7C0%29%3B%0A%20%20%20%20const%20amount%3DNumber%28d.amount%7C%7C0%29%3B%0A%20%20%20%20const%20realAfter%3DcurrentBalance+amount%3B%0A%20%20%20%20const%20settings%3D%28await%20db.ref%28%22settings/referral%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20const%20commissionPercent%3DNumber%28settings.commissionPercent%3F%3F1%29%3B%0A%20%20%20%20const%20firstDepositBonus%3DNumber%28settings.firstDepositBonus%3F%3F10%29%3B%0A%20%20%20%20const%20referrerUid%3DString%28user.referredBy%7C%7C%22%22%29%3B%0A%20%20%20%20let%20referrer%3Dnull%3B%0A%20%20%20%20if%28referrerUid%20%26%26%20referrerUid%21%3D%3Dd.uid%29%7B%0A%20%20%20%20%20%20const%20rs%3Dawait%20db.ref%28%22users/%22+referrerUid%29.once%28%22value%22%29%3B%0A%20%20%20%20%20%20if%28rs.exists%28%29%29%20referrer%3Drs.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20previousApproved%3Dvals%28data.deposits%29.some%28x%3D%3Ex.id%21%3D%3Did%26%26x.uid%3D%3D%3Dd.uid%26%26x.status%3D%3D%3D%22approved%22%29%3B%0A%20%20%20%20const%20commission%3Dreferrer%3FNumber%28%28amount*commissionPercent/100%29.toFixed%282%29%29%3A0%3B%0A%20%20%20%20const%20bonus%3D%28referrer%26%26%21previousApproved%29%3FNumber%28firstDepositBonus.toFixed%282%29%29%3A0%3B%0A%20%20%20%20const%20referrerBefore%3Dreferrer%3FNumber%28referrer.balance%7C%7C0%29%3A0%3B%0A%20%20%20%20const%20referrerAfter%3DreferrerBefore+commission+bonus%3B%0A%20%20%20%20const%20txid%3Ddb.ref%28%22transactions%22%29.push%28%29.key%3B%0A%20%20%20%20const%20updates%3D%7B%7D%3B%0A%0A%20%20%20%20updates%5B%22users/%22+d.uid+%22/balance%22%5D%3DrealAfter%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/status%22%5D%3D%22approved%22%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/approvedAt%22%5D%3DDate.now%28%29%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/balanceBefore%22%5D%3DcurrentBalance%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/balanceAfter%22%5D%3DrealAfter%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/approvedBy%22%5D%3DADMIN_UID%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/referralCommission%22%5D%3Dcommission%3B%0A%20%20%20%20updates%5B%22deposits/%22+id+%22/firstDepositBonus%22%5D%3Dbonus%3B%0A%0A%20%20%20%20updates%5B%22transactions/%22+txid%5D%3D%7Btype%3A%22deposit_approved%22%2Cuid%3Ad.uid%2Camount%2CbalanceBefore%3AcurrentBalance%2CbalanceAfter%3ArealAfter%2CdepositId%3Aid%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%0A%20%20%20%20if%28referrer%20%26%26%20%28commission%3E0%20%7C%7C%20bonus%3E0%29%29%7B%0A%20%20%20%20%20%20updates%5B%22users/%22+referrerUid+%22/balance%22%5D%3DreferrerAfter%3B%0A%20%20%20%20%20%20updates%5B%22users/%22+referrerUid+%22/referralStats/totalReferrals%22%5D%3DNumber%28referrer.referralStats%3F.totalReferrals%7C%7C0%29%3B%0A%20%20%20%20%20%20updates%5B%22users/%22+referrerUid+%22/referralStats/totalCommission%22%5D%3DNumber%28referrer.referralStats%3F.totalCommission%7C%7C0%29+commission+bonus%3B%0A%20%20%20%20%20%20updates%5B%22users/%22+referrerUid+%22/referralStats/firstDepositBonuses%22%5D%3DNumber%28referrer.referralStats%3F.firstDepositBonuses%7C%7C0%29+%28bonus%3E0%3F1%3A0%29%3B%0A%0A%20%20%20%20%20%20if%28commission%3E0%29%7B%0A%20%20%20%20%20%20%20%20const%20rid%3Ddb.ref%28%22referrals/%22+referrerUid+%22/history%22%29.push%28%29.key%3B%0A%20%20%20%20%20%20%20%20updates%5B%22referrals/%22+referrerUid+%22/history/%22+rid%5D%3D%7Btype%3A%22commission%22%2CreferredUid%3Ad.uid%2CdepositId%3Aid%2Camount%3Acommission%2CratePercent%3AcommissionPercent%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%20%20%20%20%20%20%20%20const%20rtx%3Ddb.ref%28%22transactions%22%29.push%28%29.key%3B%0A%20%20%20%20%20%20%20%20updates%5B%22transactions/%22+rtx%5D%3D%7Btype%3A%22referral_commission%22%2Cuid%3AreferrerUid%2CreferredUid%3Ad.uid%2Camount%3Acommission%2CdepositId%3Aid%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%28bonus%3E0%29%7B%0A%20%20%20%20%20%20%20%20const%20rid%3Ddb.ref%28%22referrals/%22+referrerUid+%22/history%22%29.push%28%29.key%3B%0A%20%20%20%20%20%20%20%20updates%5B%22referrals/%22+referrerUid+%22/history/%22+rid%5D%3D%7Btype%3A%22first_deposit_bonus%22%2CreferredUid%3Ad.uid%2CdepositId%3Aid%2Camount%3Abonus%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%20%20%20%20%20%20%20%20const%20rtx%3Ddb.ref%28%22transactions%22%29.push%28%29.key%3B%0A%20%20%20%20%20%20%20%20updates%5B%22transactions/%22+rtx%5D%3D%7Btype%3A%22first_deposit_bonus%22%2Cuid%3AreferrerUid%2CreferredUid%3Ad.uid%2Camount%3Abonus%2CdepositId%3Aid%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20await%20db.ref%28%29.update%28updates%29%3B%0A%20%20%20%20closeModal%28%29%3Bawait%20refresh%28%29%3BrenderDeposits%28%29%3B%0A%20%20%20%20alert%28%22%u2705%20Deposit%20approved%u0964%22+%28referrer%3F%28%22%5Cn%5Cn%uD83C%uDF81%20Referral%20Commission%3A%20%22+money%28commission%29+%28bonus%3E0%3F%28%22%5Cn%uD83C%uDF81%20First%20Deposit%20Bonus%3A%20%22+money%28bonus%29%29%3A%22%22%29%29%3A%22%22%29%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20rejectDeposit%28id%29%7B%0A%20%20if%28%21confirm%28%22%u098F%u0987%20Deposit%20Reject%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22deposits/%22+id%29.update%28%7Bstatus%3A%22rejected%22%2CrejectedAt%3ADate.now%28%29%2CrejectedBy%3AADMIN_UID%7D%29%3Bawait%20refresh%28%29%3BrenderDeposits%28%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0A%0Afunction%20renderWithdraws%28%29%7B%0A%20%20const%20a%3Dvals%28data.withdrawals%29.sort%28%28x%2Cy%29%3D%3E%28y.createdAt%7C%7C0%29-%28x.createdAt%7C%7C0%29%29%3B%0A%20%20%24%28%22withdrawList%22%29.innerHTML%3Da.length%3Fa.map%28w%3D%3E%7B%0A%20%20%20%20const%20u%3Ddata.users%5Bw.uid%5D%7C%7C%7B%7D%2Camount%3DNumber%28w.amount%7C%7C0%29%2Cfee%3DNumber%28w.adminFee%3F%3Famount*.05%29%2Cnet%3DNumber%28w.netAmount%3F%3Famount-fee%29%3B%0A%20%20%20%20return%20%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%uD83D%uDC64%20%24%7Besc%28w.name%7C%7Cu.name%7C%7C%22User%22%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCF1%20%24%7Besc%28w.phone%7C%7Cu.phone%7C%7Cw.number%7C%7C%22-%22%29%7D%3Cbr%3E%0A%20%20%20%20%uD83D%uDCB0%20Current%20Balance%3A%20%3Cb%3E%24%7Bmoney%28u.balance%29%7D%3C/b%3E%3Cbr%3E%u2796%20Withdraw%3A%20%3Cb%3E%24%7Bmoney%28amount%29%7D%3C/b%3E%3Cbr%3E%uD83E%uDDFE%20Admin%20Fee%3A%20%3Cb%3E%24%7Bmoney%28fee%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCB5%20User%20receives%3A%20%3Cb%3E%24%7Bmoney%28net%29%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%uD83D%uDCCC%20%3Cspan%20class%3D%22badge%20%24%7Bw.status%3D%3D%3D%22approved%22%3F%22approved%22%3Aw.status%3D%3D%3D%22rejected%22%3F%22rejected%22%3A%22%22%7D%22%3E%24%7Besc%28w.status%7C%7C%22unknown%22%29%7D%3C/span%3E%0A%20%20%20%20%24%7Bw.status%3D%3D%3D%22pending%22%3F%60%3Cdiv%20class%3D%22wrap%22%20style%3D%22margin-top%3A8px%22%3E%3Cbutton%20class%3D%22ok%22%20onclick%3D%22approveWithdraw%28%27%24%7Besc%28w.id%29%7D%27%29%22%3E%u2705%20Approve%3C/button%3E%3Cbutton%20class%3D%22danger%22%20onclick%3D%22rejectWithdraw%28%27%24%7Besc%28w.id%29%7D%27%29%22%3E%u274C%20Reject%3C/button%3E%3C/div%3E%60%3A%22%22%7D%3C/div%3E%60%3B%0A%20%20%7D%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20Withdraw%20%u09A8%u09C7%u0987%u0964%22%3B%0A%7D%0Aasync%20function%20approveWithdraw%28id%29%7B%0A%20%20const%20w%3Ddata.withdrawals%5Bid%5D%3Bif%28%21w%7C%7Cw.status%21%3D%3D%22pending%22%29return%3B%0A%20%20const%20u%3Ddata.users%5Bw.uid%5D%7C%7C%7B%7D%2Cbefore%3DNumber%28u.balance%7C%7C0%29%2Camount%3DNumber%28w.amount%7C%7C0%29%2Cfee%3DNumber%28w.adminFee%3F%3Famount*.05%29%2Cafter%3Dbefore-amount%3B%0A%20%20if%28after%3C0%29return%20alert%28%22%u274C%20User-%u098F%u09B0%20Balance%20%u09AF%u09A5%u09C7%u09B7%u09CD%u099F%20%u09A8%u09DF%u0964%22%29%3B%0A%20%20modal%28%22%uD83D%uDCB8%20Withdraw%20Approve%22%2C%60%u09AC%u09B0%u09CD%u09A4%u09AE%u09BE%u09A8%20Balance%3A%20%3Cb%3E%24%7Bmoney%28before%29%7D%3C/b%3E%3Cbr%3EWithdraw%3A%20%3Cb%3E%24%7Bmoney%28amount%29%7D%3C/b%3E%3Cbr%3EFee%3A%20%3Cb%3E%24%7Bmoney%28fee%29%7D%3C/b%3E%3Cbr%3E%u09A8%u09A4%u09C1%u09A8%20Balance%3A%20%3Cb%3E%24%7Bmoney%28after%29%7D%3C/b%3E%60%2C%60%3Cbutton%20class%3D%22ok%22%20onclick%3D%22confirmWithdraw%28%27%24%7Besc%28id%29%7D%27%2C%24%7Bbefore%7D%2C%24%7Bafter%7D%2C%24%7Bfee%7D%29%22%3EConfirm%20Approve%3C/button%3E%3Cbutton%20class%3D%22light%22%20onclick%3D%22closeModal%28%29%22%3ECancel%3C/button%3E%60%29%3B%0A%7D%0Aasync%20function%20confirmWithdraw%28id%2Cbefore%2Cafter%2Cfee%29%7B%0A%20%20const%20w%3Ddata.withdrawals%5Bid%5D%3Bif%28%21w%7C%7Cw.status%21%3D%3D%22pending%22%29%7BcloseModal%28%29%3Breturn%7D%0A%20%20const%20txid%3Ddb.ref%28%22transactions%22%29.push%28%29.key%2Camount%3DNumber%28w.amount%7C%7C0%29%2Cnet%3DNumber%28w.netAmount%3F%3Famount-fee%29%2Cupdates%3D%7B%7D%3B%0A%20%20updates%5B%22users/%22+w.uid+%22/balance%22%5D%3Dafter%3B%0A%20%20updates%5B%22withdrawals/%22+id+%22/status%22%5D%3D%22approved%22%3Bupdates%5B%22withdrawals/%22+id+%22/approvedAt%22%5D%3DDate.now%28%29%3Bupdates%5B%22withdrawals/%22+id+%22/approvedBy%22%5D%3DADMIN_UID%3Bupdates%5B%22withdrawals/%22+id+%22/balanceBefore%22%5D%3Dbefore%3Bupdates%5B%22withdrawals/%22+id+%22/balanceAfter%22%5D%3Dafter%3B%0A%20%20updates%5B%22transactions/%22+txid%5D%3D%7Btype%3A%22withdraw_approved%22%2Cuid%3Aw.uid%2Camount%2CadminFee%3Afee%2CnetAmount%3Anet%2CbalanceBefore%3Abefore%2CbalanceAfter%3Aafter%2CwithdrawalId%3Aid%2CcreatedAt%3ADate.now%28%29%7D%3B%0A%20%20try%7Bawait%20db.ref%28%29.update%28updates%29%3BcloseModal%28%29%3Bawait%20refresh%28%29%3BrenderWithdraws%28%29%3Balert%28%22%u2705%20Withdraw%20approved%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20rejectWithdraw%28id%29%7B%0A%20%20if%28%21confirm%28%22%u098F%u0987%20Withdraw%20Reject%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22withdrawals/%22+id%29.update%28%7Bstatus%3A%22rejected%22%2CrejectedAt%3ADate.now%28%29%2CrejectedBy%3AADMIN_UID%7D%29%3Bawait%20refresh%28%29%3BrenderWithdraws%28%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0A%0Afunction%20renderHistory%28%29%7B%0A%20%20const%20a%3Dvals%28data.transactions%29.sort%28%28x%2Cy%29%3D%3E%28y.createdAt%7C%7C0%29-%28x.createdAt%7C%7C0%29%29.slice%280%2C300%29%3B%0A%20%20%24%28%22historyList%22%29.innerHTML%3Da.length%3Fa.map%28t%3D%3E%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%24%7Besc%28t.type%7C%7C%22transaction%22%29%7D%3C/b%3E%3Cbr%3E%uD83C%uDD94%20%24%7Besc%28t.uid%7C%7C%22-%22%29%7D%20%24%7Bt.amount%21%3D%3Dundefined%3F%22%u2022%20%uD83D%uDCB0%20%22+money%28t.amount%29%3A%22%22%7D%3Cbr%3E%uD83D%uDD50%20%24%7Bt.createdAt%3Fnew%20Date%28t.createdAt%29.toLocaleString%28%22bn-BD%22%29%3A%22-%22%7D%3C/div%3E%60%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20History%20%u09A8%u09C7%u0987%u0964%22%3B%0A%7D%0A%0Afunction%20recoveryActuals%28uid%29%7B%0A%20%20const%20u%3Ddata.users%5Buid%5D%7C%7C%7B%7D%3B%0A%20%20let%20stockCount%3D0%3B%0A%20%20const%20st%3Du.stock%7C%7Cu.myStock%7C%7C%7B%7D%3B%0A%20%20if%28typeof%20st%3D%3D%3D%22number%22%29stockCount%3DNumber%28st%29%3B%0A%20%20else%20Object.values%28st%7C%7C%7B%7D%29.forEach%28v%3D%3EstockCount+%3Dtypeof%20v%3D%3D%3D%22number%22%3FNumber%28v%29%3ANumber%28v%3F.quantity%7C%7C0%29%29%3B%0A%20%20const%20deps%3Dvals%28data.deposits%29.filter%28x%3D%3Ex.uid%3D%3D%3Duid%29.sort%28%28a%2Cb%29%3D%3E%28b.createdAt%7C%7C0%29-%28a.createdAt%7C%7C0%29%29%3B%0A%20%20const%20wds%3Dvals%28data.withdrawals%29.filter%28x%3D%3Ex.uid%3D%3D%3Duid%29.sort%28%28a%2Cb%29%3D%3E%28b.createdAt%7C%7C0%29-%28a.createdAt%7C%7C0%29%29%3B%0A%20%20return%20%7Bname%3Au.name%7C%7C%22%22%2Cphone%3Au.phone%7C%7C%22%22%2Cbalance%3ANumber%28u.balance%7C%7C0%29%2CstockCount%2ClastDeposit%3Adeps.length%3FNumber%28deps%5B0%5D.amount%7C%7C0%29%3A0%2ClastWithdraw%3Awds.length%3FNumber%28wds%5B0%5D.amount%7C%7C0%29%3A0%7D%3B%0A%7D%0Afunction%20recoveryCompare%28r%2Cuid%29%7B%0A%20%20const%20a%3DrecoveryActuals%28uid%29%2Cnear%3D%28x%2Cy%29%3D%3EMath.abs%28Number%28x%7C%7C0%29-Number%28y%7C%7C0%29%29%3C0.01%3B%0A%20%20return%20%7Bactual%3Aa%2Cname%3Aa.name%3D%3D%3Dr.name%2Cphone%3Aa.phone%3D%3D%3Dr.phone%2Cbalance%3Anear%28a.balance%2Cr.claimedBalance%29%2CstockCount%3ANumber%28a.stockCount%29%3D%3D%3DNumber%28r.claimedStockCount%29%2C%0A%20%20%20%20lastDeposit%3Anear%28a.lastDeposit%2Cr.claimedLastDeposit%3F%3Fr.lastDeposit%29%2ClastWithdraw%3Anear%28a.lastWithdraw%2Cr.claimedLastWithdraw%3F%3Fr.lastWithdraw%29%7D%3B%0A%7D%0Afunction%20hasClaim%28r%2Ckey%29%7B%0A%20%20const%20v%3Dr%5Bkey%5D%3Breturn%20v%21%3D%3Dnull%26%26v%21%3D%3Dundefined%26%26v%21%3D%3D%22%22%3B%0A%7D%0Afunction%20renderPinRecovery%28%29%7B%0A%20%20const%20a%3Dvals%28data.pinRecoveryRequests%29.sort%28%28x%2Cy%29%3D%3E%28y.createdAt%7C%7C0%29-%28x.createdAt%7C%7C0%29%29%3B%0A%20%20%24%28%22recoveryList%22%29.innerHTML%3Da.length%3Fa.map%28r%3D%3E%7B%0A%20%20%20%20const%20u%3Dvals%28data.users%29.find%28x%3D%3Ex.phone%3D%3D%3Dr.phone%29%2Cuid%3Du%3F.uid%7C%7Cu%3F.id%7C%7C%22%22%3B%0A%20%20%20%20const%20c%3Duid%3FrecoveryCompare%28r%2Cuid%29%3Anull%3B%0A%20%20%20%20const%20hd%3DhasClaim%28r%2C%22claimedLastDeposit%22%29%7C%7ChasClaim%28r%2C%22lastDeposit%22%29%2Chw%3DhasClaim%28r%2C%22claimedLastWithdraw%22%29%7C%7ChasClaim%28r%2C%22lastWithdraw%22%29%3B%0A%20%20%20%20const%20allOk%3D%21%21c%26%26c.name%26%26c.phone%26%26c.balance%26%26c.stockCount%26%26%28hd%3Fc.lastDeposit%3Atrue%29%26%26%28hw%3Fc.lastWithdraw%3Atrue%29%26%26%28hd%7C%7Chw%29%3B%0A%20%20%20%20return%20%60%3Cdiv%20class%3D%22item%22%3E%0A%20%20%20%20%20%20%3Cb%3E%uD83D%uDD11%20%24%7Besc%28r.name%7C%7C%22-%22%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCF1%20%24%7Besc%28r.phone%7C%7C%22-%22%29%7D%3Cbr%3E%0A%20%20%20%20%20%20%uD83D%uDCB0%20Claimed%20Balance%3A%20%3Cb%3E%24%7Bmoney%28r.claimedBalance%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCE6%20Claimed%20Stock%3A%20%3Cb%3E%24%7Besc%28r.claimedStockCount%3F%3F%22-%22%29%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%20%20%uD83D%uDCB3%20Last%20Deposit%3A%20%3Cb%3E%24%7Bhd%3Fmoney%28r.claimedLastDeposit%3F%3Fr.lastDeposit%29%3A%22%u09A6%u09C7%u0993%u09DF%u09BE%20%u09B9%u09DF%u09A8%u09BF%22%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%20%20%uD83D%uDCB8%20Last%20Withdraw%3A%20%3Cb%3E%24%7Bhw%3Fmoney%28r.claimedLastWithdraw%3F%3Fr.lastWithdraw%29%3A%22%u09A6%u09C7%u0993%u09DF%u09BE%20%u09B9%u09DF%u09A8%u09BF%22%7D%3C/b%3E%3Cbr%3E%0A%20%20%20%20%20%20%uD83D%uDCCC%20%3Cspan%20class%3D%22badge%20%24%7Br.status%3D%3D%3D%22approved%22%3F%22approved%22%3Ar.status%3D%3D%3D%22rejected%22%3F%22rejected%22%3A%22%22%7D%22%3E%24%7Besc%28r.status%7C%7C%22pending%22%29%7D%3C/span%3E%0A%20%20%20%20%20%20%24%7Bc%3F%60%3Cdiv%20style%3D%22margin-top%3A8px%3Bline-height%3A1.6%22%3E%3Cb%3EAdmin%20%u09AF%u09BE%u099A%u09BE%u0987%3A%3C/b%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%u09A8%u09BE%u09AE%20%24%7Bc.name%3F%22%u2705%22%3A%22%u274C%22%7D%20%u2022%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20%24%7Bc.phone%3F%22%u2705%22%3A%22%u274C%22%7D%20%u2022%20%u09AC%u09CD%u09AF%u09BE%u09B2%u09C7%u09A8%u09CD%u09B8%20%24%7Bc.balance%3F%22%u2705%22%3A%22%u274C%22%7D%20%u2022%20%u09B8%u09CD%u099F%u0995%20%24%7Bc.stockCount%3F%22%u2705%22%3A%22%u274C%22%7D%20%u2022%0A%20%20%20%20%20%20%20%20%u09A1%u09BF%u09AA%u09CB%u099C%u09BF%u099F%20%24%7Bhd%3F%28c.lastDeposit%3F%22%u2705%22%3A%22%u274C%22%29%3A%22%u26AA%22%7D%20%u2022%20%u0989%u0987%u09A5%u09A1%u09CD%u09B0%20%24%7Bhw%3F%28c.lastWithdraw%3F%22%u2705%22%3A%22%u274C%22%29%3A%22%u26AA%22%7D%3Cbr%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22small%22%3EActual%3A%20Balance%20%24%7Bmoney%28c.actual.balance%29%7D%20%u2022%20Stock%20%24%7Bc.actual.stockCount%7D%20%u2022%20Deposit%20%24%7Bmoney%28c.actual.lastDeposit%29%7D%20%u2022%20Withdraw%20%24%7Bmoney%28c.actual.lastWithdraw%29%7D%3C/span%3E%0A%20%20%20%20%20%20%3C/div%3E%60%3A%60%3Cdiv%20class%3D%22small%22%3E%u26A0%uFE0F%20%u098F%u0987%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%u09B0%20User%20account%20%u09AA%u09BE%u0993%u09DF%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%u0964%3C/div%3E%60%7D%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22wrap%22%20style%3D%22margin-top%3A10px%22%3E%0A%20%20%20%20%20%20%20%20%24%7Br.status%3D%3D%3D%22pending%22%3F%60%3Cbutton%20class%3D%22ok%22%20onclick%3D%22approvePinRecovery%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%u2705%20Verify%3C/button%3E%3Cbutton%20class%3D%22danger%22%20onclick%3D%22rejectPinRecovery%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%u274C%20Reject%3C/button%3E%60%3A%22%22%7D%0A%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22blue%22%20onclick%3D%22sendRecoveryTelegram%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%uD83D%uDCE8%20Telegram%3C/button%3E%0A%20%20%20%20%20%20%20%20%24%7Br.status%3D%3D%3D%22approved%22%3F%60%3Cbutton%20class%3D%22blue%22%20onclick%3D%22openRecoverySms%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%uD83D%uDCF2%20SMS-%u098F%20PIN%20%u09AA%u09BE%u09A0%u09BE%u09A8%3C/button%3E%3Cbutton%20class%3D%22light%22%20onclick%3D%22markRecoverySmsSent%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%u2705%20SMS%20Sent%3C/button%3E%60%3A%22%22%7D%0A%20%20%20%20%20%20%20%20%3Cbutton%20class%3D%22danger%22%20onclick%3D%22deletePinRecovery%28%27%24%7Besc%28r.id%29%7D%27%29%22%3E%uD83D%uDDD1%uFE0F%20Delete%3C/button%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/div%3E%60%3B%0A%20%20%7D%29.join%28%22%22%29%3A%22%u0995%u09CB%u09A8%u09CB%20PIN%20Recovery%20%u0986%u09AC%u09C7%u09A6%u09A8%20%u09A8%u09C7%u0987%u0964%22%3B%0A%20%20%24%28%22cRecovery%22%29.textContent%3Dvals%28data.pinRecoveryRequests%29.filter%28x%3D%3Ex.status%3D%3D%3D%22pending%22%29.length%3B%0A%7D%0Aasync%20function%20approvePinRecovery%28id%29%7B%0A%20%20const%20r%3Ddata.pinRecoveryRequests%5Bid%5D%3Bif%28%21r%29return%3B%0A%20%20const%20u%3Dvals%28data.users%29.find%28x%3D%3Ex.phone%3D%3D%3Dr.phone%29%3Bif%28%21u%29return%20alert%28%22%u274C%20%u098F%u0987%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%u09B0%20User%20account%20%u09AA%u09BE%u0993%u09DF%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%u0964%22%29%3B%0A%20%20const%20c%3DrecoveryCompare%28r%2Cu.uid%7C%7Cu.id%29%2Chd%3DhasClaim%28r%2C%22claimedLastDeposit%22%29%7C%7ChasClaim%28r%2C%22lastDeposit%22%29%2Chw%3DhasClaim%28r%2C%22claimedLastWithdraw%22%29%7C%7ChasClaim%28r%2C%22lastWithdraw%22%29%3B%0A%20%20const%20valid%3Dc.name%26%26c.phone%26%26c.balance%26%26c.stockCount%26%26%28hd%3Fc.lastDeposit%3Atrue%29%26%26%28hw%3Fc.lastWithdraw%3Atrue%29%26%26%28hd%7C%7Chw%29%3B%0A%20%20if%28%21valid%29return%20alert%28%22%u274C%20%u09A4%u09A5%u09CD%u09AF%20%u09AE%u09C7%u09B2%u09C7%u09A8%u09BF%u0964%20Balance/Stock%20%u09B8%u09A0%u09BF%u0995%20%u09B9%u09A4%u09C7%20%u09B9%u09AC%u09C7%20%u098F%u09AC%u0982%20Last%20Deposit%20%u0985%u09A5%u09AC%u09BE%20Last%20Withdraw-%u098F%u09B0%20%u0985%u09A8%u09CD%u09A4%u09A4%20%u098F%u0995%u099F%u09BF%20%u09B8%u09A0%u09BF%u0995%20%u09A4%u09A5%u09CD%u09AF%20%u09A6%u09BF%u09A4%u09C7%20%u09B9%u09AC%u09C7%u0964%22%29%3B%0A%20%20if%28%21confirm%28%22%u09B8%u09AC%20%u09A4%u09A5%u09CD%u09AF%20%u09AE%u09BF%u09B2%u09C7%20%u0997%u09C7%u099B%u09C7%u0964%20Verified%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%5Cn%5CnPIN%20Firebase-%u098F%20%u09B2%u09BF%u0996%u09AC%u09C7%u09A8%20%u09A8%u09BE%u0964%20%u09B8%u09A0%u09BF%u0995%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20SMS%20%u09AA%u09BE%u09A0%u09BE%u09A8%u0964%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22pinRecoveryRequests/%22+id%29.update%28%7Bstatus%3A%22approved%22%2CverifiedAt%3ADate.now%28%29%2CverifiedBy%3AADMIN_UID%7D%29%3Bawait%20refresh%28%29%3BrenderPinRecovery%28%29%3Balert%28%22%u2705%20Verified%u0964%20%u098F%u0996%u09A8%20User-%u098F%u09B0%20%u09B8%u09A0%u09BF%u0995%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20SMS-%u098F%20PIN%20%u09AA%u09BE%u09A0%u09BE%u09A8%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20rejectPinRecovery%28id%29%7B%0A%20%20if%28%21confirm%28%22%u098F%u0987%20Recovery%20%u0986%u09AC%u09C7%u09A6%u09A8%20Reject%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22pinRecoveryRequests/%22+id%29.update%28%7Bstatus%3A%22rejected%22%2CrejectedAt%3ADate.now%28%29%2CverifiedBy%3AADMIN_UID%7D%29%3Bawait%20refresh%28%29%3BrenderPinRecovery%28%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20deletePinRecovery%28id%29%7B%0A%20%20if%28%21confirm%28%22%u098F%u0987%20PIN%20Recovery%20%u0986%u09AC%u09C7%u09A6%u09A8%u099F%u09BF%20%u09B8%u09CD%u09A5%u09BE%u09DF%u09C0%u09AD%u09BE%u09AC%u09C7%20Delete%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22pinRecoveryRequests/%22+id%29.remove%28%29%3Bawait%20refresh%28%29%3BrenderPinRecovery%28%29%3Balert%28%22%u2705%20Delete%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20openRecoverySms%28id%29%7B%0A%20%20const%20r%3Ddata.pinRecoveryRequests%5Bid%5D%3B%0A%20%20if%28%21r%29return%3B%0A%20%20if%28r.status%21%3D%3D%22approved%22%29return%20alert%28%22%u274C%20%u0986%u0997%u09C7%20%u0986%u09AC%u09C7%u09A6%u09A8%u099F%u09BF%20Verify%20%u0995%u09B0%u09C1%u09A8%u0964%22%29%3B%0A%20%20const%20phone%3DString%28r.phone%7C%7C%22%22%29.trim%28%29%3B%0A%20%20if%28%21phone%29return%20alert%28%22%u274C%20User-%u098F%u09B0%20%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%20%u09A8%u09AE%u09CD%u09AC%u09B0%20%u09AA%u09BE%u0993%u09DF%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%u0964%22%29%3B%0A%20%20const%20pin%3Dprompt%28%22%uD83D%uDD10%20User-%u098F%u09B0%20%u09A8%u09A4%u09C1%u09A8%20PIN%20Code%20%u09B2%u09BF%u0996%u09C1%u09A8%3A%5Cn%5Cn%u098F%u0987%20PIN-%u099F%u09BF%20%u0986%u09AA%u09A8%u09BE%u09B0%20%u09A8%u09BF%u099C%u09C7%u09B0%20%u09A8%u09BF%u09B0%u09BE%u09AA%u09A6%u09AD%u09BE%u09AC%u09C7%20%u09A4%u09C8%u09B0%u09BF%20%u0995%u09B0%u09BE%20PIN%20%u09B9%u09AC%u09C7%u0964%22%29%3B%0A%20%20if%28pin%3D%3D%3Dnull%29return%3B%0A%20%20const%20cleanPin%3DString%28pin%29.trim%28%29%3B%0A%20%20if%28%21cleanPin%29return%20alert%28%22%u274C%20PIN%20Code%20%u0996%u09BE%u09B2%u09BF%20%u09B0%u09BE%u0996%u09BE%20%u09AF%u09BE%u09AC%u09C7%20%u09A8%u09BE%u0964%22%29%3B%0A%20%20const%20body%3D%60%u0995%u09CD%u09B0%u09AF%u09BC-%u09AC%u09BF%u0995%u09CD%u09B0%u09AF%u09BC%20PIN%20Recovery%5Cn%5Cn%u0986%u09AA%u09A8%u09BE%u09B0%20PIN%20Code%3A%20%24%7BcleanPin%7D%5Cn%5Cn%u098F%u0987%20PIN%20%u0997%u09CB%u09AA%u09A8%20%u09B0%u09BE%u0996%u09C1%u09A8%u0964%60%3B%0A%20%20const%20smsUrl%3D%22sms%3A%22+phone+%22%3Fbody%3D%22+encodeURIComponent%28body%29%3B%0A%20%20try%7B%0A%20%20%20%20await%20db.ref%28%22pinRecoveryRequests/%22+id%29.update%28%7BsmsPreparedAt%3ADate.now%28%29%2CsmsPreparedBy%3AADMIN_UID%7D%29%3B%0A%20%20%7Dcatch%28e%29%7B%7D%0A%20%20window.location.href%3DsmsUrl%3B%0A%7D%0Aasync%20function%20markRecoverySmsSent%28id%29%7B%0A%20%20try%7Bawait%20db.ref%28%22pinRecoveryRequests/%22+id%29.update%28%7Bstatus%3A%22sms_sent%22%2CsmsSentAt%3ADate.now%28%29%2CsmsSentBy%3AADMIN_UID%7D%29%3Bawait%20refresh%28%29%3BrenderPinRecovery%28%29%3Balert%28%22%uD83D%uDCF2%20SMS%20Sent%20%u09B9%u09BF%u09B8%u09C7%u09AC%u09C7%20%u09B8%u0982%u09B0%u0995%u09CD%u09B7%u09A3%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20sendRecoveryTelegram%28id%29%7B%0A%20%20const%20r%3Ddata.pinRecoveryRequests%5Bid%5D%3Bif%28%21r%29return%3B%0A%20%20const%20cfg%3DgetTelegramSettings%28%29%3B%0A%20%20let%20token%3Dcfg.token%2Cchat%3Dcfg.chatId%3B%0A%20%20if%28%21token%29%7Btoken%3Dprompt%28%22Telegram%20Bot%20Token%20%u09A6%u09BF%u09A8%3A%22%29%3Bif%28%21token%29return%3B%7D%0A%20%20if%28%21chat%29%7Bchat%3Dprompt%28%22Telegram%20Chat%20ID%20%u09A6%u09BF%u09A8%3A%22%29%3Bif%28%21chat%29return%3B%7D%0A%20%20const%20text%3D%60%uD83D%uDD11%20PIN%20Recovery%20Request%5Cn%5Cn%u09A8%u09BE%u09AE%3A%20%24%7Br.name%7C%7C%22-%22%7D%5Cn%u09AE%u09CB%u09AC%u09BE%u0987%u09B2%3A%20%24%7Br.phone%7C%7C%22-%22%7D%5Cn%u09AC%u09B0%u09CD%u09A4%u09AE%u09BE%u09A8%20%u09AC%u09CD%u09AF%u09BE%u09B2%u09C7%u09A8%u09CD%u09B8%3A%20%24%7Bmoney%28r.claimedBalance%29%7D%5Cn%u09B8%u09CD%u099F%u0995%3A%20%24%7Br.claimedStockCount%3F%3F%22-%22%7D%5Cn%u09B2%u09BE%u09B8%u09CD%u099F%20%u09A1%u09BF%u09AA%u09CB%u099C%u09BF%u099F%3A%20%24%7BhasClaim%28r%2C%22claimedLastDeposit%22%29%3Fmoney%28r.claimedLastDeposit%29%3A%22%u09A6%u09C7%u0993%u09DF%u09BE%20%u09B9%u09DF%u09A8%u09BF%22%7D%5Cn%u09B2%u09BE%u09B8%u09CD%u099F%20%u0989%u0987%u09A5%u09A1%u09CD%u09B0%3A%20%24%7BhasClaim%28r%2C%22claimedLastWithdraw%22%29%3Fmoney%28r.claimedLastWithdraw%29%3A%22%u09A6%u09C7%u0993%u09DF%u09BE%20%u09B9%u09DF%u09A8%u09BF%22%7D%5Cn%u09B8%u09CD%u099F%u09CD%u09AF%u09BE%u099F%u09BE%u09B8%3A%20%24%7Br.status%7C%7C%22pending%22%7D%60%3B%0A%20%20try%7B%0A%20%20%20%20const%20res%3Dawait%20fetch%28%60https%3A//api.telegram.org/bot%24%7BencodeURIComponent%28token%29%7D/sendMessage%60%2C%7Bmethod%3A%22POST%22%2Cheaders%3A%7B%22Content-Type%22%3A%22application/json%22%7D%2Cbody%3AJSON.stringify%28%7Bchat_id%3Achat%2Ctext%7D%29%7D%29%3B%0A%20%20%20%20const%20j%3Dawait%20res.json%28%29%3Bif%28%21j.ok%29throw%20Error%28j.description%7C%7C%22Telegram%20error%22%29%3B%0A%20%20%20%20if%28%21cfg.token%7C%7C%21cfg.chatId%29saveTelegramSettingsValues%28token%2Cchat%29%3B%0A%20%20%20%20await%20db.ref%28%22pinRecoveryRequests/%22+id%29.update%28%7BtelegramSentAt%3ADate.now%28%29%2CtelegramSentBy%3AADMIN_UID%7D%29%3B%0A%20%20%20%20alert%28%22%u2705%20Telegram-%u098F%20Recovery%20%u0986%u09AC%u09C7%u09A6%u09A8%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Telegram%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Afunction%20getTelegramSettings%28%29%7Breturn%20%7Btoken%3AlocalStorage.getItem%28%22kroybikroy_tg_token%22%29%7C%7C%22%22%2CchatId%3AlocalStorage.getItem%28%22kroybikroy_tg_chat%22%29%7C%7C%22%22%7D%7D%0Aasync%20function%20saveTelegramSettingsValues%28token%2Cchat%29%7B%0A%20%20token%3DString%28token%7C%7C%22%22%29.trim%28%29%3B%20chat%3DString%28chat%7C%7C%22%22%29.trim%28%29%3B%0A%20%20localStorage.setItem%28%22kroybikroy_tg_token%22%2Ctoken%29%3B%0A%20%20localStorage.setItem%28%22kroybikroy_tg_chat%22%2Cchat%29%3B%0A%20%20try%7B%0A%20%20%20%20await%20db.ref%28%22settings/telegram%22%29.set%28%7BbotToken%3Atoken%2CchatId%3Achat%2CupdatedAt%3Afirebase.database.ServerValue.TIMESTAMP%2CupdatedBy%3AADMIN_UID%7D%29%3B%0A%20%20%7Dcatch%28e%29%7B%20console.error%28%22Telegram%20settings%20Firebase%20save%20failed%3A%22%2Ce%29%3B%20%7D%0A%7D%0Afunction%20loadTelegramSettings%28%29%7Bconst%20c%3DgetTelegramSettings%28%29%3Bif%28%24%28%22tgToken%22%29%29%24%28%22tgToken%22%29.value%3Dc.token%3Bif%28%24%28%22tgChatId%22%29%29%24%28%22tgChatId%22%29.value%3Dc.chatId%3B%7D%0Aasync%20function%20saveTelegramSettings%28%29%7Bconst%20token%3D%24%28%22tgToken%22%29.value.trim%28%29%2Cchat%3D%24%28%22tgChatId%22%29.value.trim%28%29%3Bif%28%21token%7C%7C%21chat%29return%20alert%28%22%u274C%20Bot%20Token%20%u098F%u09AC%u0982%20Chat%20ID%20%u09A6%u09C1%u099F%u09CB%u0987%20%u09A6%u09BF%u09A8%u0964%22%29%3Btry%7Bawait%20saveTelegramSettingsValues%28token%2Cchat%29%3Balert%28%22%u2705%20Telegram%20Settings%20%u09B8%u0982%u09B0%u0995%u09CD%u09B7%u09A3%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%7Dcatch%28e%29%7Balert%28%22%u274C%20Telegram%20Settings%20save%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%3B%7D%7D%0Aasync%20function%20testTelegram%28%29%7B%0A%20%20const%20token%3D%24%28%22tgToken%22%29.value.trim%28%29%7C%7CgetTelegramSettings%28%29.token%2Cchat%3D%24%28%22tgChatId%22%29.value.trim%28%29%7C%7CgetTelegramSettings%28%29.chatId%3B%0A%20%20if%28%21token%7C%7C%21chat%29return%20alert%28%22%u274C%20%u0986%u0997%u09C7%20Bot%20Token%20%u098F%u09AC%u0982%20Chat%20ID%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20try%7Bconst%20res%3Dawait%20fetch%28%60https%3A//api.telegram.org/bot%24%7BencodeURIComponent%28token%29%7D/sendMessage%60%2C%7Bmethod%3A%22POST%22%2Cheaders%3A%7B%22Content-Type%22%3A%22application/json%22%7D%2Cbody%3AJSON.stringify%28%7Bchat_id%3Achat%2Ctext%3A%22%u2705%20%u0995%u09CD%u09B0%u09AF%u09BC-%u09AC%u09BF%u0995%u09CD%u09B0%u09AF%u09BC%20Admin%20Panel%5CnTelegram%20connection%20%u09B8%u09AB%u09B2%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%7D%29%7D%29%3Bconst%20j%3Dawait%20res.json%28%29%3Bif%28%21j.ok%29throw%20Error%28j.description%7C%7C%22Telegram%20error%22%29%3BsaveTelegramSettingsValues%28token%2Cchat%29%3Balert%28%22%u2705%20Test%20Message%20Telegram-%u098F%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%7Dcatch%28e%29%7Balert%28%22%u274C%20Test%20Message%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20clearTelegramSettings%28%29%7Bif%28%21confirm%28%22Telegram%20Token%20%u0993%20Chat%20ID%20%u09AE%u09C1%u099B%u09C7%20%u09AB%u09C7%u09B2%u09AC%u09C7%u09A8%3F%22%29%29return%3BlocalStorage.removeItem%28%22kroybikroy_tg_token%22%29%3BlocalStorage.removeItem%28%22kroybikroy_tg_chat%22%29%3Btry%7Bawait%20db.ref%28%22settings/telegram%22%29.remove%28%29%3B%7Dcatch%28e%29%7Bconsole.error%28e%29%3B%7DloadTelegramSettings%28%29%3Balert%28%22%u2705%20Telegram%20Settings%20%u09AE%u09C1%u099B%u09C7%20%u09AB%u09C7%u09B2%u09BE%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%7D%0A%0A%0Afunction%20supportMsgsHtml%28msgs%29%7B%0A%20%20return%20msgs.map%28m%3D%3E%7B%0A%20%20%20%20const%20right%3Dm.senderType%3D%3D%3D%22admin%22%2Ctm%3Dm.createdAt%3Fnew%20Date%28m.createdAt%29.toLocaleTimeString%28%22bn-BD%22%2C%7Bhour%3A%222-digit%22%2Cminute%3A%222-digit%22%7D%29%3A%22%22%3B%0A%20%20%20%20return%20%60%3Cdiv%20style%3D%22margin%3A6px%200%3Btext-align%3A%24%7Bright%3F%22right%22%3A%22left%22%7D%22%3E%3Cspan%20style%3D%22display%3Ainline-block%3Bmax-width%3A85%25%3Bpadding%3A9px%2011px%3Bborder-radius%3A12px%3Bbackground%3A%24%7Bright%3F%22%23dbeafe%22%3A%22%23f1f5f9%22%7D%22%3E%3Cb%3E%24%7Bright%3F%22Admin%22%3A%22User%22%7D%3C/b%3E%3Cbr%3E%24%7Besc%28m.text%7C%7C%22%22%29%7D%3Cbr%3E%3Cspan%20class%3D%22small%22%3E%24%7Besc%28tm%29%7D%3C/span%3E%3C/span%3E%3C/div%3E%60%3B%0A%20%20%7D%29.join%28%22%22%29%3B%0A%7D%0Afunction%20stopSupportMessagesListener%28%29%7B%0A%20%20if%28supportMessagesRef%26%26supportMessagesCb%29supportMessagesRef.off%28%22value%22%2CsupportMessagesCb%29%3B%0A%20%20supportMessagesRef%3Dnull%3BsupportMessagesCb%3Dnull%3B%0A%7D%0Aasync%20function%20autoTrimSupportMessages%28uid%29%7B%0A%20%20if%28%21uid%29return%3B%0A%20%20try%7B%0A%20%20%20%20const%20s%3Dawait%20db.ref%28%22customerService/chats/%22+uid+%22/messages%22%29.once%28%22value%22%29%3Bif%28%21s.exists%28%29%29return%3B%0A%20%20%20%20const%20a%3DObject.entries%28s.val%28%29%7C%7C%7B%7D%29.map%28%28%5Bid%2Cv%5D%29%3D%3E%28%7Bid%2C...%28v%7C%7C%7B%7D%29%7D%29%29%3B%0A%20%20%20%20if%28a.length%3C%3D50%29return%3B%0A%20%20%20%20a.sort%28%28x%2Cy%29%3D%3E%28Number%28x.createdAt%29%7C%7C0%29-%28Number%28y.createdAt%29%7C%7C0%29%29%3B%0A%20%20%20%20const%20updates%3D%7B%7D%3Ba.slice%280%2Ca.length-50%29.forEach%28m%3D%3Eupdates%5B%22customerService/chats/%22+uid+%22/messages/%22+m.id%5D%3Dnull%29%3B%0A%20%20%20%20await%20db.ref%28%29.update%28updates%29%3B%0A%20%20%7Dcatch%28e%29%7Bconsole.warn%28%22Chat%20cleanup%3A%22%2Ce%29%7D%0A%7D%0Afunction%20startSupportMessagesListener%28uid%29%7B%0A%20%20stopSupportMessagesListener%28%29%3Bif%28%21uid%29return%3B%0A%20%20const%20r%3Ddb.ref%28%22customerService/chats/%22+uid+%22/messages%22%29%3B%0A%20%20const%20cb%3Dsnap%3D%3E%7B%0A%20%20%20%20const%20box%3D%24%28%22supportMessages%22%29%3Bif%28%21box%29return%3B%0A%20%20%20%20const%20msgs%3Dsnap.exists%28%29%3FObject.values%28snap.val%28%29%7C%7C%7B%7D%29%3A%5B%5D%3B%0A%20%20%20%20msgs.sort%28%28a%2Cb%29%3D%3E%28a.createdAt%7C%7C0%29-%28b.createdAt%7C%7C0%29%29%3B%0A%20%20%20%20if%28msgs.length%3E50%29autoTrimSupportMessages%28uid%29%3B%0A%20%20%20%20const%20near%3D%28box.scrollHeight-box.scrollTop-box.clientHeight%29%3C120%3B%0A%20%20%20%20box.innerHTML%3DsupportMsgsHtml%28msgs%29%3Bif%28near%29box.scrollTop%3Dbox.scrollHeight%3B%0A%20%20%7D%3B%0A%20%20supportMessagesRef%3Dr%3BsupportMessagesCb%3Dcb%3Br.on%28%22value%22%2Ccb%29%3B%0A%7D%0Afunction%20renderSupportChatShell%28status%29%7B%0A%20%20const%20c%3D%24%28%22supportActive%22%29%3Bif%28%21c%29return%3B%0A%20%20if%28%21supportActiveUid%29%7BstopSupportMessagesListener%28%29%3Bc.innerHTML%3D%27%3Cdiv%20class%3D%22small%22%3E%u098F%u0996%u09A8%20%u0995%u09CB%u09A8%u09CB%20Active%20Chat%20%u09A8%u09C7%u0987%u0964%3C/div%3E%27%3Breturn%7D%0A%20%20c.innerHTML%3D%60%3Cdiv%20class%3D%22item%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%3Cdiv%3E%3Cb%3E%uD83D%uDC64%20%24%7Besc%28status.activeName%7C%7CsupportActiveUid%29%7D%3C/b%3E%3Cbr%3E%3Cspan%20class%3D%22small%22%3E%uD83D%uDCF1%20%24%7Besc%28status.activePhone%7C%7C%22%22%29%7D%3C/span%3E%3C/div%3E%3Cspan%20class%3D%22badge%20approved%22%3E%uD83D%uDFE2%20Active%3C/span%3E%3C/div%3E%0A%20%20%20%20%3Chr%3E%3Cdiv%20id%3D%22supportMessages%22%20class%3D%22chatbox%22%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22wrap%22%20style%3D%22margin-top%3A8px%22%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22danger%22%20onclick%3D%22clearSupportChat%28%29%22%3E%uD83D%uDDD1%uFE0F%20Chat%20%u09B8%u09AE%u09CD%u09AA%u09C2%u09B0%u09CD%u09A3%20Delete%3C/button%3E%0A%20%20%20%20%20%20%3Cbutton%20class%3D%22danger%22%20onclick%3D%22closeSupportChat%28%29%22%3E%u2705%20Chat%20%u09B6%u09C7%u09B7%20%u0995%u09B0%u09C1%u09A8%3C/button%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%20%20%3Cdiv%20style%3D%22display%3Aflex%3Bgap%3A8px%3Bmargin-top%3A10px%22%3E%3Cinput%20id%3D%22supportInput%22%20placeholder%3D%22User-%u0995%u09C7%20%u09AE%u09C7%u09B8%u09C7%u099C%20%u09B2%u09BF%u0996%u09C1%u09A8...%22%20autocomplete%3D%22off%22%20style%3D%22margin%3A0%3Bflex%3A1%22%3E%3Cbutton%20class%3D%22blue%22%20onclick%3D%22sendSupportMessage%28%29%22%3E%u09AA%u09BE%u09A0%u09BE%u09A8%3C/button%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20class%3D%22small%22%20style%3D%22margin-top%3A6px%22%3ERefresh%20%u099B%u09BE%u09DC%u09BE%u0987%20Live%20chat%u0964%20%u09B8%u09B0%u09CD%u09AC%u09CB%u099A%u09CD%u099A%20%u09EB%u09E6%u099F%u09BF%20Message%20%u09B0%u09BE%u0996%u09BE%20%u09B9%u09AC%u09C7%3B%20%u09EB%u09E7%u09A4%u09AE%20%u09B9%u09B2%u09C7%20%u09B8%u09AC%u099A%u09C7%u09DF%u09C7%20%u09AA%u09C1%u09B0%u09CB%u09A8%u09CB%20Message%20%u09AE%u09C1%u099B%u09C7%20%u09AF%u09BE%u09AC%u09C7%u0964%3C/div%3E%0A%20%20%3C/div%3E%60%3B%0A%20%20%24%28%22supportInput%22%29%3F.addEventListener%28%22keydown%22%2Ce%3D%3E%7Bif%28e.key%3D%3D%3D%22Enter%22%29%7Be.preventDefault%28%29%3BsendSupportMessage%28%29%7D%7D%29%3B%0A%20%20startSupportMessagesListener%28supportActiveUid%29%3B%0A%7D%0Aasync%20function%20renderSupport%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20status%3D%28await%20db.ref%28%22customerService/status%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20const%20qobj%3D%28await%20db.ref%28%22customerService/queue%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20const%20nextUid%3DString%28status.activeUid%7C%7C%22%22%29%2Cchanged%3DnextUid%21%3D%3DsupportActiveUid%3B%0A%20%20%20%20supportActiveUid%3DnextUid%3B%0A%20%20%20%20const%20online%3DadminIsOnline%28status%29%3B%0A%20%20%20%20%24%28%22supportStatusBox%22%29.innerHTML%3D%21online%3F%27%3Cspan%20style%3D%22color%3A%23c62828%22%3E%uD83D%uDD34%20Customer%20Service%20Offline%3C/span%3E%27%3AsupportActiveUid%3F%60%3Cspan%20style%3D%22color%3A%2316834b%22%3E%uD83D%uDFE2%20Chat%20Active%3C/span%3E%3Cbr%3E%uD83D%uDC64%20%24%7Besc%28status.activeName%7C%7CsupportActiveUid%29%7D%3Cbr%3E%3Cbutton%20class%3D%22danger%22%20style%3D%22margin-top%3A8px%22%20onclick%3D%22closeSupportChat%28%29%22%3E%u2705%20Chat%20%u09B6%u09C7%u09B7%20%u0995%u09B0%u09C1%u09A8%3C/button%3E%60%3A%27%3Cspan%20style%3D%22color%3A%2316834b%22%3E%uD83D%uDFE2%20Service%20Available%3C/span%3E%3Cbr%3E%3Cspan%20class%3D%22small%22%3EQueue%20%u09A5%u09C7%u0995%u09C7%20%u098F%u0995%u099C%u09A8%20User%20Accept%20%u0995%u09B0%u09C1%u09A8%u0964%3C/span%3E%27%3B%0A%20%20%20%20const%20q%3DObject.values%28qobj%29.filter%28x%3D%3Ex%26%26x.status%3D%3D%3D%22waiting%22%29.sort%28%28a%2Cb%29%3D%3E%28a.createdAt%7C%7C0%29-%28b.createdAt%7C%7C0%29%29%3B%0A%20%20%20%20%24%28%22cSupport%22%29.textContent%3Dq.length+%28supportActiveUid%3F1%3A0%29%3B%0A%20%20%20%20%24%28%22supportQueue%22%29.innerHTML%3Dq.length%3Fq.map%28%28u%2Ci%29%3D%3E%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%23%24%7Bi+1%7D%20%uD83D%uDC64%20%24%7Besc%28u.name%7C%7C%22User%22%29%7D%3C/b%3E%3Cbr%3E%uD83D%uDCF1%20%24%7Besc%28u.phone%7C%7C%22-%22%29%7D%3Cbr%3E%uD83C%uDD94%20%24%7Besc%28u.uid%7C%7C%22%22%29%7D%3Cbr%3E%3Cspan%20class%3D%22small%22%3E%24%7Bu.createdAt%3Fnew%20Date%28u.createdAt%29.toLocaleString%28%22bn-BD%22%29%3A%22%22%7D%3C/span%3E%3Cdiv%20class%3D%22wrap%22%20style%3D%22margin-top%3A8px%22%3E%3Cbutton%20class%3D%22ok%22%20onclick%3D%22acceptSupport%28%27%24%7Besc%28u.uid%7C%7C%22%22%29%7D%27%29%22%3E%u2705%20Accept%3C/button%3E%3Cbutton%20class%3D%22danger%22%20onclick%3D%22cancelSupport%28%27%24%7Besc%28u.uid%7C%7C%22%22%29%7D%27%29%22%3E%u2716%20Cancel%3C/button%3E%3C/div%3E%3C/div%3E%60%29.join%28%22%22%29%3A%27%3Cdiv%20class%3D%22small%22%3E%u0995%u09CB%u09A8%u09CB%20waiting%20User%20%u09A8%u09C7%u0987%u0964%27%3B%0A%20%20%20%20if%28changed%7C%7C%20%28supportActiveUid%26%26%21%24%28%22supportInput%22%29%29%29renderSupportChatShell%28status%29%3B%0A%20%20%7Dcatch%28e%29%7B%24%28%22supportStatusBox%22%29.innerHTML%3D%22%u274C%20Support%20data%20load%20error%3A%20%22+esc%28e.message%29%7D%0A%7D%0Aasync%20function%20acceptSupport%28uid%29%7B%0A%20%20if%28%21uid%29return%3B%0A%20%20try%7B%0A%20%20%20%20const%20s%3D%28await%20db.ref%28%22customerService/status%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20if%28%21adminIsOnline%28s%29%29return%20alert%28%22%uD83D%uDD34%20Customer%20Service%20Offline%u0964%22%29%3B%0A%20%20%20%20if%28s.activeUid%29return%20alert%28%22%u274C%20%u0985%u09A8%u09CD%u09AF%20User-%u098F%u09B0%20Chat%20%u099A%u09B2%u099B%u09C7%u0964%22%29%3B%0A%20%20%20%20const%20u%3D%28await%20db.ref%28%22users/%22+uid%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%2Cnow%3DDate.now%28%29%2Cup%3D%7B%7D%3B%0A%20%20%20%20up%5B%22customerService/status/activeUid%22%5D%3Duid%3Bup%5B%22customerService/status/activeName%22%5D%3Du.name%7C%7C%22User%22%3Bup%5B%22customerService/status/activePhone%22%5D%3Du.phone%7C%7C%22%22%3Bup%5B%22customerService/status/activeAt%22%5D%3Dnow%3B%0A%20%20%20%20up%5B%22customerService/queue/%22+uid+%22/status%22%5D%3D%22active%22%3Bup%5B%22customerService/chats/%22+uid+%22/status%22%5D%3D%22active%22%3B%0A%20%20%20%20await%20db.ref%28%29.update%28up%29%3Bawait%20renderSupport%28%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Accept%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20cancelSupport%28uid%29%7B%0A%20%20try%7Bawait%20db.ref%28%22customerService/queue/%22+uid%29.update%28%7Bstatus%3A%22cancelled%22%2CclosedAt%3ADate.now%28%29%7D%29%3Bawait%20renderSupport%28%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20Cancel%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20closeSupportChat%28%29%7B%0A%20%20const%20uid%3DsupportActiveUid%3Bif%28%21uid%29return%3B%0A%20%20try%7B%0A%20%20%20%20await%20db.ref%28%29.update%28%7B%0A%20%20%20%20%20%20%22customerService/status/activeUid%22%3Anull%2C%22customerService/status/activeName%22%3Anull%2C%22customerService/status/activePhone%22%3Anull%2C%22customerService/status/activeAt%22%3Anull%2C%0A%20%20%20%20%20%20%5B%22customerService/queue/%22+uid+%22/status%22%5D%3A%22closed%22%2C%5B%22customerService/chats/%22+uid+%22/status%22%5D%3A%22closed%22%2C%5B%22customerService/chats/%22+uid+%22/closedAt%22%5D%3ADate.now%28%29%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20await%20renderSupport%28%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Chat%20close%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20clearSupportChat%28%29%7B%0A%20%20const%20uid%3DsupportActiveUid%3Bif%28%21uid%29return%3B%0A%20%20if%28%21confirm%28%22%u098F%u0987%20User-%u098F%u09B0%20%u09AA%u09C1%u09B0%u09CB%20Chat-%u098F%u09B0%20%u09B8%u09AC%20Message%20%u09B8%u09CD%u09A5%u09BE%u09DF%u09C0%u09AD%u09BE%u09AC%u09C7%20Delete%20%u0995%u09B0%u09AC%u09C7%u09A8%3F%22%29%29return%3B%0A%20%20try%7Bawait%20db.ref%28%22customerService/chats/%22+uid+%22/messages%22%29.remove%28%29%3Bawait%20autoTrimSupportMessages%28uid%29%3Balert%28%22%u2705%20Chat-%u098F%u09B0%20Message%20Delete%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20Chat%20Delete%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20sendSupportMessage%28%29%7B%0A%20%20const%20uid%3DsupportActiveUid%2Cinput%3D%24%28%22supportInput%22%29%2Ctext%3D%28input%3F.value%7C%7C%22%22%29.trim%28%29%3B%0A%20%20if%28%21uid%7C%7C%21text%29return%3B%0A%20%20try%7B%0A%20%20%20%20const%20s%3D%28await%20db.ref%28%22customerService/status%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20if%28%21adminIsOnline%28s%29%7C%7CString%28s.activeUid%7C%7C%22%22%29%21%3D%3Duid%29return%20alert%28%22%u274C%20Chat%20active%20%u09A8%u09C7%u0987%u0964%22%29%3B%0A%20%20%20%20const%20m%3Ddb.ref%28%22customerService/chats/%22+uid+%22/messages%22%29.push%28%29%3B%0A%20%20%20%20await%20m.set%28%7BsenderUid%3AADMIN_UID%2CsenderType%3A%22admin%22%2Ctext%2CcreatedAt%3Afirebase.database.ServerValue.TIMESTAMP%7D%29%3B%0A%20%20%20%20await%20autoTrimSupportMessages%28uid%29%3Binput.value%3D%22%22%3Binput.focus%28%29%3B%0A%20%20%7Dcatch%28e%29%7Balert%28%22%u274C%20Message%20%u09AA%u09BE%u09A0%u09BE%u09A8%u09CB%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0A%0A%0Afunction%20normalizeMobileNumber%28v%29%7B%0A%20%20return%20String%28v%7C%7C%22%22%29.trim%28%29.replace%28/%5B%5E%5Cd+%5D/g%2C%22%22%29%3B%0A%7D%0A%0Afunction%20renderDepositPreview%28s%29%7B%0A%20%20s%3Ds%7C%7C%7B%7D%3B%0A%20%20const%20rows%3D%5B%0A%20%20%20%20%5B%22%uD83D%uDFE3%22%2C%22bKash%22%2C%22depBkash%22%5D%2C%0A%20%20%20%20%5B%22%uD83D%uDFE0%22%2C%22Nagad%22%2C%22depNagad%22%5D%2C%0A%20%20%20%20%5B%22%uD83D%uDD35%22%2C%22Rocket%22%2C%22depRocket%22%5D%0A%20%20%5D.map%28%28%5Bico%2Cname%2Ckey%5D%29%3D%3E%7B%0A%20%20%20%20const%20num%3Ds%5Bkey.replace%28%22dep%22%2C%22%22%29.toLowerCase%28%29%5D%20%7C%7C%20%22%22%3B%0A%20%20%20%20return%20num%20%3F%20%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%24%7Bico%7D%20%24%7Bname%7D%3C/b%3E%3Cbr%3E%uD83D%uDCF1%20%3Cb%20style%3D%22font-size%3A18px%22%3E%24%7Besc%28num%29%7D%3C/b%3E%3Cbr%3E%3Cspan%20class%3D%22small%22%3ESend%20Money%3C/span%3E%3C/div%3E%60%20%3A%20%22%22%3B%0A%20%20%7D%29.join%28%22%22%29%3B%0A%20%20const%20ins%3Desc%28s.instruction%7C%7C%22%u09A8%u09BF%u09B0%u09CD%u09A6%u09BF%u09B7%u09CD%u099F%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20Send%20Money%20%u0995%u09B0%u09C7%20Transaction%20ID%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20%24%28%22depositPreview%22%29.innerHTML%3D%28rows%7C%7C%27%3Cdiv%20class%3D%22small%22%3E%u0995%u09CB%u09A8%u09CB%20Deposit%20%u09A8%u09AE%u09CD%u09AC%u09B0%20%u098F%u0996%u09A8%u09CB%20%u09B8%u09C7%u099F%20%u0995%u09B0%u09BE%20%u09B9%u09DF%u09A8%u09BF%u0964%3C/div%3E%27%29%0A%20%20%20%20+%20%60%3Cdiv%20class%3D%22item%22%3E%3Cb%3E%uD83D%uDCDD%20%u09A8%u09BF%u09B0%u09CD%u09A6%u09C7%u09B6%u09A8%u09BE%3C/b%3E%3Cbr%3E%24%7Bins%7D%3C/div%3E%60%3B%0A%7D%0A%0Aasync%20function%20loadDepositSettings%28%29%7B%0A%20%20try%7B%0A%20%20%20%20const%20s%3D%28await%20db.ref%28%22settings/depositMethods%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%3B%0A%20%20%20%20%24%28%22depBkash%22%29.value%3Ds.bkash%7C%7C%22%22%3B%0A%20%20%20%20%24%28%22depNagad%22%29.value%3Ds.nagad%7C%7C%22%22%3B%0A%20%20%20%20%24%28%22depRocket%22%29.value%3Ds.rocket%7C%7C%22%22%3B%0A%20%20%20%20%24%28%22depInstruction%22%29.value%3Ds.instruction%7C%7C%22%u09A8%u09BF%u09B0%u09CD%u09A6%u09BF%u09B7%u09CD%u099F%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20Send%20Money%20%u0995%u09B0%u09C7%20Transaction%20ID%20%u09A6%u09BF%u09A8%u0964%22%3B%0A%20%20%20%20renderDepositPreview%28s%29%3B%0A%20%20%7Dcatch%28e%29%7B%0A%20%20%20%20alert%28%22%u274C%20Deposit%20Settings%20load%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%3B%0A%20%20%7D%0A%7D%0A%0Aasync%20function%20saveDepositSettings%28%29%7B%0A%20%20const%20bkash%3DnormalizeMobileNumber%28%24%28%22depBkash%22%29.value%29%3B%0A%20%20const%20nagad%3DnormalizeMobileNumber%28%24%28%22depNagad%22%29.value%29%3B%0A%20%20const%20rocket%3DnormalizeMobileNumber%28%24%28%22depRocket%22%29.value%29%3B%0A%20%20const%20instruction%3D%24%28%22depInstruction%22%29.value.trim%28%29%3B%0A%0A%20%20if%28%21bkash%26%26%21nagad%26%26%21rocket%29%7B%0A%20%20%20%20return%20alert%28%22%u274C%20%u0985%u09A8%u09CD%u09A4%u09A4%20bKash%2C%20Nagad%20%u0985%u09A5%u09AC%u09BE%20Rocket-%u098F%u09B0%20%u098F%u0995%u099F%u09BF%20%u09A8%u09AE%u09CD%u09AC%u09B0%20%u09A6%u09BF%u09A8%u0964%22%29%3B%0A%20%20%7D%0A%0A%20%20const%20invalid%3D%5B%5B%22bKash%22%2Cbkash%5D%2C%5B%22Nagad%22%2Cnagad%5D%2C%5B%22Rocket%22%2Crocket%5D%5D%0A%20%20%20%20.filter%28%28%5B%2Cv%5D%29%3D%3Ev%20%26%26%20%21/%5E%5C+%3F%5Cd%7B10%2C15%7D%24/.test%28v%29%29%3B%0A%20%20if%28invalid.length%29%7B%0A%20%20%20%20return%20alert%28%22%u274C%20%22+invalid.map%28x%3D%3Ex%5B0%5D%29.join%28%22%2C%20%22%29+%22%20%u09A8%u09AE%u09CD%u09AC%u09B0%20%u09B8%u09A0%u09BF%u0995%20%u09A8%u09DF%u0964%22%29%3B%0A%20%20%7D%0A%0A%20%20try%7B%0A%20%20%20%20const%20payload%3D%7B%0A%20%20%20%20%20%20bkash%2Cnagad%2Crocket%2C%0A%20%20%20%20%20%20instruction%3Ainstruction%7C%7C%22%u09A8%u09BF%u09B0%u09CD%u09A6%u09BF%u09B7%u09CD%u099F%20%u09A8%u09AE%u09CD%u09AC%u09B0%u09C7%20Send%20Money%20%u0995%u09B0%u09C7%20Transaction%20ID%20%u09A6%u09BF%u09A8%u0964%22%2C%0A%20%20%20%20%20%20updatedAt%3Afirebase.database.ServerValue.TIMESTAMP%2C%0A%20%20%20%20%20%20updatedBy%3AADMIN_UID%0A%20%20%20%20%7D%3B%0A%20%20%20%20await%20db.ref%28%22settings/depositMethods%22%29.set%28payload%29%3B%0A%20%20%20%20renderDepositPreview%28payload%29%3B%0A%20%20%20%20alert%28%22%u2705%20Deposit%20Payment%20Settings%20%u09B8%u0982%u09B0%u0995%u09CD%u09B7%u09A3%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%3B%0A%20%20%7Dcatch%28e%29%7B%0A%20%20%20%20alert%28%22%u274C%20Deposit%20Settings%20save%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%3B%0A%20%20%7D%0A%7D%0A%0Aasync%20function%20saveNotice%28%29%7B%0A%20%20try%7Bawait%20db.ref%28%22settings/notice%22%29.set%28%7Btext%3A%24%28%22noticeText%22%29.value.trim%28%29%2CupdatedAt%3Afirebase.database.ServerValue.TIMESTAMP%7D%29%3Balert%28%22%uD83D%uDCE2%20Notice%20Publish%20%u09B9%u09DF%u09C7%u099B%u09C7%u0964%22%29%7D%0A%20%20catch%28e%29%7Balert%28%22%u274C%20Notice%20save%20%u0995%u09B0%u09BE%20%u09AF%u09BE%u09DF%u09A8%u09BF%3A%20%22+e.message%29%7D%0A%7D%0Aasync%20function%20loadNotice%28%29%7Btry%7B%24%28%22noticeText%22%29.value%3D%28%28await%20db.ref%28%22settings/notice%22%29.once%28%22value%22%29%29.val%28%29%7C%7C%7B%7D%29.text%7C%7C%22%22%7Dcatch%28e%29%7B%7D%7D%0AloadNotice%28%29%3B%0AloadDepositSettings%28%29%3B%0A%0AsetInterval%28%28%29%3D%3E%7B%0A%20%20if%28%24%28%22app%22%29.classList.contains%28%22hidden%22%29%29return%3B%0A%20%20if%28%21%24%28%22support%22%29.classList.contains%28%22hidden%22%29%29renderSupport%28%29%3B%0A%20%20if%28%21%24%28%22recovery%22%29.classList.contains%28%22hidden%22%29%29refresh%28%29%3B%0A%7D%2C10000%29%3B%0AloadTelegramSettings%28%29%3B%0A%3C/script%3E%0A%3C/body%3E%0A%3C/html%3E'))</script>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>🛠️ ক্রয়-বিক্রয় Admin</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f7;color:#182230;font-family:Arial,system-ui,sans-serif}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e4e7ec;padding:12px 16px}
+.brand{font-size:21px;font-weight:800}.muted{color:#667085;font-size:12px}
+main{max-width:900px;margin:auto;padding:12px 12px 90px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px #10182812}
+.tile{min-height:125px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:19px;cursor:pointer}
+.tile .ico{font-size:42px;margin-bottom:7px}.stat{font-size:27px;font-weight:900}
+.small{font-size:12px;color:#667085}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:11px;margin:5px 0 10px;font-size:15px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+button,.btn{border:0;border-radius:11px;padding:11px 14px;background:#344054;color:#fff;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.ok{background:#16834b}.danger{background:#c62828}.blue{background:#175cd3}.purple{background:#7435df}.light{background:#eef2f6;color:#344054}
+.full{width:100%}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.wrap{display:flex;gap:7px;flex-wrap:wrap}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;overflow:auto;z-index:30}
+nav button{min-width:78px;background:#fff;color:#475467;border-radius:0;padding:8px 5px;font-size:11px}
+nav button b{display:block;font-size:21px}.hidden{display:none!important}
+.item{border:1px solid #eaecf0;border-radius:14px;padding:12px;margin:8px 0;background:#fff}
+.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;background:#fff3cd}
+.approved{background:#dcfce7}.rejected{background:#fee2e2}.active{background:#dbeafe}
+.product{border:1px solid #e2e7ef;border-radius:16px;padding:13px;margin:9px 0}
+.product img{width:78px;height:78px;object-fit:cover;border-radius:12px;float:left;margin-right:12px;background:#eee}
+.clear{clear:both}
+.rates{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.rate{background:#f4f7fb;border-radius:11px;padding:9px;font-size:12px}
+.rate b{display:block;font-size:17px;margin-top:3px}
+.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:flex-end;z-index:50}
+.modalbox{background:#fff;width:100%;max-height:90vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.loginbox{width:100%;max-width:430px}
+.chatbox{height:44vh;min-height:240px;overflow:auto;padding:8px;background:#f8fafc;border-radius:12px}
+@media(min-width:650px){.modal{align-items:center}.modalbox{max-width:560px;border-radius:22px}}
+@media(max-width:650px){.grid,.rates{grid-template-columns:1fr}.top .brand{font-size:18px}}
+</style>
+</head>
+<body>
+
+<div id="login" class="login">
+  <div class="card loginbox">
+    <div class="brand">👑 ক্রয়-বিক্রয় Admin</div>
+    <p class="muted">Firebase Admin Login</p>
+    <input id="email" type="email" placeholder="Admin Gmail">
+    <input id="password" type="password" placeholder="Admin Password / PIN">
+    <button class="blue full" onclick="adminLogin()">🔐 Login</button>
+    <p id="loginMsg" class="small"></p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+  <div class="top">
+    <div>
+      <div class="brand">👑 ক্রয়-বিক্রয় Admin</div>
+      <div id="adminText" class="muted">Verified Admin</div>
+    </div>
+    <button class="danger" onclick="adminLogout()">🚪 Logout</button>
+  </div>
+</header>
+
+<main>
+<section id="home">
+  <div class="grid">
+    <div class="card"><div class="small">👥 Users</div><div id="cUsers" class="stat">0</div></div>
+    <div class="card"><div class="small">📦 Products</div><div id="cProducts" class="stat">0</div></div>
+    <div class="card"><div class="small">💰 Pending Deposit</div><div id="cDeposits" class="stat">0</div></div>
+    <div class="card"><div class="small">💸 Pending Withdraw</div><div id="cWithdraws" class="stat">0</div></div>
+    <div class="card"><div class="small">💬 Customer Service</div><div id="cSupport" class="stat">0</div></div>
+    <div class="card"><div class="small">🔑 PIN Recovery</div><div id="cRecovery" class="stat">0</div></div>
+  </div>
+  <div class="grid">
+    <div class="card tile" onclick="showPage('users')"><div class="ico">👥</div>Users</div>
+    <div class="card tile" onclick="showPage('products')"><div class="ico">📦</div>Products</div>
+    <div class="card tile" onclick="showPage('deposits')"><div class="ico">💰</div>Deposit</div>
+    <div class="card tile" onclick="showPage('depositSettings')"><div class="ico">📲</div>Deposit Settings</div>
+    <div class="card tile" onclick="showPage('referral')"><div class="ico">🎁</div>Referral System</div>
+    <div class="card tile" onclick="showPage('withdraws')"><div class="ico">💸</div>Withdraw</div>
+    <div class="card tile" onclick="showPage('support')"><div class="ico">💬</div>Customer Service</div>
+    <div class="card tile" onclick="showPage('recovery')"><div class="ico">🔑</div>PIN Recovery</div>
+    <div class="card tile" onclick="showPage('history')"><div class="ico">📜</div>History</div>
+    <div class="card tile" onclick="showPage('notice')"><div class="ico">📢</div>Notice</div>
+    <div class="card tile" onclick="showPage('telegram')"><div class="ico">✈️</div>Telegram</div>
+<div id="directTelegramBox" style="margin-top:14px;padding:14px;border:1px solid #ddd;border-radius:12px;background:#fafafa;">
+  <div style="font-weight:700;margin-bottom:8px;">📲 সরাসরি Telegram Bot</div>
+  <input id="telegramBotUsername" type="text" placeholder="@KroyBikroyAdmin2026Bot"
+         value="@KroyBikroyAdmin2026Bot"
+         style="width:100%;box-sizing:border-box;padding:11px;border:1px solid #ccc;border-radius:9px;margin-bottom:9px;">
+  <button type="button" onclick="openDirectTelegram()"
+          style="width:100%;padding:11px;border:0;border-radius:9px;cursor:pointer;">
+    ✈️ Telegram Bot-এ প্রবেশ করুন
+  </button>
+</div>
+<script>
+function openDirectTelegram(){
+  let u = (document.getElementById('telegramBotUsername')?.value || '').trim();
+   u = u.replace(/^https?:\/\/(t\.me\/)?/i,'').replace(/^@/,'').split(/[?#\s]/)[0];
+  if(!u){
+    alert('আগে Telegram Bot Username দিন।');
+    return;
+  }
+  window.open('https://t.me/' + encodeURIComponent(u), '_blank', 'noopener,noreferrer');
+}
+</script>
+
+  </div>
+</section>
+
+<section id="users" class="hidden">
+  <div class="card"><h2>👥 Users</h2>
+    <input id="userSearch" placeholder="🔎 নাম / মোবাইল / UID Search" oninput="renderUsers()">
+    <div id="usersList"></div>
+  </div>
+</section>
+
+<section id="products" class="hidden">
+  <div class="card">
+    <h2>📦 Add Product</h2>
+    <input id="pName" placeholder="Product Name">
+    <select id="pCategory">
+      <option>শার্ট</option><option>প্যান্ট</option><option>লুঙ্গি</option>
+      <option>জুতা</option><option>টুপি</option><option>মোবাইল</option>
+      <option>টিভি</option><option>প্লিজ</option><option>অন্যান্য</option>
+    </select>
+    <label>👥 User → User Rate</label>
+    <input id="pUU" type="number" min="0" step="0.01" placeholder="যেমন: 70">
+    <label>👑 User → Admin Rate</label>
+    <input id="pUA" type="number" min="0" step="0.01" placeholder="যেমন: 65">
+    <label>🛒 Admin → User Rate</label>
+    <input id="pAU" type="number" min="0" step="0.01" placeholder="যেমন: 75">
+    <label>📦 Stock</label>
+    <input id="pStock" type="number" min="0" step="1" placeholder="Stock">
+    <label>🖼️ Product Image URL (বর্তমান ব্যবস্থাই থাকবে)</label>
+    <input id="pImage" type="url" placeholder="https://...">
+    <textarea id="pDesc" placeholder="Description"></textarea>
+    <button class="ok full" onclick="addProduct()">➕ Add Product</button>
+  </div>
+  <div class="card"><h3>🏷️ Category Filter</h3><div class="wrap" id="catButtons"></div></div>
+  <div class="card">
+    <div class="row"><h2 style="margin:0">📋 Products</h2><button class="blue" onclick="refresh()">🔄 Refresh</button></div>
+    <div id="productsList"></div>
+  </div>
+</section>
+
+<section id="deposits" class="hidden"><div class="card">
+  <div class="row"><h2>💰 Deposits</h2><button class="blue" onclick="refresh()">🔄 Refresh</button></div>
+  <div id="depositList"></div>
+</div></section>
+
+<section id="depositSettings" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div>
+        <h2 style="margin:0">📲 Deposit Payment Settings</h2>
+        <div class="muted">User Deposit করার সময় যে Send Money নম্বরগুলো দেখাবে।</div>
+      </div>
+      <button class="blue" onclick="loadDepositSettings()">🔄 Refresh</button>
+    </div>
+
+    <label>🟣 bKash — Send Money</label>
+    <input id="depBkash" type="tel" inputmode="numeric" placeholder="01XXXXXXXXX">
+
+    <label>🟠 Nagad — Send Money</label>
+    <input id="depNagad" type="tel" inputmode="numeric" placeholder="01XXXXXXXXX">
+
+    <label>🔵 Rocket — Send Money</label>
+    <input id="depRocket" type="tel" inputmode="numeric" placeholder="01XXXXXXXXX">
+
+    <label>📝 Deposit Instructions</label>
+    <textarea id="depInstruction" placeholder="উদাহরণ: নির্দিষ্ট নম্বরে Send Money করে Transaction ID দিন।"></textarea>
+
+    <button class="ok full" onclick="saveDepositSettings()">💾 Deposit Settings Save</button>
+    <p class="small" style="margin-bottom:0">
+      ⚠️ এখানে শুধু আপনার ব্যবসার Deposit গ্রহণের নম্বর ও নির্দেশনা রাখুন। User Deposit Request-এ Method ও TXID পাঠাবে, তারপর Admin যাচাই করে Approve/Reject করবেন।
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👀 User-এর কাছে যেভাবে দেখাবে</h3>
+    <div id="depositPreview"></div>
+  </div>
+</section>
+
+<section id="referral" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div><h2 style="margin:0">🎁 Referral System</h2><div class="muted">Referral commission ও প্রথম সফল Deposit bonus এখান থেকে নিয়ন্ত্রণ করুন।</div></div>
+      <button class="blue" onclick="loadReferralSettings()">🔄 Refresh</button>
+    </div>
+    <label>💰 Referral Commission (%)</label>
+    <input id="refCommissionPercent" type="number" min="0" max="100" step="0.01" placeholder="1">
+    <label>🎁 First Successful Deposit Bonus (৳)</label>
+    <input id="refFirstDepositBonus" type="number" min="0" step="0.01" placeholder="10">
+    <button class="ok full" onclick="saveReferralSettings()">💾 Referral Settings Save</button>
+    <p class="small" style="margin-bottom:0">নিয়ম: প্রতিটি Admin-Approved Deposit-এর উপর নির্ধারিত % Referrer পাবে। কোনো Referred User-এর প্রথম সফল Deposit-এ একবার Bonus যোগ হবে। Pending/Rejected Deposit-এ কোনো কমিশন হবে না।</p>
+  </div>
+  <div class="card">
+    <h3>📊 Referral Overview</h3>
+    <div id="referralOverview"></div>
+  </div>
+</section>
+
+<section id="withdraws" class="hidden"><div class="card">
+  <div class="row"><h2>💸 Withdraws</h2><button class="blue" onclick="refresh()">🔄 Refresh</button></div>
+  <div id="withdrawList"></div>
+</div></section>
+
+<section id="history" class="hidden"><div class="card">
+  <div class="row"><h2>📜 History</h2><button class="blue" onclick="refresh()">🔄 Refresh</button></div>
+  <div id="historyList"></div>
+</div></section>
+
+<section id="recovery" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div><h2 style="margin:0">🔑 PIN Recovery Requests</h2>
+      <div class="muted">তথ্য মিলিয়ে Verified হলে User-এর সঠিক নম্বরে SMS পাঠাবেন।</div></div>
+      <button class="blue" onclick="renderPinRecovery()">🔄 Refresh</button>
+    </div>
+  </div>
+  <div class="card"><div id="recoveryList"></div></div>
+</section>
+
+<section id="support" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div><h2 style="margin:0">💬 Customer Service</h2><div class="muted">One User at a Time • Live • সর্বোচ্চ ৫০টি Message রাখা হবে</div></div>
+      <button class="blue" onclick="renderSupport()">🔄 Refresh</button>
+    </div>
+  </div>
+  <div class="card" id="supportStatusBox">Loading...</div>
+  <div class="card"><h3>⏳ Waiting Queue</h3><div id="supportQueue"></div></div>
+  <div class="card"><h3>💬 Active Chat</h3><div id="supportActive"></div></div>
+</section>
+
+<section id="telegram" class="hidden">
+  <div class="card">
+    <div class="row"><div><h2 style="margin:0">✈️ Telegram Settings</h2><div class="muted">PIN Recovery তথ্য Admin-এর Telegram Bot-এ পাঠানোর জন্য এখানে Bot Token ও Chat ID একবার সংরক্ষণ করুন।</div></div><button class="blue" onclick="loadTelegramSettings()">🔄 Refresh</button></div>
+    <label>🤖 Telegram Bot Token</label>
+    <input id="tgToken" type="password" placeholder="123456:ABC...">
+    <label>💬 Telegram Chat ID</label>
+    <input id="tgChatId" placeholder="যেমন: 123456789 বা -100...">
+    <div class="wrap">
+      <button class="ok" onclick="saveTelegramSettings()">💾 Save</button>
+      <button class="blue" onclick="testTelegram()">📨 Test Message</button>
+      <button class="light" onclick="clearTelegramSettings()">🗑️ Clear</button>
+    </div>
+    <p class="small">🔒 Token Firebase-এ রাখা হবে না; এই Admin browser-এর Local Storage-এ রাখা হবে। অন্য ডিভাইসে Admin Panel খুললে আবার Token/Chat ID দিতে হবে।</p>
+  </div>
+  <div class="card">
+    <h3>📨 PIN Recovery Telegram</h3>
+    <p class="muted">Recovery Requests থেকে <b>📨 Telegram</b> চাপলে এই সংরক্ষিত Token ও Chat ID ব্যবহার করে আবেদনটি পাঠানো হবে।</p>
+  </div>
+</section>
+
+<section id="notice" class="hidden"><div class="card">
+  <h2>📢 Notice</h2>
+  <textarea id="noticeText" placeholder="User App-এ যে Notice দেখাতে চান লিখুন"></textarea>
+  <button class="purple full" onclick="saveNotice()">📢 Publish Notice</button>
+</div></section>
+</main>
+
+<nav>
+  <button onclick="showPage('home')"><b>🏠</b>Home</button>
+  <button onclick="showPage('products')"><b>📦</b>Products</button>
+  <button onclick="showPage('depositSettings')"><b>📲</b>Deposit</button>
+  <button onclick="showPage('users')"><b>👥</b>Users</button>
+  <button onclick="showPage('history')"><b>📜</b>History</button>
+  <button onclick="showPage('support')"><b>💬</b>Support</button>
+  <button onclick="showPage('recovery')"><b>🔑</b>Recovery</button>
+  <button onclick="showPage('telegram')"><b>✈️</b>Telegram</button>
+</nav>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modalbox">
+    <div class="row"><h3 id="modalTitle">Confirm</h3><button class="light" onclick="closeModal()">✕</button></div>
+    <div id="modalBody"></div><div id="modalActions" class="wrap"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig={
+  apiKey:"AIzaSyC4GPSSXQwBUNsqIs65X_3JRlpTCchFZO0",
+  authDomain:"kroy-bikroy-3a17e.firebaseapp.com",
+  databaseURL:"https://kroy-bikroy-3a17e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"kroy-bikroy-3a17e",
+  storageBucket:"kroy-bikroy-3a17e.firebasestorage.app",
+  messagingSenderId:"691712503323",
+  appId:"1:691712503323:web:9c8986c988d7f978ecd2be"
+};
+const ADMIN_UID="2JmHhZztOtgRIK1kzyBgR828HSz2";
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth(),db=firebase.database();
+const $=id=>document.getElementById(id);
+const money=n=>"৳"+Number(n||0).toLocaleString("en-BD",{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const vals=x=>x?Object.entries(x).map(([id,v])=>({id,...(v||{})})):[];
+let data={users:{},products:{},deposits:{},withdrawals:{},transactions:{},productRequests:{},pinRecoveryRequests:{},customerService:{queue:{}}};
+let productFilter="all",supportActiveUid="",supportMessagesRef=null,supportMessagesCb=null;
+const CATS=["শার্ট","প্যান্ট","লুঙ্গি","জুতা","টুপি","মোবাইল","টিভি","প্লিজ","অন্যান্য"];
+
+function showPage(id){
+  document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  if(id==="home")refresh();
+  if(id==="users")renderUsers();
+  if(id==="products")renderProducts();
+  if(id==="deposits")renderDeposits();
+  if(id==="depositSettings")loadDepositSettings();
+  if(id==="referral")loadReferralSettings();
+  if(id==="withdraws")renderWithdraws();
+  if(id==="history")renderHistory();
+  if(id==="recovery")renderPinRecovery();
+  if(id==="support")renderSupport();
+}
+function closeModal(){$("modal").classList.add("hidden")}
+function modal(title,body,actions){
+  $("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modalActions").innerHTML=actions;
+  $("modal").classList.remove("hidden");
+}
+
+async function adminLogin(){
+  const msg=$("loginMsg");msg.textContent="⏳ Login হচ্ছে...";
+  try{
+    const e=$("email").value.trim(),p=$("password").value;
+    if(!e||!p)throw Error("Email এবং Password দিন।");
+    const c=await auth.signInWithEmailAndPassword(e,p);
+    if(c.user.uid!==ADMIN_UID){await auth.signOut();throw Error("এই account Admin হিসেবে অনুমোদিত নয়।");}
+  }catch(e){msg.textContent="❌ "+(e.message||"Login failed")}
+}
+async function adminLogout(){await setAdminOffline();await auth.signOut()}
+auth.onAuthStateChanged(async u=>{
+  if(u&&u.uid===ADMIN_UID){
+    $("login").classList.add("hidden");$("app").classList.remove("hidden");
+    $("adminText").textContent="🟢 Admin Online • "+u.uid;
+    await setupAdminPresence();await refresh();renderSupport();
+  }else{
+    await setAdminOffline();$("app").classList.add("hidden");$("login").classList.remove("hidden");
+  }
+});
+
+let presenceRef=null,presenceHeartbeat=null,presenceConnCb=null;
+async function setAdminOffline(){
+  try{
+    if(presenceHeartbeat)clearInterval(presenceHeartbeat);
+    presenceHeartbeat=null;
+    if(presenceConnCb&&db)db.ref(".info/connected").off("value",presenceConnCb);
+    presenceConnCb=null;
+    if(presenceRef)await presenceRef.update({online:false,lastSeenAt:Date.now(),activeUid:null,activeName:null,activePhone:null,activeAt:null});
+  }catch(e){}
+}
+async function setupAdminPresence(){
+  presenceRef=db.ref("customerService/status");
+  const connected=db.ref(".info/connected");
+  presenceConnCb=async snap=>{
+    if(snap.val()!==true)return;
+    try{
+      await presenceRef.onDisconnect().update({online:false,lastSeenAt:firebase.database.ServerValue.TIMESTAMP,activeUid:null,activeName:null,activePhone:null,activeAt:null});
+      await presenceRef.update({online:true,adminUid:ADMIN_UID,lastSeenAt:Date.now()});
+      if(presenceHeartbeat)clearInterval(presenceHeartbeat);
+      presenceHeartbeat=setInterval(()=>{if(document.visibilityState!=="hidden")presenceRef.update({online:true,lastSeenAt:Date.now()}).catch(()=>{})},5000);
+    }catch(e){}
+  };
+  connected.on("value",presenceConnCb);
+}
+function adminIsOnline(s){
+  const last=Number(s?.lastSeenAt||0);
+  return s?.online===true&&last>0&&(Date.now()-last)<15000;
+}
+
+async function refresh(){
+  try{
+    const paths=["users","products","deposits","withdrawals","transactions","productRequests","pinRecoveryRequests","customerService/queue"];
+    const ss=await Promise.all(paths.map(p=>db.ref(p).once("value")));
+    paths.forEach((p,i)=>data[p]=ss[i].exists()?ss[i].val():{});
+    $("cUsers").textContent=vals(data.users).length;
+    $("cProducts").textContent=vals(data.products).length;
+    $("cDeposits").textContent=vals(data.deposits).filter(x=>x.status==="pending").length;
+    $("cWithdraws").textContent=vals(data.withdrawals).filter(x=>x.status==="pending").length;
+    $("cRecovery").textContent=vals(data.pinRecoveryRequests).filter(x=>x.status==="pending").length;
+    if(!$("products").classList.contains("hidden"))renderProducts();
+    if(!$("deposits").classList.contains("hidden"))renderDeposits();
+    if(!$("withdraws").classList.contains("hidden"))renderWithdraws();
+    if(!$("history").classList.contains("hidden"))renderHistory();
+    if(!$("recovery").classList.contains("hidden"))renderPinRecovery();
+  }catch(e){alert("Firebase data load error: "+e.message)}
+}
+
+function renderUsers(){
+  const q=($("userSearch")?.value||"").toLowerCase();
+  const a=vals(data.users).filter(u=>[u.name,u.phone,u.uid,u.email].join(" ").toLowerCase().includes(q));
+  $("usersList").innerHTML=a.length?a.map(u=>`<div class="item"><b>👤 ${esc(u.name||"User")}</b><br>📱 ${esc(u.phone||"-")}<br>🆔 ${esc(u.uid||u.id)}<br>💰 <b>${money(u.balance)}</b><br><span class="small">${u.active===false?"🔴 Disabled":"🟢 Active"}</span></div>`).join(""):"কোনো User পাওয়া যায়নি।";
+}
+
+function catButtons(){
+  $("catButtons").innerHTML=[["all","সব"],...CATS.map(x=>[x,x])].map(([v,t])=>`<button class="${v===productFilter?"blue":"light"}" onclick="setCat('${esc(v)}')">${t}</button>`).join("");
+}
+function setCat(c){productFilter=c;renderProducts()}
+
+function productRates(p){
+  return {
+    uu:Number(p.userToUserRate??p.userSellPrice??p.price??0),
+    ua:Number(p.userToAdminRate??p.adminBuyPrice??0),
+    au:Number(p.adminToUserRate??p.adminSellPrice??p.wholesalePrice??0)
+  };
+}
+function renderProducts(){
+  catButtons();
+  const a=vals(data.products).filter(p=>productFilter==="all"||p.category===productFilter);
+  $("productsList").innerHTML=a.length?a.map(p=>{
+    const r=productRates(p);
+    return `<div class="product">
+      ${p.imageUrl||p.image?`<img src="${esc(p.imageUrl||p.image)}" onerror="this.style.display='none'">`:''}
+      <h3>${esc(p.name||"Product")}</h3>
+      <div class="muted">${esc(p.category||"-")} • 📦 Stock: ${Number(p.stock||0)}</div>
+      <div class="rates">
+        <div class="rate">👥 User → User<b>${money(r.uu)}</b></div>
+        <div class="rate">👑 User → Admin<b>${money(r.ua)}</b></div>
+        <div class="rate">🛒 Admin → User<b>${money(r.au)}</b></div>
+      </div>
+      <p>${esc(p.description||"")}</p>
+      <button class="blue" onclick='openProductEdit(${JSON.stringify(p.id)},${JSON.stringify(p)})'>✏️ Edit</button>
+      <button class="danger" onclick='deleteProduct(${JSON.stringify(p.id)},${JSON.stringify(p.name||"Product")})'>🗑️ Delete</button>
+      <div class="clear"></div>
+    </div>`;
+  }).join(""):"কোনো Product নেই।";
+}
+
+async function addProduct(){
+  try{
+    const name=$("pName").value.trim(),category=$("pCategory").value;
+    const uu=Number($("pUU").value),ua=Number($("pUA").value),au=Number($("pAU").value);
+    const stock=Number($("pStock").value),image=$("pImage").value.trim(),description=$("pDesc").value.trim();
+    if(!name||uu<0||ua<0||au<0||stock<0)return alert("Product তথ্য সঠিকভাবে দিন।");
+    const id=db.ref("products").push().key;
+    await db.ref("products/"+id).set({
+      name,category,userToUserRate:uu,userToAdminRate:ua,adminToUserRate:au,
+      userSellPrice:uu,adminBuyPrice:ua,price:uu,stock,imageUrl:image,image:image,
+      description,createdAt:firebase.database.ServerValue.TIMESTAMP,updatedAt:firebase.database.ServerValue.TIMESTAMP
+    });
+    $("pName").value=$("pUU").value=$("pUA").value=$("pAU").value=$("pStock").value=$("pImage").value=$("pDesc").value="";
+    await refresh();renderProducts();alert("✅ Product যোগ হয়েছে।");
+  }catch(e){alert("❌ Product যোগ করা যায়নি: "+e.message)}
+}
+
+function openProductEdit(id,p){
+  const r=productRates(p);
+  modal("✏️ Product Edit",`
+    <input type="hidden" id="editProductId" value="${esc(id)}">
+    <label>Product Name</label><input id="eName" value="${esc(p.name||"")}">
+    <label>Category</label><select id="eCategory">${CATS.map(c=>`<option ${p.category===c?"selected":""}>${c}</option>`).join("")}</select>
+    <label>👥 User → User Rate</label><input id="eUU" type="number" min="0" step="0.01" value="${r.uu}">
+    <label>👑 User → Admin Rate</label><input id="eUA" type="number" min="0" step="0.01" value="${r.ua}">
+    <label>🛒 Admin → User Rate</label><input id="eAU" type="number" min="0" step="0.01" value="${r.au}">
+    <label>📦 Stock</label><input id="eStock" type="number" min="0" value="${Number(p.stock||0)}">
+    <label>🖼️ Image URL</label><input id="eImage" value="${esc(p.imageUrl||p.image||"")}">
+    <label>Description</label><textarea id="eDesc">${esc(p.description||"")}</textarea>
+  `,`<button class="ok" onclick="saveProductEdit()">💾 Save Changes</button><button class="light" onclick="closeModal()">Cancel</button>`);
+}
+async function saveProductEdit(){
+  try{
+    const id=$("editProductId").value,name=$("eName").value.trim(),category=$("eCategory").value;
+    const uu=Number($("eUU").value),ua=Number($("eUA").value),au=Number($("eAU").value),stock=Number($("eStock").value);
+    const image=$("eImage").value.trim(),description=$("eDesc").value.trim();
+    if(!id||!name||uu<0||ua<0||au<0||stock<0)return alert("তথ্য সঠিকভাবে দিন।");
+    await db.ref("products/"+id).update({
+      name,category,userToUserRate:uu,userToAdminRate:ua,adminToUserRate:au,
+      userSellPrice:uu,adminBuyPrice:ua,price:uu,stock,imageUrl:image,image:image,
+      description,updatedAt:firebase.database.ServerValue.TIMESTAMP
+    });
+    closeModal();await refresh();renderProducts();alert("✅ Product-এর Rate/তথ্য পরিবর্তন হয়েছে।");
+  }catch(e){alert("❌ Update করা যায়নি: "+e.message)}
+}
+async function deleteProduct(id,name){
+  if(!confirm(`"${name}" Product স্থায়ীভাবে Delete করবেন?`))return;
+  try{await db.ref("products/"+id).remove();await refresh();renderProducts();alert("✅ Product Delete হয়েছে।")}
+  catch(e){alert("❌ Delete করা যায়নি: "+e.message)}
+}
+
+async function loadReferralSettings(){
+  try{
+    const s=(await db.ref("settings/referral").once("value")).val()||{};
+    $("refCommissionPercent").value=s.commissionPercent!==undefined?s.commissionPercent:1;
+    $("refFirstDepositBonus").value=s.firstDepositBonus!==undefined?s.firstDepositBonus:10;
+    const users=vals(data.users);
+    const referred=users.filter(u=>u.referredBy);
+    const totalCommission=users.reduce((n,u)=>n+Number(u.referralStats?.totalCommission||0),0);
+    const totalBonus=users.reduce((n,u)=>n+Number(u.referralStats?.firstDepositBonuses||0),0);
+    $("referralOverview").innerHTML=`👥 Total Referral Users: <b>${referred.length}</b><br>💰 Total Referral Commission: <b>${money(totalCommission)}</b><br>🎁 First Deposit Bonus Count: <b>${totalBonus}</b>`;
+  }catch(e){alert("❌ Referral Settings load করা যায়নি: "+e.message)}
+}
+
+async function saveReferralSettings(){
+  const commissionPercent=Number($("refCommissionPercent").value);
+  const firstDepositBonus=Number($("refFirstDepositBonus").value);
+  if(!Number.isFinite(commissionPercent)||commissionPercent<0||commissionPercent>100||!Number.isFinite(firstDepositBonus)||firstDepositBonus<0) return alert("❌ সঠিক Referral Settings দিন।");
+  try{
+    await db.ref("settings/referral").set({commissionPercent,firstDepositBonus,updatedAt:firebase.database.ServerValue.TIMESTAMP,updatedBy:ADMIN_UID});
+    alert("✅ Referral Settings Save হয়েছে।");
+    await refresh();loadReferralSettings();
+  }catch(e){alert("❌ Save করা যায়নি: "+e.message)}
+}
+
+function renderDeposits(){
+  const a=vals(data.deposits).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
+  $("depositList").innerHTML=a.length?a.map(d=>`<div class="item">
+    <b>👤 ${esc(d.name||data.users[d.uid]?.name||"User")}</b><br>
+    📱 ${esc(d.phone||data.users[d.uid]?.phone||"-")}<br>
+    💰 Amount: <b>${money(d.amount)}</b><br>
+    💳 ${esc(d.method||"-")} • TXID: ${esc(d.transactionId||"-")}<br>
+    📌 <span class="badge ${d.status==="approved"?"approved":d.status==="rejected"?"rejected":""}">${esc(d.status||"unknown")}</span>
+    ${d.status==="pending"?`<div class="wrap" style="margin-top:8px"><button class="ok" onclick="approveDeposit('${esc(d.id)}')">✅ Approve</button><button class="danger" onclick="rejectDeposit('${esc(d.id)}')">❌ Reject</button></div>`:""}
+  </div>`).join(""):"কোনো Deposit নেই।";
+}
+async function approveDeposit(id){
+  const d=data.deposits[id];if(!d||d.status!=="pending")return;
+  const u=data.users[d.uid]||{},before=Number(u.balance||0),amount=Number(d.amount||0),after=before+amount;
+  modal("💰 Deposit Approve",`বর্তমান Balance: <b>${money(before)}</b><br>Deposit: <b>${money(amount)}</b><br>নতুন Balance: <b>${money(after)}</b>`,`<button class="ok" onclick="confirmDeposit('${esc(id)}',${before},${after})">Confirm Approve</button><button class="light" onclick="closeModal()">Cancel</button>`);
+}
+async function confirmDeposit(id,before,after){
+  const d=data.deposits[id];
+  if(!d||d.status!=="pending"){closeModal();return}
+
+  try{
+    const freshUserSnap=await db.ref("users/"+d.uid).once("value");
+    const user=freshUserSnap.exists()?freshUserSnap.val()||{}:{};
+    const currentBalance=Number(user.balance||0);
+    const amount=Number(d.amount||0);
+    const realAfter=currentBalance+amount;
+    const settings=(await db.ref("settings/referral").once("value")).val()||{};
+    const commissionPercent=Number(settings.commissionPercent??1);
+    const firstDepositBonus=Number(settings.firstDepositBonus??10);
+    const referrerUid=String(user.referredBy||"");
+    let referrer=null;
+    if(referrerUid && referrerUid!==d.uid){
+      const rs=await db.ref("users/"+referrerUid).once("value");
+      if(rs.exists()) referrer=rs.val()||{};
+    }
+
+    const previousApproved=vals(data.deposits).some(x=>x.id!==id&&x.uid===d.uid&&x.status==="approved");
+    const commission=referrer?Number((amount*commissionPercent/100).toFixed(2)):0;
+    const bonus=(referrer&&!previousApproved)?Number(firstDepositBonus.toFixed(2)):0;
+    const referrerBefore=referrer?Number(referrer.balance||0):0;
+    const referrerAfter=referrerBefore+commission+bonus;
+    const txid=db.ref("transactions").push().key;
+    const updates={};
+
+    updates["users/"+d.uid+"/balance"]=realAfter;
+    updates["deposits/"+id+"/status"]="approved";
+    updates["deposits/"+id+"/approvedAt"]=Date.now();
+    updates["deposits/"+id+"/balanceBefore"]=currentBalance;
+    updates["deposits/"+id+"/balanceAfter"]=realAfter;
+    updates["deposits/"+id+"/approvedBy"]=ADMIN_UID;
+    updates["deposits/"+id+"/referralCommission"]=commission;
+    updates["deposits/"+id+"/firstDepositBonus"]=bonus;
+
+    updates["transactions/"+txid]={type:"deposit_approved",uid:d.uid,amount,balanceBefore:currentBalance,balanceAfter:realAfter,depositId:id,createdAt:Date.now()};
+
+    if(referrer && (commission>0 || bonus>0)){
+      updates["users/"+referrerUid+"/balance"]=referrerAfter;
+      updates["users/"+referrerUid+"/referralStats/totalReferrals"]=Number(referrer.referralStats?.totalReferrals||0);
+      updates["users/"+referrerUid+"/referralStats/totalCommission"]=Number(referrer.referralStats?.totalCommission||0)+commission+bonus;
+      updates["users/"+referrerUid+"/referralStats/firstDepositBonuses"]=Number(referrer.referralStats?.firstDepositBonuses||0)+(bonus>0?1:0);
+
+      if(commission>0){
+        const rid=db.ref("referrals/"+referrerUid+"/history").push().key;
+        updates["referrals/"+referrerUid+"/history/"+rid]={type:"commission",referredUid:d.uid,depositId:id,amount:commission,ratePercent:commissionPercent,createdAt:Date.now()};
+        const rtx=db.ref("transactions").push().key;
+        updates["transactions/"+rtx]={type:"referral_commission",uid:referrerUid,referredUid:d.uid,amount:commission,depositId:id,createdAt:Date.now()};
+      }
+      if(bonus>0){
+        const rid=db.ref("referrals/"+referrerUid+"/history").push().key;
+        updates["referrals/"+referrerUid+"/history/"+rid]={type:"first_deposit_bonus",referredUid:d.uid,depositId:id,amount:bonus,createdAt:Date.now()};
+        const rtx=db.ref("transactions").push().key;
+        updates["transactions/"+rtx]={type:"first_deposit_bonus",uid:referrerUid,referredUid:d.uid,amount:bonus,depositId:id,createdAt:Date.now()};
+      }
+    }
+
+    await db.ref().update(updates);
+    closeModal();await refresh();renderDeposits();
+    alert("✅ Deposit approved।"+(referrer?("\n\n🎁 Referral Commission: "+money(commission)+(bonus>0?("\n🎁 First Deposit Bonus: "+money(bonus)):"")):""));
+  }catch(e){alert("❌ "+e.message)}
+}
+async function rejectDeposit(id){
+  if(!confirm("এই Deposit Reject করবেন?"))return;
+  try{await db.ref("deposits/"+id).update({status:"rejected",rejectedAt:Date.now(),rejectedBy:ADMIN_UID});await refresh();renderDeposits()}
+  catch(e){alert("❌ "+e.message)}
+}
+
+function renderWithdraws(){
+  const a=vals(data.withdrawals).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
+  $("withdrawList").innerHTML=a.length?a.map(w=>{
+    const u=data.users[w.uid]||{},amount=Number(w.amount||0),fee=Number(w.adminFee??amount*.05),net=Number(w.netAmount??amount-fee);
+    return `<div class="item"><b>👤 ${esc(w.name||u.name||"User")}</b><br>📱 ${esc(w.phone||u.phone||w.number||"-")}<br>
+    💰 Current Balance: <b>${money(u.balance)}</b><br>➖ Withdraw: <b>${money(amount)}</b><br>🧾 Admin Fee: <b>${money(fee)}</b><br>💵 User receives: <b>${money(net)}</b><br>
+    📌 <span class="badge ${w.status==="approved"?"approved":w.status==="rejected"?"rejected":""}">${esc(w.status||"unknown")}</span>
+    ${w.status==="pending"?`<div class="wrap" style="margin-top:8px"><button class="ok" onclick="approveWithdraw('${esc(w.id)}')">✅ Approve</button><button class="danger" onclick="rejectWithdraw('${esc(w.id)}')">❌ Reject</button></div>`:""}</div>`;
+  }).join(""):"কোনো Withdraw নেই।";
+}
+async function approveWithdraw(id){
+  const w=data.withdrawals[id];if(!w||w.status!=="pending")return;
+  const u=data.users[w.uid]||{},before=Number(u.balance||0),amount=Number(w.amount||0),fee=Number(w.adminFee??amount*.05),after=before-amount;
+  if(after<0)return alert("❌ User-এর Balance যথেষ্ট নয়।");
+  modal("💸 Withdraw Approve",`বর্তমান Balance: <b>${money(before)}</b><br>Withdraw: <b>${money(amount)}</b><br>Fee: <b>${money(fee)}</b><br>নতুন Balance: <b>${money(after)}</b>`,`<button class="ok" onclick="confirmWithdraw('${esc(id)}',${before},${after},${fee})">Confirm Approve</button><button class="light" onclick="closeModal()">Cancel</button>`);
+}
+async function confirmWithdraw(id,before,after,fee){
+  const w=data.withdrawals[id];if(!w||w.status!=="pending"){closeModal();return}
+  const txid=db.ref("transactions").push().key,amount=Number(w.amount||0),net=Number(w.netAmount??amount-fee),updates={};
+  updates["users/"+w.uid+"/balance"]=after;
+  updates["withdrawals/"+id+"/status"]="approved";updates["withdrawals/"+id+"/approvedAt"]=Date.now();updates["withdrawals/"+id+"/approvedBy"]=ADMIN_UID;updates["withdrawals/"+id+"/balanceBefore"]=before;updates["withdrawals/"+id+"/balanceAfter"]=after;
+  updates["transactions/"+txid]={type:"withdraw_approved",uid:w.uid,amount,adminFee:fee,netAmount:net,balanceBefore:before,balanceAfter:after,withdrawalId:id,createdAt:Date.now()};
+  try{await db.ref().update(updates);closeModal();await refresh();renderWithdraws();alert("✅ Withdraw approved।")}
+  catch(e){alert("❌ "+e.message)}
+}
+async function rejectWithdraw(id){
+  if(!confirm("এই Withdraw Reject করবেন?"))return;
+  try{await db.ref("withdrawals/"+id).update({status:"rejected",rejectedAt:Date.now(),rejectedBy:ADMIN_UID});await refresh();renderWithdraws()}
+  catch(e){alert("❌ "+e.message)}
+}
+
+function renderHistory(){
+  const a=vals(data.transactions).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0)).slice(0,300);
+  $("historyList").innerHTML=a.length?a.map(t=>`<div class="item"><b>${esc(t.type||"transaction")}</b><br>🆔 ${esc(t.uid||"-")} ${t.amount!==undefined?"• 💰 "+money(t.amount):""}<br>🕐 ${t.createdAt?new Date(t.createdAt).toLocaleString("bn-BD"):"-"}</div>`).join(""):"কোনো History নেই।";
+}
+
+function recoveryActuals(uid){
+  const u=data.users[uid]||{};
+  let stockCount=0;
+  const st=u.stock||u.myStock||{};
+  if(typeof st==="number")stockCount=Number(st);
+  else Object.values(st||{}).forEach(v=>stockCount+=typeof v==="number"?Number(v):Number(v?.quantity||0));
+  const deps=vals(data.deposits).filter(x=>x.uid===uid).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const wds=vals(data.withdrawals).filter(x=>x.uid===uid).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  return {name:u.name||"",phone:u.phone||"",balance:Number(u.balance||0),stockCount,lastDeposit:deps.length?Number(deps[0].amount||0):0,lastWithdraw:wds.length?Number(wds[0].amount||0):0};
+}
+function recoveryCompare(r,uid){
+  const a=recoveryActuals(uid),near=(x,y)=>Math.abs(Number(x||0)-Number(y||0))<0.01;
+  return {actual:a,name:a.name===r.name,phone:a.phone===r.phone,balance:near(a.balance,r.claimedBalance),stockCount:Number(a.stockCount)===Number(r.claimedStockCount),
+    lastDeposit:near(a.lastDeposit,r.claimedLastDeposit??r.lastDeposit),lastWithdraw:near(a.lastWithdraw,r.claimedLastWithdraw??r.lastWithdraw)};
+}
+function hasClaim(r,key){
+  const v=r[key];return v!==null&&v!==undefined&&v!=="";
+}
+function renderPinRecovery(){
+  const a=vals(data.pinRecoveryRequests).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
+  $("recoveryList").innerHTML=a.length?a.map(r=>{
+    const u=vals(data.users).find(x=>x.phone===r.phone),uid=u?.uid||u?.id||"";
+    const c=uid?recoveryCompare(r,uid):null;
+    const hd=hasClaim(r,"claimedLastDeposit")||hasClaim(r,"lastDeposit"),hw=hasClaim(r,"claimedLastWithdraw")||hasClaim(r,"lastWithdraw");
+    const allOk=!!c&&c.name&&c.phone&&c.balance&&c.stockCount&&(hd?c.lastDeposit:true)&&(hw?c.lastWithdraw:true)&&(hd||hw);
+    return `<div class="item">
+      <b>🔑 ${esc(r.name||"-")}</b><br>📱 ${esc(r.phone||"-")}<br>
+      💰 Claimed Balance: <b>${money(r.claimedBalance)}</b><br>📦 Claimed Stock: <b>${esc(r.claimedStockCount??"-")}</b><br>
+      💳 Last Deposit: <b>${hd?money(r.claimedLastDeposit??r.lastDeposit):"দেওয়া হয়নি"}</b><br>
+      💸 Last Withdraw: <b>${hw?money(r.claimedLastWithdraw??r.lastWithdraw):"দেওয়া হয়নি"}</b><br>
+      📌 <span class="badge ${r.status==="approved"?"approved":r.status==="rejected"?"rejected":""}">${esc(r.status||"pending")}</span>
+      ${c?`<div style="margin-top:8px;line-height:1.6"><b>Admin যাচাই:</b><br>
+        নাম ${c.name?"✅":"❌"} • মোবাইল ${c.phone?"✅":"❌"} • ব্যালেন্স ${c.balance?"✅":"❌"} • স্টক ${c.stockCount?"✅":"❌"} •
+        ডিপোজিট ${hd?(c.lastDeposit?"✅":"❌"):"⚪"} • উইথড্র ${hw?(c.lastWithdraw?"✅":"❌"):"⚪"}<br>
+        <span class="small">Actual: Balance ${money(c.actual.balance)} • Stock ${c.actual.stockCount} • Deposit ${money(c.actual.lastDeposit)} • Withdraw ${money(c.actual.lastWithdraw)}</span>
+      </div>`:`<div class="small">⚠️ এই মোবাইল নম্বরের User account পাওয়া যায়নি।</div>`}
+      <div class="wrap" style="margin-top:10px">
+        ${r.status==="pending"?`<button class="ok" onclick="approvePinRecovery('${esc(r.id)}')">✅ Verify</button><button class="danger" onclick="rejectPinRecovery('${esc(r.id)}')">❌ Reject</button>`:""}
+        <button class="blue" onclick="sendRecoveryTelegram('${esc(r.id)}')">📨 Telegram</button>
+        ${r.status==="approved"?`<button class="blue" onclick="openRecoverySms('${esc(r.id)}')">📲 SMS-এ PIN পাঠান</button><button class="light" onclick="markRecoverySmsSent('${esc(r.id)}')">✅ SMS Sent</button>`:""}
+        <button class="danger" onclick="deletePinRecovery('${esc(r.id)}')">🗑️ Delete</button>
+      </div>
+    </div>`;
+  }).join(""):"কোনো PIN Recovery আবেদন নেই।";
+  $("cRecovery").textContent=vals(data.pinRecoveryRequests).filter(x=>x.status==="pending").length;
+}
+async function approvePinRecovery(id){
+  const r=data.pinRecoveryRequests[id];if(!r)return;
+  const u=vals(data.users).find(x=>x.phone===r.phone);if(!u)return alert("❌ এই মোবাইল নম্বরের User account পাওয়া যায়নি।");
+  const c=recoveryCompare(r,u.uid||u.id),hd=hasClaim(r,"claimedLastDeposit")||hasClaim(r,"lastDeposit"),hw=hasClaim(r,"claimedLastWithdraw")||hasClaim(r,"lastWithdraw");
+  const valid=c.name&&c.phone&&c.balance&&c.stockCount&&(hd?c.lastDeposit:true)&&(hw?c.lastWithdraw:true)&&(hd||hw);
+  if(!valid)return alert("❌ তথ্য মেলেনি। Balance/Stock সঠিক হতে হবে এবং Last Deposit অথবা Last Withdraw-এর অন্তত একটি সঠিক তথ্য দিতে হবে।");
+  if(!confirm("সব তথ্য মিলে গেছে। Verified করবেন?\n\nPIN Firebase-এ লিখবেন না। সঠিক মোবাইল নম্বরে SMS পাঠান।"))return;
+  try{await db.ref("pinRecoveryRequests/"+id).update({status:"approved",verifiedAt:Date.now(),verifiedBy:ADMIN_UID});await refresh();renderPinRecovery();alert("✅ Verified। এখন User-এর সঠিক নম্বরে SMS-এ PIN পাঠান।")}
+  catch(e){alert("❌ "+e.message)}
+}
+async function rejectPinRecovery(id){
+  if(!confirm("এই Recovery আবেদন Reject করবেন?"))return;
+  try{await db.ref("pinRecoveryRequests/"+id).update({status:"rejected",rejectedAt:Date.now(),verifiedBy:ADMIN_UID});await refresh();renderPinRecovery()}
+  catch(e){alert("❌ "+e.message)}
+}
+async function deletePinRecovery(id){
+  if(!confirm("এই PIN Recovery আবেদনটি স্থায়ীভাবে Delete করবেন?"))return;
+  try{await db.ref("pinRecoveryRequests/"+id).remove();await refresh();renderPinRecovery();alert("✅ Delete হয়েছে।")}
+  catch(e){alert("❌ "+e.message)}
+}
+async function openRecoverySms(id){
+  const r=data.pinRecoveryRequests[id];
+  if(!r)return;
+  if(r.status!=="approved")return alert("❌ আগে আবেদনটি Verify করুন।");
+  const phone=String(r.phone||"").trim();
+  if(!phone)return alert("❌ User-এর মোবাইল নম্বর পাওয়া যায়নি।");
+  const pin=prompt("🔐 User-এর নতুন PIN Code লিখুন:\n\nএই PIN-টি আপনার নিজের নিরাপদভাবে তৈরি করা PIN হবে।");
+  if(pin===null)return;
+  const cleanPin=String(pin).trim();
+  if(!cleanPin)return alert("❌ PIN Code খালি রাখা যাবে না।");
+  const body=`ক্রয়-বিক্রয় PIN Recovery\n\nআপনার PIN Code: ${cleanPin}\n\nএই PIN গোপন রাখুন।`;
+  const smsUrl="sms:"+phone+"?body="+encodeURIComponent(body);
+  try{
+    await db.ref("pinRecoveryRequests/"+id).update({smsPreparedAt:Date.now(),smsPreparedBy:ADMIN_UID});
+  }catch(e){}
+  window.location.href=smsUrl;
+}
+async function markRecoverySmsSent(id){
+  try{await db.ref("pinRecoveryRequests/"+id).update({status:"sms_sent",smsSentAt:Date.now(),smsSentBy:ADMIN_UID});await refresh();renderPinRecovery();alert("📲 SMS Sent হিসেবে সংরক্ষণ হয়েছে।")}
+  catch(e){alert("❌ "+e.message)}
+}
+async function sendRecoveryTelegram(id){
+  const r=data.pinRecoveryRequests[id];if(!r)return;
+  const cfg=getTelegramSettings();
+  let token=cfg.token,chat=cfg.chatId;
+  if(!token){token=prompt("Telegram Bot Token দিন:");if(!token)return;}
+  if(!chat){chat=prompt("Telegram Chat ID দিন:");if(!chat)return;}
+  const text=`🔑 PIN Recovery Request\n\nনাম: ${r.name||"-"}\nমোবাইল: ${r.phone||"-"}\nবর্তমান ব্যালেন্স: ${money(r.claimedBalance)}\nস্টক: ${r.claimedStockCount??"-"}\nলাস্ট ডিপোজিট: ${hasClaim(r,"claimedLastDeposit")?money(r.claimedLastDeposit):"দেওয়া হয়নি"}\nলাস্ট উইথড্র: ${hasClaim(r,"claimedLastWithdraw")?money(r.claimedLastWithdraw):"দেওয়া হয়নি"}\nস্ট্যাটাস: ${r.status||"pending"}`;
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chat,text})});
+    const j=await res.json();if(!j.ok)throw Error(j.description||"Telegram error");
+    if(!cfg.token||!cfg.chatId)saveTelegramSettingsValues(token,chat);
+    await db.ref("pinRecoveryRequests/"+id).update({telegramSentAt:Date.now(),telegramSentBy:ADMIN_UID});
+    alert("✅ Telegram-এ Recovery আবেদন পাঠানো হয়েছে।");
+  }catch(e){alert("❌ Telegram পাঠানো যায়নি: "+e.message)}
+}
+function getTelegramSettings(){return {token:localStorage.getItem("kroybikroy_tg_token")||"",chatId:localStorage.getItem("kroybikroy_tg_chat")||""}}
+async function saveTelegramSettingsValues(token,chat){
+  token=String(token||"").trim(); chat=String(chat||"").trim();
+  localStorage.setItem("kroybikroy_tg_token",token);
+  localStorage.setItem("kroybikroy_tg_chat",chat);
+  try{
+    await db.ref("settings/telegram").set({botToken:token,chatId:chat,updatedAt:firebase.database.ServerValue.TIMESTAMP,updatedBy:ADMIN_UID});
+  }catch(e){ console.error("Telegram settings Firebase save failed:",e); }
+}
+function loadTelegramSettings(){const c=getTelegramSettings();if($("tgToken"))$("tgToken").value=c.token;if($("tgChatId"))$("tgChatId").value=c.chatId;}
+async function saveTelegramSettings(){const token=$("tgToken").value.trim(),chat=$("tgChatId").value.trim();if(!token||!chat)return alert("❌ Bot Token এবং Chat ID দুটোই দিন।");try{await saveTelegramSettingsValues(token,chat);alert("✅ Telegram Settings সংরক্ষণ হয়েছে।");}catch(e){alert("❌ Telegram Settings save করা যায়নি: "+e.message);}}
+async function testTelegram(){
+  const token=$("tgToken").value.trim()||getTelegramSettings().token,chat=$("tgChatId").value.trim()||getTelegramSettings().chatId;
+  if(!token||!chat)return alert("❌ আগে Bot Token এবং Chat ID দিন।");
+  try{const res=await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chat,text:"✅ ক্রয়-বিক্রয় Admin Panel\nTelegram connection সফল হয়েছে।"})});const j=await res.json();if(!j.ok)throw Error(j.description||"Telegram error");saveTelegramSettingsValues(token,chat);alert("✅ Test Message Telegram-এ পাঠানো হয়েছে।");}catch(e){alert("❌ Test Message পাঠানো যায়নি: "+e.message)}
+}
+async function clearTelegramSettings(){if(!confirm("Telegram Token ও Chat ID মুছে ফেলবেন?"))return;localStorage.removeItem("kroybikroy_tg_token");localStorage.removeItem("kroybikroy_tg_chat");try{await db.ref("settings/telegram").remove();}catch(e){console.error(e);}loadTelegramSettings();alert("✅ Telegram Settings মুছে ফেলা হয়েছে।");}
+
+
+function supportMsgsHtml(msgs){
+  return msgs.map(m=>{
+    const right=m.senderType==="admin",tm=m.createdAt?new Date(m.createdAt).toLocaleTimeString("bn-BD",{hour:"2-digit",minute:"2-digit"}):"";
+    return `<div style="margin:6px 0;text-align:${right?"right":"left"}"><span style="display:inline-block;max-width:85%;padding:9px 11px;border-radius:12px;background:${right?"#dbeafe":"#f1f5f9"}"><b>${right?"Admin":"User"}</b><br>${esc(m.text||"")}<br><span class="small">${esc(tm)}</span></span></div>`;
+  }).join("");
+}
+function stopSupportMessagesListener(){
+  if(supportMessagesRef&&supportMessagesCb)supportMessagesRef.off("value",supportMessagesCb);
+  supportMessagesRef=null;supportMessagesCb=null;
+}
+async function autoTrimSupportMessages(uid){
+  if(!uid)return;
+  try{
+    const s=await db.ref("customerService/chats/"+uid+"/messages").once("value");if(!s.exists())return;
+    const a=Object.entries(s.val()||{}).map(([id,v])=>({id,...(v||{})}));
+    if(a.length<=50)return;
+    a.sort((x,y)=>(Number(x.createdAt)||0)-(Number(y.createdAt)||0));
+    const updates={};a.slice(0,a.length-50).forEach(m=>updates["customerService/chats/"+uid+"/messages/"+m.id]=null);
+    await db.ref().update(updates);
+  }catch(e){console.warn("Chat cleanup:",e)}
+}
+function startSupportMessagesListener(uid){
+  stopSupportMessagesListener();if(!uid)return;
+  const r=db.ref("customerService/chats/"+uid+"/messages");
+  const cb=snap=>{
+    const box=$("supportMessages");if(!box)return;
+    const msgs=snap.exists()?Object.values(snap.val()||{}):[];
+    msgs.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    if(msgs.length>50)autoTrimSupportMessages(uid);
+    const near=(box.scrollHeight-box.scrollTop-box.clientHeight)<120;
+    box.innerHTML=supportMsgsHtml(msgs);if(near)box.scrollTop=box.scrollHeight;
+  };
+  supportMessagesRef=r;supportMessagesCb=cb;r.on("value",cb);
+}
+function renderSupportChatShell(status){
+  const c=$("supportActive");if(!c)return;
+  if(!supportActiveUid){stopSupportMessagesListener();c.innerHTML='<div class="small">এখন কোনো Active Chat নেই।</div>';return}
+  c.innerHTML=`<div class="item">
+    <div class="row"><div><b>👤 ${esc(status.activeName||supportActiveUid)}</b><br><span class="small">📱 ${esc(status.activePhone||"")}</span></div><span class="badge approved">🟢 Active</span></div>
+    <hr><div id="supportMessages" class="chatbox"></div>
+    <div class="wrap" style="margin-top:8px">
+      <button class="danger" onclick="clearSupportChat()">🗑️ Chat সম্পূর্ণ Delete</button>
+      <button class="danger" onclick="closeSupportChat()">✅ Chat শেষ করুন</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px"><input id="supportInput" placeholder="User-কে মেসেজ লিখুন..." autocomplete="off" style="margin:0;flex:1"><button class="blue" onclick="sendSupportMessage()">পাঠান</button></div>
+    <div class="small" style="margin-top:6px">Refresh ছাড়াই Live chat। সর্বোচ্চ ৫০টি Message রাখা হবে; ৫১তম হলে সবচেয়ে পুরোনো Message মুছে যাবে।</div>
+  </div>`;
+  $("supportInput")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sendSupportMessage()}});
+  startSupportMessagesListener(supportActiveUid);
+}
+async function renderSupport(){
+  try{
+    const status=(await db.ref("customerService/status").once("value")).val()||{};
+    const qobj=(await db.ref("customerService/queue").once("value")).val()||{};
+    const nextUid=String(status.activeUid||""),changed=nextUid!==supportActiveUid;
+    supportActiveUid=nextUid;
+    const online=adminIsOnline(status);
+    $("supportStatusBox").innerHTML=!online?'<span style="color:#c62828">🔴 Customer Service Offline</span>':supportActiveUid?`<span style="color:#16834b">🟢 Chat Active</span><br>👤 ${esc(status.activeName||supportActiveUid)}<br><button class="danger" style="margin-top:8px" onclick="closeSupportChat()">✅ Chat শেষ করুন</button>`:'<span style="color:#16834b">🟢 Service Available</span><br><span class="small">Queue থেকে একজন User Accept করুন।</span>';
+    const q=Object.values(qobj).filter(x=>x&&x.status==="waiting").sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    $("cSupport").textContent=q.length+(supportActiveUid?1:0);
+    $("supportQueue").innerHTML=q.length?q.map((u,i)=>`<div class="item"><b>#${i+1} 👤 ${esc(u.name||"User")}</b><br>📱 ${esc(u.phone||"-")}<br>🆔 ${esc(u.uid||"")}<br><span class="small">${u.createdAt?new Date(u.createdAt).toLocaleString("bn-BD"):""}</span><div class="wrap" style="margin-top:8px"><button class="ok" onclick="acceptSupport('${esc(u.uid||"")}')">✅ Accept</button><button class="danger" onclick="cancelSupport('${esc(u.uid||"")}')">✖ Cancel</button></div></div>`).join(""):'<div class="small">কোনো waiting User নেই।';
+    if(changed|| (supportActiveUid&&!$("supportInput")))renderSupportChatShell(status);
+  }catch(e){$("supportStatusBox").innerHTML="❌ Support data load error: "+esc(e.message)}
+}
+async function acceptSupport(uid){
+  if(!uid)return;
+  try{
+    const s=(await db.ref("customerService/status").once("value")).val()||{};
+    if(!adminIsOnline(s))return alert("🔴 Customer Service Offline।");
+    if(s.activeUid)return alert("❌ অন্য User-এর Chat চলছে।");
+    const u=(await db.ref("users/"+uid).once("value")).val()||{},now=Date.now(),up={};
+    up["customerService/status/activeUid"]=uid;up["customerService/status/activeName"]=u.name||"User";up["customerService/status/activePhone"]=u.phone||"";up["customerService/status/activeAt"]=now;
+    up["customerService/queue/"+uid+"/status"]="active";up["customerService/chats/"+uid+"/status"]="active";
+    await db.ref().update(up);await renderSupport();
+  }catch(e){alert("❌ Accept করা যায়নি: "+e.message)}
+}
+async function cancelSupport(uid){
+  try{await db.ref("customerService/queue/"+uid).update({status:"cancelled",closedAt:Date.now()});await renderSupport()}
+  catch(e){alert("❌ Cancel করা যায়নি: "+e.message)}
+}
+async function closeSupportChat(){
+  const uid=supportActiveUid;if(!uid)return;
+  try{
+    await db.ref().update({
+      "customerService/status/activeUid":null,"customerService/status/activeName":null,"customerService/status/activePhone":null,"customerService/status/activeAt":null,
+      ["customerService/queue/"+uid+"/status"]:"closed",["customerService/chats/"+uid+"/status"]:"closed",["customerService/chats/"+uid+"/closedAt"]:Date.now()
+    });
+    await renderSupport();
+  }catch(e){alert("❌ Chat close করা যায়নি: "+e.message)}
+}
+async function clearSupportChat(){
+  const uid=supportActiveUid;if(!uid)return;
+  if(!confirm("এই User-এর পুরো Chat-এর সব Message স্থায়ীভাবে Delete করবেন?"))return;
+  try{await db.ref("customerService/chats/"+uid+"/messages").remove();await autoTrimSupportMessages(uid);alert("✅ Chat-এর Message Delete হয়েছে।")}
+  catch(e){alert("❌ Chat Delete করা যায়নি: "+e.message)}
+}
+async function sendSupportMessage(){
+  const uid=supportActiveUid,input=$("supportInput"),text=(input?.value||"").trim();
+  if(!uid||!text)return;
+  try{
+    const s=(await db.ref("customerService/status").once("value")).val()||{};
+    if(!adminIsOnline(s)||String(s.activeUid||"")!==uid)return alert("❌ Chat active নেই।");
+    const m=db.ref("customerService/chats/"+uid+"/messages").push();
+    await m.set({senderUid:ADMIN_UID,senderType:"admin",text,createdAt:firebase.database.ServerValue.TIMESTAMP});
+    await autoTrimSupportMessages(uid);input.value="";input.focus();
+  }catch(e){alert("❌ Message পাঠানো যায়নি: "+e.message)}
+}
+
+
+function normalizeMobileNumber(v){
+  return String(v||"").trim().replace(/[^\d+]/g,"");
+}
+
+function renderDepositPreview(s){
+  s=s||{};
+  const rows=[
+    ["🟣","bKash","depBkash"],
+    ["🟠","Nagad","depNagad"],
+    ["🔵","Rocket","depRocket"]
+  ].map(([ico,name,key])=>{
+    const num=s[key.replace("dep","").toLowerCase()] || "";
+    return num ? `<div class="item"><b>${ico} ${name}</b><br>📱 <b style="font-size:18px">${esc(num)}</b><br><span class="small">Send Money</span></div>` : "";
+  }).join("");
+  const ins=esc(s.instruction||"নির্দিষ্ট নম্বরে Send Money করে Transaction ID দিন।");
+  $("depositPreview").innerHTML=(rows||'<div class="small">কোনো Deposit নম্বর এখনো সেট করা হয়নি।</div>')
+    + `<div class="item"><b>📝 নির্দেশনা</b><br>${ins}</div>`;
+}
+
+async function loadDepositSettings(){
+  try{
+    const s=(await db.ref("settings/depositMethods").once("value")).val()||{};
+    $("depBkash").value=s.bkash||"";
+    $("depNagad").value=s.nagad||"";
+    $("depRocket").value=s.rocket||"";
+    $("depInstruction").value=s.instruction||"নির্দিষ্ট নম্বরে Send Money করে Transaction ID দিন।";
+    renderDepositPreview(s);
+  }catch(e){
+    alert("❌ Deposit Settings load করা যায়নি: "+e.message);
+  }
+}
+
+async function saveDepositSettings(){
+  const bkash=normalizeMobileNumber($("depBkash").value);
+  const nagad=normalizeMobileNumber($("depNagad").value);
+  const rocket=normalizeMobileNumber($("depRocket").value);
+  const instruction=$("depInstruction").value.trim();
+
+  if(!bkash&&!nagad&&!rocket){
+    return alert("❌ অন্তত bKash, Nagad অথবা Rocket-এর একটি নম্বর দিন।");
+  }
+
+  const invalid=[["bKash",bkash],["Nagad",nagad],["Rocket",rocket]]
+    .filter(([,v])=>v && !/^\+?\d{10,15}$/.test(v));
+  if(invalid.length){
+    return alert("❌ "+invalid.map(x=>x[0]).join(", ")+" নম্বর সঠিক নয়।");
+  }
+
+  try{
+    const payload={
+      bkash,nagad,rocket,
+      instruction:instruction||"নির্দিষ্ট নম্বরে Send Money করে Transaction ID দিন।",
+      updatedAt:firebase.database.ServerValue.TIMESTAMP,
+      updatedBy:ADMIN_UID
+    };
+    await db.ref("settings/depositMethods").set(payload);
+    renderDepositPreview(payload);
+    alert("✅ Deposit Payment Settings সংরক্ষণ হয়েছে।");
+  }catch(e){
+    alert("❌ Deposit Settings save করা যায়নি: "+e.message);
+  }
+}
+
+async function saveNotice(){
+  try{await db.ref("settings/notice").set({text:$("noticeText").value.trim(),updatedAt:firebase.database.ServerValue.TIMESTAMP});alert("📢 Notice Publish হয়েছে।")}
+  catch(e){alert("❌ Notice save করা যায়নি: "+e.message)}
+}
+async function loadNotice(){try{$("noticeText").value=((await db.ref("settings/notice").once("value")).val()||{}).text||""}catch(e){}}
+loadNotice();
+loadDepositSettings();
+
+setInterval(()=>{
+  if($("app").classList.contains("hidden"))return;
+  if(!$("support").classList.contains("hidden"))renderSupport();
+  if(!$("recovery").classList.contains("hidden"))refresh();
+},10000);
+loadTelegramSettings();
+</script>
+</body>
+</html>
