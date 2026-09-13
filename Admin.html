@@ -605,8 +605,10 @@ function renderWithdraws(){
     const payNumber=w.number||w.phone||"-";
     return `<div class="item"><b>👤 ${esc(w.name||u.name||"User")}</b><br>
     💳 Withdraw Method: <b>${esc(w.method||"-")}</b><br>
+    📱 User Signup মোবাইল: <b>${esc(u.phone||w.userPhone||w.phone||"-")}</b>
+    <button class="blue" style="padding:5px 8px;margin-left:6px" onclick="copyWithdrawNumber('signup-${esc(w.id)}','${esc(u.phone||w.userPhone||w.phone||"")}')">📋 Copy</button><br>
     📱 টাকা পাঠানোর নম্বর: <b id="wdnum-${esc(w.id)}">${esc(payNumber)}</b>
-    <button class="blue" style="padding:5px 8px;margin-left:6px" onclick="copyWithdrawNumber('${esc(w.id)}','${esc(payNumber)}')">📋 Copy</button><br>
+    <button class="danger" style="padding:5px 8px;margin-left:6px" onclick="copyWithdrawNumber('${esc(w.id)}','${esc(payNumber)}')">📋 Copy</button><br>
     💰 Current Balance: <b>${money(u.balance)}</b><br>➖ Withdraw: <b>${money(amount)}</b><br>🧾 Admin Fee: <b>${money(fee)}</b><br>💵 User receives: <b>${money(net)}</b><br>
     📌 <span class="badge ${w.status==="approved"?"approved":w.status==="rejected"?"rejected":""}">${esc(w.status||"unknown")}</span>
     ${w.status==="pending"?`<div class="wrap" style="margin-top:8px"><button class="ok" onclick="approveWithdraw('${esc(w.id)}')">✅ Approve</button><button class="danger" onclick="rejectWithdraw('${esc(w.id)}')">❌ Reject</button></div>`:""}</div>`;
