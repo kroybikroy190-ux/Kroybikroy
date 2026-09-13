@@ -5495,11 +5495,11 @@ window.submitDeposit = async function(){
 
   if(
     !Number.isFinite(amount) ||
-    amount <= 0
+    amount < 100
   ){
 
     alert(
-      "❌ সঠিক Deposit Amount দিন।"
+      "❌ সর্বনিম্ন Deposit ৳100 করতে হবে।"
     );
 
     return;
@@ -6816,10 +6816,29 @@ window.submitWithdraw = async function(){
     SAVE FIREBASE
     ============================================= */
 
-    await set(
-      requestRef,
-      withdrawData
-    );
+    const balanceAfterRequest = Number((balance - amount).toFixed(2));
+    withdrawData.balanceBefore = balance;
+    withdrawData.balanceAfter = balanceAfterRequest;
+    withdrawData.balanceDebited = true;
+
+    const updates = {};
+    updates["withdrawals/" + requestRef.key] = withdrawData;
+    updates["users/" + currentUser.uid + "/balance"] = balanceAfterRequest;
+
+    const withdrawTxId = push(ref(db,"transactions")).key;
+    updates["transactions/" + withdrawTxId] = {
+      type:"withdraw_requested",
+      uid:currentUser.uid,
+      amount:amount,
+      adminFee:calculation.adminFee,
+      netAmount:calculation.netAmount,
+      balanceBefore:balance,
+      balanceAfter:balanceAfterRequest,
+      withdrawalId:requestRef.key,
+      createdAt:Date.now()
+    };
+
+    await update(ref(db), updates);
 
 
     /* =============================================

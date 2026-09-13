@@ -602,31 +602,44 @@ function renderWithdraws(){
   const a=vals(data.withdrawals).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
   $("withdrawList").innerHTML=a.length?a.map(w=>{
     const u=data.users[w.uid]||{},amount=Number(w.amount||0),fee=Number(w.adminFee??amount*.05),net=Number(w.netAmount??amount-fee);
-    return `<div class="item"><b>👤 ${esc(w.name||u.name||"User")}</b><br>📱 ${esc(w.phone||u.phone||w.number||"-")}<br>
+    const payNumber=w.number||w.phone||"-";
+    return `<div class="item"><b>👤 ${esc(w.name||u.name||"User")}</b><br>
+    💳 Withdraw Method: <b>${esc(w.method||"-")}</b><br>
+    📱 টাকা পাঠানোর নম্বর: <b id="wdnum-${esc(w.id)}">${esc(payNumber)}</b>
+    <button class="blue" style="padding:5px 8px;margin-left:6px" onclick="copyWithdrawNumber('${esc(w.id)}','${esc(payNumber)}')">📋 Copy</button><br>
     💰 Current Balance: <b>${money(u.balance)}</b><br>➖ Withdraw: <b>${money(amount)}</b><br>🧾 Admin Fee: <b>${money(fee)}</b><br>💵 User receives: <b>${money(net)}</b><br>
     📌 <span class="badge ${w.status==="approved"?"approved":w.status==="rejected"?"rejected":""}">${esc(w.status||"unknown")}</span>
     ${w.status==="pending"?`<div class="wrap" style="margin-top:8px"><button class="ok" onclick="approveWithdraw('${esc(w.id)}')">✅ Approve</button><button class="danger" onclick="rejectWithdraw('${esc(w.id)}')">❌ Reject</button></div>`:""}</div>`;
   }).join(""):"কোনো Withdraw নেই।";
 }
+async function copyWithdrawNumber(id,number){
+  try{await navigator.clipboard.writeText(String(number));alert("✅ Withdraw Number Copy হয়েছে: "+number)}
+  catch(e){prompt("নম্বর কপি করুন:",number)}
+}
 async function approveWithdraw(id){
   const w=data.withdrawals[id];if(!w||w.status!=="pending")return;
-  const u=data.users[w.uid]||{},before=Number(u.balance||0),amount=Number(w.amount||0),fee=Number(w.adminFee??amount*.05),after=before-amount;
-  if(after<0)return alert("❌ User-এর Balance যথেষ্ট নয়।");
-  modal("💸 Withdraw Approve",`বর্তমান Balance: <b>${money(before)}</b><br>Withdraw: <b>${money(amount)}</b><br>Fee: <b>${money(fee)}</b><br>নতুন Balance: <b>${money(after)}</b>`,`<button class="ok" onclick="confirmWithdraw('${esc(id)}',${before},${after},${fee})">Confirm Approve</button><button class="light" onclick="closeModal()">Cancel</button>`);
+  const u=data.users[w.uid]||{},amount=Number(w.amount||0);
+  modal("💸 Withdraw Approve",`Payment Number: <b>${esc(w.number||"-")}</b><br>Withdraw: <b>${money(amount)}</b><br><br>ইউজারের টাকা Request করার সময়ই কেটে নেওয়া হয়েছে। Approve করলে শুধু Withdraw সম্পন্ন হবে।`,`<button class="ok" onclick="confirmWithdraw('${esc(id)}')">Confirm Approve</button><button class="light" onclick="closeModal()">Cancel</button>`);
 }
-async function confirmWithdraw(id,before,after,fee){
+async function confirmWithdraw(id){
   const w=data.withdrawals[id];if(!w||w.status!=="pending"){closeModal();return}
-  const txid=db.ref("transactions").push().key,amount=Number(w.amount||0),net=Number(w.netAmount??amount-fee),updates={};
-  updates["users/"+w.uid+"/balance"]=after;
-  updates["withdrawals/"+id+"/status"]="approved";updates["withdrawals/"+id+"/approvedAt"]=Date.now();updates["withdrawals/"+id+"/approvedBy"]=ADMIN_UID;updates["withdrawals/"+id+"/balanceBefore"]=before;updates["withdrawals/"+id+"/balanceAfter"]=after;
-  updates["transactions/"+txid]={type:"withdraw_approved",uid:w.uid,amount,adminFee:fee,netAmount:net,balanceBefore:before,balanceAfter:after,withdrawalId:id,createdAt:Date.now()};
+  const txid=db.ref("transactions").push().key,amount=Number(w.amount||0),fee=Number(w.adminFee??amount*.05),net=Number(w.netAmount??amount-fee),updates={};
+  updates["withdrawals/"+id+"/status"]="approved";updates["withdrawals/"+id+"/approvedAt"]=Date.now();updates["withdrawals/"+id+"/approvedBy"]=ADMIN_UID;
+  updates["transactions/"+txid]={type:"withdraw_approved",uid:w.uid,amount,adminFee:fee,netAmount:net,withdrawalId:id,createdAt:Date.now()};
   try{await db.ref().update(updates);closeModal();await refresh();renderWithdraws();alert("✅ Withdraw approved।")}
   catch(e){alert("❌ "+e.message)}
 }
 async function rejectWithdraw(id){
-  if(!confirm("এই Withdraw Reject করবেন?"))return;
-  try{await db.ref("withdrawals/"+id).update({status:"rejected",rejectedAt:Date.now(),rejectedBy:ADMIN_UID});await refresh();renderWithdraws()}
-  catch(e){alert("❌ "+e.message)}
+  const w=data.withdrawals[id];if(!w||w.status!=="pending")return;
+  if(!confirm("এই Withdraw Reject করবেন? Reject করলে ৳"+Number(w.amount||0).toFixed(2)+" User-এর Balance-এ ফেরত যাবে।"))return;
+  try{
+    const userSnap=await db.ref("users/"+w.uid+"/balance").once("value");
+    const current=Number(userSnap.val()||0),refund=Number(w.amount||0),txid=db.ref("transactions").push().key,updates={};
+    updates["users/"+w.uid+"/balance"]=Number((current+refund).toFixed(2));
+    updates["withdrawals/"+id+"/status"]="rejected";updates["withdrawals/"+id+"/rejectedAt"]=Date.now();updates["withdrawals/"+id+"/rejectedBy"]=ADMIN_UID;updates["withdrawals/"+id+"/refunded"]=true;updates["withdrawals/"+id+"/refundedAmount"]=refund;
+    updates["transactions/"+txid]={type:"withdraw_rejected_refund",uid:w.uid,amount:refund,withdrawalId:id,createdAt:Date.now()};
+    await db.ref().update(updates);await refresh();renderWithdraws();alert("↩️ Withdraw Reject হয়েছে এবং User-এর ৳"+refund.toFixed(2)+" Balance-এ ফেরত দেওয়া হয়েছে।");
+  }catch(e){alert("❌ "+e.message)}
 }
 
 function renderHistory(){
