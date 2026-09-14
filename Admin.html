@@ -87,6 +87,7 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
     <div class="card tile" onclick="showPage('recovery')"><div class="ico">🔑</div>PIN Recovery</div>
     <div class="card tile" onclick="showPage('history')"><div class="ico">📜</div>History</div>
     <div class="card tile" onclick="showPage('notice')"><div class="ico">📢</div>Notice</div>
+    <div class="card tile" onclick="showPage('youtube')"><div class="ico">▶️</div>YouTube Video</div>
     <div class="card tile" onclick="showPage('telegram')"><div class="ico">✈️</div>Telegram</div>
 <div id="directTelegramBox" style="margin-top:14px;padding:14px;border:1px solid #ddd;border-radius:12px;background:#fafafa;">
   <div style="font-weight:700;margin-bottom:8px;">📲 সরাসরি Telegram Bot</div>
@@ -240,6 +241,35 @@ function openDirectTelegram(){
   <div class="card"><h3>💬 Active Chat</h3><div id="supportActive"></div></div>
 </section>
 
+<section id="youtube" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div>
+        <h2 style="margin:0">▶️ YouTube Video Settings</h2>
+        <div class="muted">User App-এর Home/Dashboard-এ শেখার ভিডিওর লিংক ও বাটন দেখাবে।</div>
+      </div>
+      <button class="blue" onclick="loadYoutubeSettings()">🔄 Refresh</button>
+    </div>
+
+    <label>🎬 YouTube Video Link</label>
+    <input id="youtubeLink" type="url" placeholder="https://www.youtube.com/watch?v=...">
+
+    <label>📝 Video Title</label>
+    <input id="youtubeTitle" type="text" placeholder="অ্যাপ ব্যবহার শিখুন">
+
+    <label>📄 Video Description</label>
+    <textarea id="youtubeDescription" placeholder="ভিডিও দেখে ক্রয়-বিক্রয় App-এর কাজগুলো শিখুন।"></textarea>
+
+    <button class="ok full" onclick="saveYoutubeSettings()">💾 YouTube Settings Save</button>
+    <p class="small" style="margin-bottom:0">লিংক Save করার পর User App-এ YouTube বাটনে চাপলে ভিডিওটি নতুন Tab-এ খুলবে।</p>
+  </div>
+
+  <div class="card">
+    <h3>👀 User-এর কাছে Preview</h3>
+    <div id="youtubePreview"></div>
+  </div>
+</section>
+
 <section id="telegram" class="hidden">
   <div class="card">
     <div class="row"><div><h2 style="margin:0">✈️ Telegram Settings</h2><div class="muted">PIN Recovery তথ্য Admin-এর Telegram Bot-এ পাঠানোর জন্য এখানে Bot Token ও Chat ID একবার সংরক্ষণ করুন।</div></div><button class="blue" onclick="loadTelegramSettings()">🔄 Refresh</button></div>
@@ -319,6 +349,7 @@ function showPage(id){
   if(id==="deposits")renderDeposits();
   if(id==="depositSettings")loadDepositSettings();
   if(id==="referral")loadReferralSettings();
+  if(id==="youtube")loadYoutubeSettings();
   if(id==="withdraws")renderWithdraws();
   if(id==="history")renderHistory();
   if(id==="recovery")renderPinRecovery();
@@ -942,6 +973,60 @@ async function saveDepositSettings(){
   }
 }
 
+function normalizeYoutubeUrl(v){
+  return String(v||"").trim();
+}
+
+function renderYoutubePreview(s){
+  s=s||{};
+  const link=normalizeYoutubeUrl(s.link);
+  const title=esc(s.title||"অ্যাপ ব্যবহার শিখুন");
+  const desc=esc(s.description||"ভিডিও দেখে ক্রয়-বিক্রয় App-এর কাজগুলো শিখুন।");
+  $("youtubePreview").innerHTML=link
+    ? `<div class="item" style="border-left:5px solid #dc2626">
+         <b style="font-size:18px">▶️ ${title}</b>
+         <p class="small">${desc}</p>
+         <a class="btn danger" href="${esc(link)}" target="_blank" rel="noopener noreferrer">▶️ YouTube Video দেখুন</a>
+       </div>`
+    : `<div class="small">কোনো YouTube Video Link এখনো সেট করা হয়নি।</div>`;
+}
+
+async function loadYoutubeSettings(){
+  try{
+    const s=(await db.ref("settings/youtube").once("value")).val()||{};
+    $("youtubeLink").value=s.link||"";
+    $("youtubeTitle").value=s.title||"অ্যাপ ব্যবহার শিখুন";
+    $("youtubeDescription").value=s.description||"ভিডিও দেখে ক্রয়-বিক্রয় App-এর কাজগুলো শিখুন।";
+    renderYoutubePreview(s);
+  }catch(e){
+    alert("❌ YouTube Settings load করা যায়নি: "+e.message);
+  }
+}
+
+async function saveYoutubeSettings(){
+  const link=normalizeYoutubeUrl($("youtubeLink").value);
+  const title=$("youtubeTitle").value.trim();
+  const description=$("youtubeDescription").value.trim();
+  if(!link) return alert("❌ YouTube Video Link দিন।");
+  if(!/^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(link)){
+    return alert("❌ সঠিক YouTube Link দিন।");
+  }
+  try{
+    const payload={
+      link,
+      title:title||"অ্যাপ ব্যবহার শিখুন",
+      description:description||"ভিডিও দেখে ক্রয়-বিক্রয় App-এর কাজগুলো শিখুন।",
+      updatedAt:firebase.database.ServerValue.TIMESTAMP,
+      updatedBy:ADMIN_UID
+    };
+    await db.ref("settings/youtube").set(payload);
+    renderYoutubePreview(payload);
+    alert("✅ YouTube Video Settings Save হয়েছে।");
+  }catch(e){
+    alert("❌ YouTube Settings save করা যায়নি: "+e.message);
+  }
+}
+
 async function saveNotice(){
   try{await db.ref("settings/notice").set({text:$("noticeText").value.trim(),updatedAt:firebase.database.ServerValue.TIMESTAMP});alert("📢 Notice Publish হয়েছে।")}
   catch(e){alert("❌ Notice save করা যায়নি: "+e.message)}
@@ -949,6 +1034,7 @@ async function saveNotice(){
 async function loadNotice(){try{$("noticeText").value=((await db.ref("settings/notice").once("value")).val()||{}).text||""}catch(e){}}
 loadNotice();
 loadDepositSettings();
+loadYoutubeSettings();
 
 setInterval(()=>{
   if($("app").classList.contains("hidden"))return;

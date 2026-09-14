@@ -2143,6 +2143,12 @@ window.dashboard = async function(){
   }
 
 
+  const youtubeSnap = await get(ref(db,"settings/youtube"));
+  const youtube = youtubeSnap.exists() ? (youtubeSnap.val()||{}) : {};
+  const youtubeLink = String(youtube.link||"").trim();
+  const youtubeTitle = escapeHtml(youtube.title||"অ্যাপ ব্যবহার শিখুন");
+  const youtubeDescription = escapeHtml(youtube.description||"ভিডিও দেখে ক্রয়-বিক্রয় App-এর কাজগুলো শিখুন।");
+
   content.innerHTML = `
 
     <div class="balanceCard">
@@ -2164,6 +2170,16 @@ window.dashboard = async function(){
       </div>
 
     </div>
+
+    ${youtubeLink ? `
+    <div class="card youtubePromo" style="margin-top:12px">
+      <h3 style="margin-top:0">▶️ ${youtubeTitle}</h3>
+      <p class="small" style="line-height:1.55">${youtubeDescription}</p>
+      <a class="youtubeWatchBtn" href="${escapeAttribute(youtubeLink)}" target="_blank" rel="noopener noreferrer">
+        ▶️ YouTube Video দেখে শিখুন
+      </a>
+    </div>
+    ` : ""}
 
 
     <div class="stats">
@@ -4898,6 +4914,29 @@ window.rejectRequest = async function(
 DEPOSIT PAGE
 ================================================= */
 
+window.copyDepositNumber = async function(number){
+  const phone=cleanPhone(number);
+  if(!phone) return alert("❌ নম্বর পাওয়া যায়নি।");
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(phone);
+    }else{
+      const t=document.createElement("textarea");
+      t.value=phone;
+      t.style.position="fixed";
+      t.style.opacity="0";
+      document.body.appendChild(t);
+      t.focus();
+      t.select();
+      document.execCommand("copy");
+      t.remove();
+    }
+    alert("✅ Deposit নম্বর Copy হয়েছে: "+phone);
+  }catch(e){
+    alert("📱 নম্বর: "+phone);
+  }
+};
+
 window.depositPage = async function(){
 
   if(!currentUser){
@@ -5059,35 +5098,31 @@ window.depositPage = async function(){
           💳 Payment Number
         </h3>
 
-        <p>
-          🟣 বিকাশ:
-          <b>
-            ${escapeHtml(
-              p.bkash ||
-              "সেট করা হয়নি"
-            )}
-          </b>
-        </p>
+        <div class="small" style="margin-bottom:8px">
+          নিচের নম্বরে Deposit করার আগে নম্বরটি Copy করে নিন।
+        </div>
 
-        <p>
-          🟠 নগদ:
-          <b>
-            ${escapeHtml(
-              p.nagad ||
-              "সেট করা হয়নি"
-            )}
-          </b>
-        </p>
+        ${p.bkash ? `
+        <div class="paymentRow">
+          <div>🟣 <b>বিকাশ</b><br><b style="font-size:18px">${escapeHtml(p.bkash)}</b></div>
+          <button class="copyPaymentBtn" type="button" onclick="copyDepositNumber('${escapeAttribute(p.bkash)}')">📋 Copy</button>
+        </div>` : ""}
 
-        <p>
-          🔵 রকেট:
-          <b>
-            ${escapeHtml(
-              p.rocket ||
-              "সেট করা হয়নি"
-            )}
-          </b>
-        </p>
+        ${p.nagad ? `
+        <div class="paymentRow">
+          <div>🟠 <b>নগদ</b><br><b style="font-size:18px">${escapeHtml(p.nagad)}</b></div>
+          <button class="copyPaymentBtn" type="button" onclick="copyDepositNumber('${escapeAttribute(p.nagad)}')">📋 Copy</button>
+        </div>` : ""}
+
+        ${p.rocket ? `
+        <div class="paymentRow">
+          <div>🔵 <b>রকেট</b><br><b style="font-size:18px">${escapeHtml(p.rocket)}</b></div>
+          <button class="copyPaymentBtn" type="button" onclick="copyDepositNumber('${escapeAttribute(p.rocket)}')">📋 Copy</button>
+        </div>` : ""}
+
+        ${(!p.bkash && !p.nagad && !p.rocket) ? `
+          <div class="small">কোনো Deposit নম্বর এখনো সেট করা হয়নি।</div>
+        ` : ""}
 
       </div>
 
