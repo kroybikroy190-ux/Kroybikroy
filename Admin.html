@@ -1,4 +1,4 @@
-<!doctype html>
+    <!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
@@ -29,7 +29,16 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
 .approved{background:#dcfce7}.rejected{background:#fee2e2}.active{background:#dbeafe}
 .product{border:1px solid #e2e7ef;border-radius:16px;padding:13px;margin:9px 0}
 .product img{width:78px;height:78px;object-fit:cover;border-radius:12px;float:left;margin-right:12px;background:#eee}
-.clear{clear:both}
+ .clear{clear:both}
+.purchaseReportSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.purchaseReportSummary .rate{background:#f4f7fb;border-radius:12px;padding:10px}
+.purchaseReportSummary b{display:block;font-size:20px;margin-top:3px}
+.purchaseUser{border:1px solid #e2e7ef;border-radius:16px;padding:13px;margin:10px 0;background:#fff}
+.purchaseUserHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.purchaseProducts{margin-top:9px}
+.purchaseProductRow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid #eef2f6}
+@media(max-width:650px){.purchaseReportSummary{grid-template-columns:1fr 1fr}.purchaseUserHead{display:block}}
+
 .rates{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
 .rate{background:#f4f7fb;border-radius:11px;padding:9px;font-size:12px}
 .rate b{display:block;font-size:17px;margin-top:3px}
@@ -86,6 +95,7 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
     <div class="card tile" onclick="showPage('support')"><div class="ico">💬</div>Customer Service</div>
     <div class="card tile" onclick="showPage('recovery')"><div class="ico">🔑</div>PIN Recovery</div>
     <div class="card tile" onclick="showPage('history')"><div class="ico">📜</div>History</div>
+    <div class="card tile" onclick="showPage('purchaseReport')"><div class="ico">🛒</div>User Purchases</div>
     <div class="card tile" onclick="showPage('notice')"><div class="ico">📢</div>Notice</div>
     <div class="card tile" onclick="showPage('youtube')"><div class="ico">▶️</div>YouTube Video</div>
     <div class="card tile" onclick="showPage('telegram')"><div class="ico">✈️</div>Telegram</div>
@@ -218,6 +228,32 @@ function openDirectTelegram(){
   <div id="historyList"></div>
 </div></section>
 
+<section id="purchaseReport" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div>
+        <h2 style="margin:0">🛒 User Purchase Report</h2>
+        <div class="muted">কোন User কোন Product কত পিস কিনেছে—সব একসাথে দেখা যাবে।</div>
+      </div>
+      <button class="blue" onclick="refresh()">🔄 Refresh</button>
+    </div>
+    <input id="purchaseUserSearch" placeholder="🔎 User নাম / মোবাইল / UID Search" oninput="renderPurchaseReport()">
+    <select id="purchaseTypeFilter" onchange="renderPurchaseReport()">
+      <option value="all">সব Purchase</option>
+      <option value="admin_sell">Admin → User</option>
+      <option value="user_buy_from_user">User → User</option>
+    </select>
+    <div class="purchaseDateFilters">
+      <div><label>📅 শুরু তারিখ</label><input id="purchaseFromDate" type="date" onchange="renderPurchaseReport()"></div>
+      <div><label>📅 শেষ তারিখ</label><input id="purchaseToDate" type="date" onchange="renderPurchaseReport()"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div id="purchaseReportSummary"></div>
+    <div id="purchaseReportList"></div>
+  </div>
+</section>
+
 <section id="recovery" class="hidden">
   <div class="card">
     <div class="row">
@@ -302,6 +338,7 @@ function openDirectTelegram(){
   <button onclick="showPage('products')"><b>📦</b>Products</button>
   <button onclick="showPage('depositSettings')"><b>📲</b>Deposit</button>
   <button onclick="showPage('users')"><b>👥</b>Users</button>
+  <button onclick="showPage('purchaseReport')"><b>🛒</b>Purchases</button>
   <button onclick="showPage('history')"><b>📜</b>History</button>
   <button onclick="showPage('support')"><b>💬</b>Support</button>
   <button onclick="showPage('recovery')"><b>🔑</b>Recovery</button>
@@ -352,6 +389,7 @@ function showPage(id){
   if(id==="youtube")loadYoutubeSettings();
   if(id==="withdraws")renderWithdraws();
   if(id==="history")renderHistory();
+  if(id==="purchaseReport")renderPurchaseReport();
   if(id==="recovery")renderPinRecovery();
   if(id==="support")renderSupport();
 }
@@ -424,6 +462,7 @@ async function refresh(){
     if(!$("deposits").classList.contains("hidden"))renderDeposits();
     if(!$("withdraws").classList.contains("hidden"))renderWithdraws();
     if(!$("history").classList.contains("hidden"))renderHistory();
+    if(!$("purchaseReport").classList.contains("hidden"))renderPurchaseReport();
     if(!$("recovery").classList.contains("hidden"))renderPinRecovery();
   }catch(e){alert("Firebase data load error: "+e.message)}
 }
@@ -545,14 +584,29 @@ async function saveReferralSettings(){
 
 function renderDeposits(){
   const a=vals(data.deposits).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
-  $("depositList").innerHTML=a.length?a.map(d=>`<div class="item">
+  $("depositList").innerHTML=a.length?a.map(d=>{
+    // User যে নম্বর থেকে টাকা পাঠিয়েছে—নতুন ও পুরোনো সম্ভাব্য field দুটোই ধরা হবে।
+    const senderNumber=d.senderNumber||d.senderPhone||d.fromNumber||d.payerNumber||d.paymentNumber||d.sender||"-";
+    return `<div class="item">
     <b>👤 ${esc(d.name||data.users[d.uid]?.name||"User")}</b><br>
-    📱 ${esc(d.phone||data.users[d.uid]?.phone||"-")}<br>
+    📱 User Signup মোবাইল: <b>${esc(d.phone||data.users[d.uid]?.phone||"-")}</b><br>
+    📲 টাকা পাঠানোর নম্বর: <b>${esc(senderNumber)}</b>
+    ${senderNumber!=="-"?` <button class="blue" style="padding:5px 8px;margin-left:6px" onclick="copyDepositSenderNumber('${esc(d.id)}','${esc(senderNumber)}')">📋 Copy</button>`:""}<br>
     💰 Amount: <b>${money(d.amount)}</b><br>
     💳 ${esc(d.method||"-")} • TXID: ${esc(d.transactionId||"-")}<br>
     📌 <span class="badge ${d.status==="approved"?"approved":d.status==="rejected"?"rejected":""}">${esc(d.status||"unknown")}</span>
     ${d.status==="pending"?`<div class="wrap" style="margin-top:8px"><button class="ok" onclick="approveDeposit('${esc(d.id)}')">✅ Approve</button><button class="danger" onclick="rejectDeposit('${esc(d.id)}')">❌ Reject</button></div>`:""}
-  </div>`).join(""):"কোনো Deposit নেই।";
+  </div>`;
+  }).join(""):"কোনো Deposit নেই।";
+}
+
+async function copyDepositSenderNumber(id,number){
+  try{
+    await navigator.clipboard.writeText(String(number));
+    alert("✅ টাকা পাঠানোর নম্বর Copy হয়েছে: "+number);
+  }catch(e){
+    prompt("নম্বর কপি করুন:",number);
+  }
 }
 async function approveDeposit(id){
   const d=data.deposits[id];if(!d||d.status!=="pending")return;
@@ -673,6 +727,100 @@ async function rejectWithdraw(id){
     updates["transactions/"+txid]={type:"withdraw_rejected_refund",uid:w.uid,amount:refund,withdrawalId:id,createdAt:Date.now()};
     await db.ref().update(updates);await refresh();renderWithdraws();alert("↩️ Withdraw Reject হয়েছে এবং User-এর ৳"+refund.toFixed(2)+" Balance-এ ফেরত দেওয়া হয়েছে।");
   }catch(e){alert("❌ "+e.message)}
+}
+
+function purchaseTxRowsForUser(uid){
+  return vals(data.transactions)
+    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user")
+    .filter(t=>String(t.type==="user_buy_from_user"?(t.buyerUid||t.uid||""):(t.uid||""))===String(uid))
+    .sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+}
+
+function showUserPurchaseHistory(uid){
+  const u=data.users[uid]||{};
+  const txs=purchaseTxRowsForUser(uid);
+  const rows=txs.length?txs.map(t=>{
+    const productId=String(t.productId||"");
+    const productName=t.productName||data.products[productId]?.name||"Unknown Product";
+    const q=Number(t.quantity||0), total=Number(t.total||0);
+    const type=t.type==="admin_sell"?"Admin → User":"User → User";
+    return `<div class="purchaseHistoryRow">
+      <div class="purchaseHistoryMeta"><b>📅 ${t.createdAt?new Date(t.createdAt).toLocaleString("bn-BD"):"-"}</b><span>${esc(type)}</span></div>
+      <div style="margin-top:5px">📦 <b>${esc(productName)}</b> • <b>${q} পিস</b> • ${money(total)}</div>
+      <div class="small">🆔 Transaction: ${esc(t.id||"-")}</div>
+    </div>`;
+  }).join(""):"কোনো Purchase History নেই।";
+  const totalPieces=txs.reduce((n,t)=>n+Number(t.quantity||0),0);
+  const totalAmount=txs.reduce((n,t)=>n+Number(t.total||0),0);
+  modal(`🛒 ${u.name||"User"} — Purchase History`,
+    `<div class="item" style="margin-bottom:10px"><b>👤 ${esc(u.name||"User")}</b><br>📱 ${esc(u.phone||"-")}<br>🆔 ${esc(uid)}<br>📦 মোট ${totalPieces} পিস • 💰 ${money(totalAmount)}</div>
+     <div>${rows}</div>`,
+    `<button class="blue" onclick="closeModal()">বন্ধ করুন</button>`
+  );
+}
+
+function renderPurchaseReport(){
+  const search=String($("purchaseUserSearch")?.value||"").trim().toLowerCase();
+  const typeFilter=$("purchaseTypeFilter")?.value||"all";
+  const from=String($("purchaseFromDate")?.value||"");
+  const to=String($("purchaseToDate")?.value||"");
+  const fromTs=from?new Date(from+"T00:00:00").getTime():0;
+  const toTs=to?new Date(to+"T23:59:59.999").getTime():Infinity;
+
+  const txs=vals(data.transactions)
+    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user")
+    .filter(t=>typeFilter==="all"||t.type===typeFilter)
+    .filter(t=>{
+      const at=Number(t.createdAt||0);
+      return at>=fromTs&&at<=toTs;
+    });
+
+  const users={};
+  txs.forEach(t=>{
+    const uid=String(t.type==="user_buy_from_user"?(t.buyerUid||t.uid||""):(t.uid||""));
+    if(!uid)return;
+    const u=data.users[uid]||{};
+    const hay=[u.name,u.phone,u.uid,uid,u.email].join(" ").toLowerCase();
+    if(search&&!hay.includes(search))return;
+    if(!users[uid])users[uid]={uid,name:u.name||"User",phone:u.phone||"-",pieces:0,total:0,products:{},lastAt:0,count:0};
+    const q=Number(t.quantity||0), total=Number(t.total||0);
+    const productId=String(t.productId||"");
+    const productName=t.productName||data.products[productId]?.name||"Unknown Product";
+    const key=productId||productName;
+    if(!users[uid].products[key])users[uid].products[key]={name:productName,pieces:0,total:0};
+    users[uid].products[key].pieces+=q;
+    users[uid].products[key].total+=total;
+    users[uid].pieces+=q;
+    users[uid].total+=total;
+    users[uid].count++;
+    users[uid].lastAt=Math.max(users[uid].lastAt,Number(t.createdAt||0));
+  });
+
+  const list=Object.values(users).sort((a,b)=>b.lastAt-a.lastAt);
+  const totalPieces=list.reduce((n,u)=>n+u.pieces,0);
+  const totalAmount=list.reduce((n,u)=>n+u.total,0);
+  const totalUsers=list.length;
+  const period=from||to?` • ${from||"শুরু থেকে"} → ${to||"আজ পর্যন্ত"}`:"";
+
+  $("purchaseReportSummary").innerHTML=`
+    <div class="purchaseReportSummary">
+      <div class="rate">👥 Users<b>${totalUsers}</b></div>
+      <div class="rate">📦 মোট পিস<b>${totalPieces}</b></div>
+      <div class="rate">💰 মোট ক্রয়<b>${money(totalAmount)}</b></div>
+    </div>
+    <div class="small">📅 রিপোর্ট সময়কাল${esc(period||" • সব তারিখ")}</div>`;
+
+  $("purchaseReportList").innerHTML=list.length?list.map(u=>{
+    const rows=Object.values(u.products).sort((a,b)=>b.pieces-a.pieces).map(p=>`<div class="purchaseProductRow"><span>📦 <b>${esc(p.name)}</b></span><span><b>${p.pieces} পিস</b> • ${money(p.total)}</span></div>`).join("");
+    return `<div class="purchaseUser">
+      <div class="purchaseUserHead">
+        <div><b style="font-size:17px">👤 ${esc(u.name)}</b><br>📱 ${esc(u.phone)}<br><span class="small">🆔 ${esc(u.uid)}</span></div>
+        <div style="text-align:right"><b style="font-size:20px">${u.pieces} পিস</b><br><span class="small">মোট ${money(u.total)} • ${u.count} বার</span></div>
+      </div>
+      <div class="purchaseProducts">${rows}</div>
+      <div class="row" style="margin-top:8px"><span class="small">শেষ Purchase: ${u.lastAt?new Date(u.lastAt).toLocaleString("bn-BD"):"-"}</span><button class="blue" onclick="showUserPurchaseHistory('${esc(u.uid)}')">📜 বিস্তারিত History</button></div>
+    </div>`;
+  }).join(""):"কোনো Purchase Record পাওয়া যায়নি।";
 }
 
 function renderHistory(){
