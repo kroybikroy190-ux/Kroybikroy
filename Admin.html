@@ -242,6 +242,7 @@ function openDirectTelegram(){
       <option value="all">সব Purchase</option>
       <option value="admin_sell">Admin → User</option>
       <option value="user_buy_from_user">User → User</option>
+      <option value="user_sell_to_admin">User → Admin</option>
     </select>
     <div class="purchaseDateFilters">
       <div><label>📅 শুরু তারিখ</label><input id="purchaseFromDate" type="date" onchange="renderPurchaseReport()"></div>
@@ -731,7 +732,7 @@ async function rejectWithdraw(id){
 
 function purchaseTxRowsForUser(uid){
   return vals(data.transactions)
-    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user")
+    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user"||t.type==="user_sell_to_admin")
     .filter(t=>String(t.type==="user_buy_from_user"?(t.buyerUid||t.uid||""):(t.uid||""))===String(uid))
     .sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
 }
@@ -743,7 +744,7 @@ function showUserPurchaseHistory(uid){
     const productId=String(t.productId||"");
     const productName=t.productName||data.products[productId]?.name||"Unknown Product";
     const q=Number(t.quantity||0), total=Number(t.total||0);
-    const type=t.type==="admin_sell"?"Admin → User":"User → User";
+    const type=t.type==="admin_sell"?"Admin → User":(t.type==="user_sell_to_admin"?"User → Admin":"User → User");
     return `<div class="purchaseHistoryRow">
       <div class="purchaseHistoryMeta"><b>📅 ${t.createdAt?new Date(t.createdAt).toLocaleString("bn-BD"):"-"}</b><span>${esc(type)}</span></div>
       <div style="margin-top:5px">📦 <b>${esc(productName)}</b> • <b>${q} পিস</b> • ${money(total)}</div>
@@ -768,7 +769,7 @@ function renderPurchaseReport(){
   const toTs=to?new Date(to+"T23:59:59.999").getTime():Infinity;
 
   const txs=vals(data.transactions)
-    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user")
+    .filter(t=>t.type==="admin_sell"||t.type==="user_buy_from_user"||t.type==="user_sell_to_admin")
     .filter(t=>typeFilter==="all"||t.type===typeFilter)
     .filter(t=>{
       const at=Number(t.createdAt||0);
