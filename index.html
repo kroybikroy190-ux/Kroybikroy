@@ -1117,6 +1117,13 @@ function getProductRates(p){
 function getAdminToUserRate(p){ return getProductRates(p).adminToUser; }
 function getUserToUserRate(p){ return getProductRates(p).userToUser; }
 function getUserToAdminRate(p){ return getProductRates(p).userToAdmin; }
+function getUserToUserSellFeePercent(){
+  return get(ref(db,"settings/userToUserSellFee")).then(s=>{
+    const v=Number(s.val()?.percent);
+    return Number.isFinite(v)&&v>=0&&v<=100?v:10;
+  }).catch(()=>10);
+}
+
 
 function getAuth(){ return firebase.auth(); }
 function createUserWithEmailAndPassword(a,e,p){ return a.createUserWithEmailAndPassword(e,p); }
@@ -4766,21 +4773,28 @@ window.completeRequest = async function(requestId,autoMode=false){
     if(!sellerSnap.exists()) throw new Error("Seller Account পাওয়া যায়নি।");
     const seller=sellerSnap.val()||{};
     const qty=Number(r.quantity||0), total=Number(r.total||0);
+    const feePercent=await getUserToUserSellFeePercent();
+    const fee=Number((total*feePercent/100).toFixed(2));
+    const netTotal=Number((total-fee).toFixed(2));
     const stock=getQty(seller.stock?.[r.productId]);
     if(!Number.isInteger(qty)||qty<=0) throw new Error("Quantity সঠিক নয়।");
     if(stock<qty) return alert("❌ আপনার Stock-এ এই Product-এর পর্যাপ্ত পরিমাণ নেই। Request বাতিল/সমাধান করুন।");
 
     if(!autoMode){
-      if(!confirm("✅ Sell Complete করবেন?\n\nBuyer: "+(r.buyerName||"User")+"\nProduct: "+(r.productName||"Product")+"\nQuantity: "+qty+"\nমোট: ৳"+total.toFixed(2)+"\n\nআপনার Balance-এ ৳"+total.toFixed(2)+" যোগ হবে এবং Stock কমবে।")) return;
+      if(!confirm("✅ Sell Complete করবেন?\n\nBuyer: "+(r.buyerName||"User")+"\nProduct: "+(r.productName||"Product")+"\nQuantity: "+qty+"\nমোট Sell: ৳"+total.toFixed(2)+"\nFee ("+feePercent+"%): ৳"+fee.toFixed(2)+"\nআপনি পাবেন: ৳"+netTotal.toFixed(2)+"\n\nFee সফল Sell-এর সময় কাটা হবে এবং Stock কমবে।")) return;
     }
 
     const txId=push(ref(db,"transactions")).key;
     const updates={};
-    updates["users/"+currentUser.uid+"/balance"]=Number(seller.balance||0)+total;
+    updates["users/"+currentUser.uid+"/balance"]=Number(seller.balance||0)+netTotal;
     updates["users/"+currentUser.uid+"/stock/"+r.productId]=stock-qty;
     updates["productRequests/"+requestId+"/status"]="completed";
     updates["productRequests/"+requestId+"/completedAt"]=Date.now();
     updates["productRequests/"+requestId+"/sellerStockDebited"]=true;
+    updates["productRequests/"+requestId+"/grossTotal"]=total;
+    updates["productRequests/"+requestId+"/feePercent"]=feePercent;
+    updates["productRequests/"+requestId+"/fee"]=fee;
+    updates["productRequests/"+requestId+"/netTotal"]=netTotal;
     updates["transactions/"+txId]={
       uid:currentUser.uid,
       type:"user_sell_to_user",
@@ -4791,12 +4805,16 @@ window.completeRequest = async function(requestId,autoMode=false){
       quantity:qty,
       price:Number(r.price||0),
       total:total,
+      grossTotal:total,
+      feePercent:feePercent,
+      fee:fee,
+      netTotal:netTotal,
       createdAt:Date.now()
     };
     await update(ref(db),updates);
 
     if(!autoMode){
-      alert("✅ User-to-User Sell সম্পন্ন হয়েছে।\n\n💰 ৳"+total.toFixed(2)+" আপনার Balance-এ যোগ হয়েছে।\n📦 আপনার Stock থেকে "+qty+" টি কমেছে।\n\nBuyer-এর Stock-এ Product স্বয়ংক্রিয়ভাবে যোগ হবে।");
+      alert("✅ User-to-User Sell সম্পন্ন হয়েছে।\n\n💰 মোট Sell: ৳"+total.toFixed(2)+"\n🧾 Fee ("+feePercent+"%): ৳"+fee.toFixed(2)+"\n💵 আপনার Balance-এ যোগ হয়েছে: ৳"+netTotal.toFixed(2)+"\n📦 আপনার Stock থেকে "+qty+" টি কমেছে।\n\nBuyer-এর Stock-এ Product স্বয়ংক্রিয়ভাবে যোগ হবে।");
       await loadHeader(); requestsPage();
     }
   }catch(error){

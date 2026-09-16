@@ -91,6 +91,7 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
     <div class="card tile" onclick="showPage('deposits')"><div class="ico">💰</div>Deposit</div>
     <div class="card tile" onclick="showPage('depositSettings')"><div class="ico">📲</div>Deposit Settings</div>
     <div class="card tile" onclick="showPage('referral')"><div class="ico">🎁</div>Referral System</div>
+    <div class="card tile" onclick="showPage('u2uFee')"><div class="ico">💸</div>User → User Fee</div>
     <div class="card tile" onclick="showPage('withdraws')"><div class="ico">💸</div>Withdraw</div>
     <div class="card tile" onclick="showPage('support')"><div class="ico">💬</div>Customer Service</div>
     <div class="card tile" onclick="showPage('recovery')"><div class="ico">🔑</div>PIN Recovery</div>
@@ -327,6 +328,25 @@ function openDirectTelegram(){
   </div>
 </section>
 
+<section id="u2uFee" class="hidden">
+  <div class="card">
+    <div class="row">
+      <div>
+        <h2 style="margin:0">💸 User → User Sell Fee</h2>
+        <div class="muted">User থেকে User সফল Sell হলে Seller-এর পাওনা থেকে এই শতাংশ কেটে রাখা হবে।</div>
+      </div>
+      <button class="blue" onclick="loadU2USellFee()">🔄 Refresh</button>
+    </div>
+    <label>📊 Sell Fee / Commission (%)</label>
+    <select id="u2uSellFeePercent"><option value="0">0%</option><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12">12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option><option value="31">31%</option><option value="32">32%</option><option value="33">33%</option><option value="34">34%</option><option value="35">35%</option><option value="36">36%</option><option value="37">37%</option><option value="38">38%</option><option value="39">39%</option><option value="40">40%</option><option value="41">41%</option><option value="42">42%</option><option value="43">43%</option><option value="44">44%</option><option value="45">45%</option><option value="46">46%</option><option value="47">47%</option><option value="48">48%</option><option value="49">49%</option><option value="50">50%</option><option value="51">51%</option><option value="52">52%</option><option value="53">53%</option><option value="54">54%</option><option value="55">55%</option><option value="56">56%</option><option value="57">57%</option><option value="58">58%</option><option value="59">59%</option><option value="60">60%</option><option value="61">61%</option><option value="62">62%</option><option value="63">63%</option><option value="64">64%</option><option value="65">65%</option><option value="66">66%</option><option value="67">67%</option><option value="68">68%</option><option value="69">69%</option><option value="70">70%</option><option value="71">71%</option><option value="72">72%</option><option value="73">73%</option><option value="74">74%</option><option value="75">75%</option><option value="76">76%</option><option value="77">77%</option><option value="78">78%</option><option value="79">79%</option><option value="80">80%</option><option value="81">81%</option><option value="82">82%</option><option value="83">83%</option><option value="84">84%</option><option value="85">85%</option><option value="86">86%</option><option value="87">87%</option><option value="88">88%</option><option value="89">89%</option><option value="90">90%</option><option value="91">91%</option><option value="92">92%</option><option value="93">93%</option><option value="94">94%</option><option value="95">95%</option><option value="96">96%</option><option value="97">97%</option><option value="98">98%</option><option value="99">99%</option><option value="100">100%</option></select>
+    <div class="card" style="background:#f8fafc;border:1px solid #e2e8f0">
+      <b>উদাহরণ:</b> Sell ৳100 হলে 10% Fee = ৳10 এবং Seller-এর Balance-এ যোগ হবে ৳90। Buyer-এর কাছ থেকে ৳100-ই নেওয়া হবে।
+    </div>
+    <button class="ok full" onclick="saveU2USellFee()">💾 Fee Settings Save</button>
+    <p class="small" style="margin-bottom:0">শুধু User → User সফল Sell-এর সময় Fee প্রযোজ্য হবে। Pending/Rejected Request-এ কোনো Fee কাটা হবে না।</p>
+  </div>
+</section>
+
 <section id="notice" class="hidden"><div class="card">
   <h2>📢 Notice</h2>
   <textarea id="noticeText" placeholder="User App-এ যে Notice দেখাতে চান লিখুন"></textarea>
@@ -340,6 +360,7 @@ function openDirectTelegram(){
   <button onclick="showPage('depositSettings')"><b>📲</b>Deposit</button>
   <button onclick="showPage('users')"><b>👥</b>Users</button>
   <button onclick="showPage('purchaseReport')"><b>🛒</b>Purchases</button>
+  <button onclick="showPage('u2uFee')"><b>💸</b>U→U Fee</button>
   <button onclick="showPage('history')"><b>📜</b>History</button>
   <button onclick="showPage('support')"><b>💬</b>Support</button>
   <button onclick="showPage('recovery')"><b>🔑</b>Recovery</button>
@@ -387,6 +408,7 @@ function showPage(id){
   if(id==="deposits")renderDeposits();
   if(id==="depositSettings")loadDepositSettings();
   if(id==="referral")loadReferralSettings();
+  if(id==="u2uFee")loadU2USellFee();
   if(id==="youtube")loadYoutubeSettings();
   if(id==="withdraws")renderWithdraws();
   if(id==="history")renderHistory();
@@ -557,6 +579,22 @@ async function deleteProduct(id,name){
   if(!confirm(`"${name}" Product স্থায়ীভাবে Delete করবেন?`))return;
   try{await db.ref("products/"+id).remove();await refresh();renderProducts();alert("✅ Product Delete হয়েছে।")}
   catch(e){alert("❌ Delete করা যায়নি: "+e.message)}
+}
+
+async function loadU2USellFee(){
+  try{
+    const s=(await db.ref("settings/userToUserSellFee").once("value")).val()||{};
+    $("u2uSellFeePercent").value=s.percent!==undefined?s.percent:10;
+  }catch(e){alert("❌ User → User Fee Settings load করা যায়নি: "+e.message)}
+}
+
+async function saveU2USellFee(){
+  const percent=Number($("u2uSellFeePercent").value);
+  if(!Number.isFinite(percent)||percent<0||percent>100)return alert("❌ Fee 0 থেকে 100% এর মধ্যে দিন।");
+  try{
+    await db.ref("settings/userToUserSellFee").set({percent,updatedAt:firebase.database.ServerValue.TIMESTAMP,updatedBy:ADMIN_UID});
+    alert("✅ User → User Sell Fee Save হয়েছে: "+percent+"%");
+  }catch(e){alert("❌ Fee Settings save করা যায়নি: "+e.message)}
 }
 
 async function loadReferralSettings(){
