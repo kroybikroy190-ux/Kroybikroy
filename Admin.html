@@ -37,6 +37,13 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
 .purchaseUserHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .purchaseProducts{margin-top:9px}
 .purchaseProductRow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid #eef2f6}
+.profitSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.profitSummary .rate{background:#f4f7fb;border-radius:12px;padding:10px}
+.profitSummary b{display:block;font-size:19px;margin-top:3px}
+.profitUser{border:1px solid #e2e7ef;border-radius:16px;padding:13px;margin:10px 0;background:#fff}
+.profitRow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-top:1px solid #eef2f6}
+.profitFilters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:650px){.profitSummary{grid-template-columns:1fr 1fr}.profitFilters{grid-template-columns:1fr}}
 @media(max-width:650px){.purchaseReportSummary{grid-template-columns:1fr 1fr}.purchaseUserHead{display:block}}
 
 .rates{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
@@ -83,7 +90,6 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
     <div class="card"><div class="small">💰 Pending Deposit</div><div id="cDeposits" class="stat">0</div></div>
     <div class="card"><div class="small">💸 Pending Withdraw</div><div id="cWithdraws" class="stat">0</div></div>
     <div class="card"><div class="small">💬 Customer Service</div><div id="cSupport" class="stat">0</div></div>
-    <div class="card"><div class="small">🔑 PIN Recovery</div><div id="cRecovery" class="stat">0</div></div>
   </div>
   <div class="grid">
     <div class="card tile" onclick="showPage('users')"><div class="ico">👥</div>Users</div>
@@ -94,34 +100,12 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
     <div class="card tile" onclick="showPage('u2uFee')"><div class="ico">💸</div>User → User Fee</div>
     <div class="card tile" onclick="showPage('withdraws')"><div class="ico">💸</div>Withdraw</div>
     <div class="card tile" onclick="showPage('support')"><div class="ico">💬</div>Customer Service</div>
-    <div class="card tile" onclick="showPage('recovery')"><div class="ico">🔑</div>PIN Recovery</div>
     <div class="card tile" onclick="showPage('history')"><div class="ico">📜</div>History</div>
     <div class="card tile" onclick="showPage('purchaseReport')"><div class="ico">🛒</div>User Purchases</div>
+    <div class="card tile" onclick="showPage('profitReport')"><div class="ico">📈</div>Admin Profit/Loss</div>
     <div class="card tile" onclick="showPage('notice')"><div class="ico">📢</div>Notice</div>
     <div class="card tile" onclick="showPage('youtube')"><div class="ico">▶️</div>YouTube Video</div>
-    <div class="card tile" onclick="showPage('telegram')"><div class="ico">✈️</div>Telegram</div>
-<div id="directTelegramBox" style="margin-top:14px;padding:14px;border:1px solid #ddd;border-radius:12px;background:#fafafa;">
-  <div style="font-weight:700;margin-bottom:8px;">📲 সরাসরি Telegram Bot</div>
-  <input id="telegramBotUsername" type="text" placeholder="@KroyBikroyAdmin2026Bot"
-         value="@KroyBikroyAdmin2026Bot"
-         style="width:100%;box-sizing:border-box;padding:11px;border:1px solid #ccc;border-radius:9px;margin-bottom:9px;">
-  <button type="button" onclick="openDirectTelegram()"
-          style="width:100%;padding:11px;border:0;border-radius:9px;cursor:pointer;">
-    ✈️ Telegram Bot-এ প্রবেশ করুন
-  </button>
-</div>
-<script>
-function openDirectTelegram(){
-  let u = (document.getElementById('telegramBotUsername')?.value || '').trim();
-   u = u.replace(/^https?:\/\/(t\.me\/)?/i,'').replace(/^@/,'').split(/[?#\s]/)[0];
-  if(!u){
-    alert('আগে Telegram Bot Username দিন।');
-    return;
-  }
-  window.open('https://t.me/' + encodeURIComponent(u), '_blank', 'noopener,noreferrer');
-}
-</script>
-
+    <div class="card tile" onclick="showPage('whatsapp')"><div class="ico">🟢</div>WhatsApp Help</div>
   </div>
 </section>
 
@@ -256,16 +240,27 @@ function openDirectTelegram(){
   </div>
 </section>
 
-<section id="recovery" class="hidden">
+<section id="profitReport" class="hidden">
   <div class="card">
     <div class="row">
-      <div><h2 style="margin:0">🔑 PIN Recovery Requests</h2>
-      <div class="muted">তথ্য মিলিয়ে Verified হলে User-এর সঠিক নম্বরে SMS পাঠাবেন।</div></div>
-      <button class="blue" onclick="renderPinRecovery()">🔄 Refresh</button>
+      <div>
+        <h2 style="margin:0">📈 Admin Profit / Loss</h2>
+        <div class="muted">Deposit, User → Admin, Admin → User, User → User Fee এবং Withdraw Fee—সব একসাথে হিসাব করুন।</div>
+      </div>
+      <button class="blue" onclick="renderProfitReport()">🔄 Refresh</button>
     </div>
+    <div class="profitFilters">
+      <div><label>📅 শুরু তারিখ</label><input id="profitFromDate" type="date" onchange="renderProfitReport()"></div>
+      <div><label>📅 শেষ তারিখ</label><input id="profitToDate" type="date" onchange="renderProfitReport()"></div>
+    </div>
+    <div id="profitRates" class="small" style="margin-top:8px"></div>
   </div>
-  <div class="card"><div id="recoveryList"></div></div>
+  <div class="card">
+    <div id="profitReportSummary"></div>
+    <div id="profitReportList"></div>
+  </div>
 </section>
+
 
 <section id="support" class="hidden">
   <div class="card">
@@ -308,23 +303,21 @@ function openDirectTelegram(){
   </div>
 </section>
 
-<section id="telegram" class="hidden">
+<section id="whatsapp" class="hidden">
   <div class="card">
-    <div class="row"><div><h2 style="margin:0">✈️ Telegram Settings</h2><div class="muted">PIN Recovery তথ্য Admin-এর Telegram Bot-এ পাঠানোর জন্য এখানে Bot Token ও Chat ID একবার সংরক্ষণ করুন।</div></div><button class="blue" onclick="loadTelegramSettings()">🔄 Refresh</button></div>
-    <label>🤖 Telegram Bot Token</label>
-    <input id="tgToken" type="password" placeholder="123456:ABC...">
-    <label>💬 Telegram Chat ID</label>
-    <input id="tgChatId" placeholder="যেমন: 123456789 বা -100...">
-    <div class="wrap">
-      <button class="ok" onclick="saveTelegramSettings()">💾 Save</button>
-      <button class="blue" onclick="testTelegram()">📨 Test Message</button>
-      <button class="light" onclick="clearTelegramSettings()">🗑️ Clear</button>
+    <div class="row">
+      <div>
+        <h2 style="margin:0">🟢 WhatsApp Help Settings</h2>
+        <div class="muted">User Login পেজে “সাহায্যের জন্য WhatsApp” চাপলে এই নম্বরে WhatsApp খুলবে।</div>
+      </div>
+      <button class="blue" onclick="loadWhatsappSettings()">🔄 Refresh</button>
     </div>
-    <p class="small">🔒 Token Firebase-এ রাখা হবে না; এই Admin browser-এর Local Storage-এ রাখা হবে। অন্য ডিভাইসে Admin Panel খুললে আবার Token/Chat ID দিতে হবে।</p>
-  </div>
-  <div class="card">
-    <h3>📨 PIN Recovery Telegram</h3>
-    <p class="muted">Recovery Requests থেকে <b>📨 Telegram</b> চাপলে এই সংরক্ষিত Token ও Chat ID ব্যবহার করে আবেদনটি পাঠানো হবে।</p>
+    <label>📱 WhatsApp নম্বর</label>
+    <input id="whatsappNumber" type="tel" inputmode="numeric" placeholder="8801XXXXXXXXX বা 01XXXXXXXXX">
+    <label>💬 প্রাথমিক Message (ঐচ্ছিক)</label>
+    <textarea id="whatsappMessage" placeholder="হ্যালো, Login করতে সাহায্য চাই।"></textarea>
+    <button class="ok full" onclick="saveWhatsappSettings()">💾 WhatsApp Settings Save</button>
+    <p class="small" style="margin-bottom:0">নম্বরটি 01XXXXXXXXX, 8801XXXXXXXXX বা +8801XXXXXXXXX—যেকোনোভাবে দিতে পারবেন।</p>
   </div>
 </section>
 
@@ -360,11 +353,10 @@ function openDirectTelegram(){
   <button onclick="showPage('depositSettings')"><b>📲</b>Deposit</button>
   <button onclick="showPage('users')"><b>👥</b>Users</button>
   <button onclick="showPage('purchaseReport')"><b>🛒</b>Purchases</button>
+  <button onclick="showPage('profitReport')"><b>📈</b>Profit</button>
   <button onclick="showPage('u2uFee')"><b>💸</b>U→U Fee</button>
   <button onclick="showPage('history')"><b>📜</b>History</button>
   <button onclick="showPage('support')"><b>💬</b>Support</button>
-  <button onclick="showPage('recovery')"><b>🔑</b>Recovery</button>
-  <button onclick="showPage('telegram')"><b>✈️</b>Telegram</button>
 </nav>
 </div>
 
@@ -395,7 +387,7 @@ const $=id=>document.getElementById(id);
 const money=n=>"৳"+Number(n||0).toLocaleString("en-BD",{minimumFractionDigits:2,maximumFractionDigits:2});
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const vals=x=>x?Object.entries(x).map(([id,v])=>({id,...(v||{})})):[];
-let data={users:{},products:{},deposits:{},withdrawals:{},transactions:{},productRequests:{},pinRecoveryRequests:{},customerService:{queue:{}}};
+let data={users:{},products:{},deposits:{},withdrawals:{},transactions:{},productRequests:{},customerService:{queue:{}}};
 let productFilter="all",supportActiveUid="",supportMessagesRef=null,supportMessagesCb=null;
 const CATS=["শার্ট","প্যান্ট","লুঙ্গি","জুতা","টুপি","মোবাইল","টিভি","প্লিজ","অন্যান্য"];
 
@@ -410,10 +402,11 @@ function showPage(id){
   if(id==="referral")loadReferralSettings();
   if(id==="u2uFee")loadU2USellFee();
   if(id==="youtube")loadYoutubeSettings();
+  if(id==="whatsapp")loadWhatsappSettings();
   if(id==="withdraws")renderWithdraws();
   if(id==="history")renderHistory();
   if(id==="purchaseReport")renderPurchaseReport();
-  if(id==="recovery")renderPinRecovery();
+  if(id==="profitReport")loadProfitReportSettings();
   if(id==="support")renderSupport();
 }
 function closeModal(){$("modal").classList.add("hidden")}
@@ -473,20 +466,19 @@ function adminIsOnline(s){
 
 async function refresh(){
   try{
-    const paths=["users","products","deposits","withdrawals","transactions","productRequests","pinRecoveryRequests","customerService/queue"];
+    const paths=["users","products","deposits","withdrawals","transactions","productRequests","customerService/queue"];
     const ss=await Promise.all(paths.map(p=>db.ref(p).once("value")));
     paths.forEach((p,i)=>data[p]=ss[i].exists()?ss[i].val():{});
     $("cUsers").textContent=vals(data.users).length;
     $("cProducts").textContent=vals(data.products).length;
     $("cDeposits").textContent=vals(data.deposits).filter(x=>x.status==="pending").length;
     $("cWithdraws").textContent=vals(data.withdrawals).filter(x=>x.status==="pending").length;
-    $("cRecovery").textContent=vals(data.pinRecoveryRequests).filter(x=>x.status==="pending").length;
     if(!$("products").classList.contains("hidden"))renderProducts();
     if(!$("deposits").classList.contains("hidden"))renderDeposits();
     if(!$("withdraws").classList.contains("hidden"))renderWithdraws();
     if(!$("history").classList.contains("hidden"))renderHistory();
     if(!$("purchaseReport").classList.contains("hidden"))renderPurchaseReport();
-    if(!$("recovery").classList.contains("hidden"))renderPinRecovery();
+    if(!$("profitReport").classList.contains("hidden"))loadProfitReportSettings();
   }catch(e){alert("Firebase data load error: "+e.message)}
 }
 
@@ -862,131 +854,125 @@ function renderPurchaseReport(){
   }).join(""):"কোনো Purchase Record পাওয়া যায়নি।";
 }
 
+const ADMIN_WITHDRAW_FEE_PERCENT=5;
+
+function profitDateRangeOk(ts,from,to){
+  const t=Number(ts||0);
+  if(!t)return false;
+  if(from){const start=new Date(from+"T00:00:00").getTime();if(t<start)return false;}
+  if(to){const end=new Date(to+"T23:59:59.999").getTime();if(t>end)return false;}
+  return true;
+}
+
+function renderProfitReport(){
+  const from=$("profitFromDate")?.value||"";
+  const to=$("profitToDate")?.value||"";
+  if(from&&to&&from>to){
+    $("profitReportSummary").innerHTML='<div class="small">❌ শুরু তারিখ শেষ তারিখের পরে হতে পারবে না।</div>';
+    $("profitReportList").innerHTML="";return;
+  }
+  const txs=vals(data.transactions).filter(t=>profitDateRangeOk(t.createdAt||t.timestamp,from,to));
+  const products=data.products||{};
+  const u2u=txs.filter(t=>t.type==="user_sell_to_user");
+  const withdrawals=txs.filter(t=>t.type==="withdraw_approved");
+  const deposits=txs.filter(t=>t.type==="deposit_approved");
+  const userToAdmin=txs.filter(t=>t.type==="user_sell_to_admin");
+  const adminToUser=txs.filter(t=>t.type==="admin_sell");
+
+  let u2uGross=0,u2uFee=0,u2uPieces=0;
+  let withdrawGross=0,withdrawFee=0,withdrawNet=0;
+  let depositGross=0,depositCommission=0,depositBonus=0,depositCost=0;
+  let uaPieces=0,uaPurchase=0,uaPotentialMargin=0;
+  let auPieces=0,auRevenue=0,auCost=0,auMargin=0;
+  const byUser={};
+
+  function ensureUser(uid,fallbackName,fallbackPhone){
+    uid=String(uid||""); const u=data.users[uid]||{};
+    if(!byUser[uid])byUser[uid]={uid,name:u.name||fallbackName||"User",phone:u.phone||fallbackPhone||"-",u2uPieces:0,u2uGross:0,u2uFee:0,withdrawAmount:0,withdrawFee:0,depositAmount:0,depositCommission:0,depositBonus:0,uaPieces:0,uaPurchase:0,uaPotentialMargin:0,auPieces:0,auRevenue:0,auCost:0,auMargin:0};
+    return byUser[uid];
+  }
+
+  u2u.forEach(t=>{
+    const gross=Number(t.grossTotal??t.total??0),fee=Number(t.fee??(gross*Number(t.feePercent??10)/100)),qty=Number(t.quantity||0);
+    u2uGross+=gross;u2uFee+=fee;u2uPieces+=qty;
+    const row=ensureUser(String(t.sellerUid||t.uid||""),t.sellerName,t.sellerPhone);row.u2uPieces+=qty;row.u2uGross+=gross;row.u2uFee+=fee;
+  });
+
+  withdrawals.forEach(t=>{
+    const amount=Number(t.amount||0),fee=Number(t.adminFee??(amount*ADMIN_WITHDRAW_FEE_PERCENT/100)),net=Number(t.netAmount??(amount-fee));
+    withdrawGross+=amount;withdrawFee+=fee;withdrawNet+=net;
+    const row=ensureUser(String(t.uid||""));row.withdrawAmount+=amount;row.withdrawFee+=fee;
+  });
+
+  deposits.forEach(t=>{
+    const amount=Number(t.amount||0),d=t.depositId?data.deposits?.[t.depositId]:null;
+    const commission=Number(d?.referralCommission||0),bonus=Number(d?.firstDepositBonus||0);
+    depositGross+=amount;depositCommission+=commission;depositBonus+=bonus;depositCost+=commission+bonus;
+    const row=ensureUser(String(t.uid||""));row.depositAmount+=amount;row.depositCommission+=commission;row.depositBonus+=bonus;
+  });
+
+  userToAdmin.forEach(t=>{
+    const qty=Number(t.quantity||0),total=Number(t.total||0),p=products[String(t.productId||"")]||{};
+    const futureSellRate=Number(p.adminToUserRate??p.adminSellPrice??p.price??0),potential=Number((qty*futureSellRate-total).toFixed(2));
+    uaPieces+=qty;uaPurchase+=total;uaPotentialMargin+=potential;
+    const row=ensureUser(String(t.uid||""),t.name,t.phone);row.uaPieces+=qty;row.uaPurchase+=total;row.uaPotentialMargin+=potential;
+  });
+
+  adminToUser.forEach(t=>{
+    const qty=Number(t.quantity||0),revenue=Number(t.total||0),p=products[String(t.productId||"")]||{};
+    const costRate=Number(t.costBasisRate??p.userToAdminRate??p.adminBuyPrice??0),cost=Number((qty*costRate).toFixed(2)),margin=Number((revenue-cost).toFixed(2));
+    auPieces+=qty;auRevenue+=revenue;auCost+=cost;auMargin+=margin;
+    const row=ensureUser(String(t.uid||""));row.auPieces+=qty;row.auRevenue+=revenue;row.auCost+=cost;row.auMargin+=margin;
+  });
+
+  const directIncome=Number((u2uFee+withdrawFee).toFixed(2));
+  const tradingMargin=Number(auMargin.toFixed(2));
+  const totalIncome=Number((directIncome+tradingMargin).toFixed(2));
+  const totalCost=Number(depositCost.toFixed(2));
+  const netProfit=Number((totalIncome-totalCost).toFixed(2));
+  const period=(from||to)?` • ${from||"শুরু নেই"} → ${to||"শেষ নেই"}`:" • সব তারিখ";
+
+  $("profitRates").innerHTML=`⚙️ U→U Sell Fee: <b>${Number(window.currentU2UFeePercent??10)}%</b> • Withdraw Fee: <b>${ADMIN_WITHDRAW_FEE_PERCENT}%</b> • Admin → User Margin: <b>বর্তমান User → Admin Rate ভিত্তিক আনুমানিক</b>`;
+  $("profitReportSummary").innerHTML=`
+    <div class="profitSummary">
+      <div class="rate">🛒 U→U Sales<b>${u2uPieces} পিস • ${money(u2uGross)}</b></div>
+      <div class="rate">🧾 U→U Admin Fee<b>${money(u2uFee)}</b></div>
+      <div class="rate">💸 Withdraw Fee<b>${money(withdrawFee)}</b></div>
+      <div class="rate">🏦 Deposit<b>${money(depositGross)}</b></div>
+      <div class="rate">🎁 Referral Cost<b>${money(depositCost)}</b></div>
+      <div class="rate">👤 User → Admin<b>${uaPieces} পিস • ${money(uaPurchase)}</b></div>
+      <div class="rate">🛍️ Admin → User<b>${auPieces} পিস • ${money(auRevenue)}</b></div>
+      <div class="rate">📊 Trading Margin<b>${money(tradingMargin)}</b></div>
+      <div class="rate">📈 মোট Income<b>${money(totalIncome)}</b></div>
+      <div class="rate">➖ মোট Cost<b>${money(totalCost)}</b></div>
+      <div class="rate">💰 Net Profit/Loss<b>${money(netProfit)}</b></div>
+    </div>
+    <div class="small">📅 রিপোর্ট সময়কাল${period}</div>
+    <div class="small" style="margin-top:7px">ℹ️ Deposit নিজে Admin-এর আয় নয়, কারণ বর্তমান কোডে Deposit Fee নেই। Referral Commission + First Deposit Bonus-কে Admin Cost ধরা হয়েছে। User → Admin সরাসরি লাভ নয়; এটি stock acquisition এবং বর্তমান rate অনুযায়ী সম্ভাব্য margin আলাদাভাবে দেখানো হয়েছে। Admin → User-এর পুরোনো transaction-এ cost-basis rate না থাকলে বর্তমান User → Admin rate দিয়ে আনুমানিক margin দেখানো হয়।</div>`;
+
+  const users=Object.values(byUser).sort((a,b)=>(b.u2uFee+b.withdrawFee+b.auMargin-b.depositCommission-b.depositBonus)-(a.u2uFee+a.withdrawFee+a.auMargin-a.depositCommission-a.depositBonus));
+  $("profitReportList").innerHTML=users.length?users.map(u=>{
+    const userNet=Number((u.u2uFee+u.withdrawFee+u.auMargin-u.depositCommission-u.depositBonus).toFixed(2));
+    return `<div class="profitUser"><div class="row"><div><b style="font-size:17px">👤 ${esc(u.name)}</b><br>📱 ${esc(u.phone)}<br><span class="small">🆔 ${esc(u.uid)}</span></div><div style="text-align:right"><b style="font-size:20px">${money(userNet)}</b><br><span class="small">এই User-এর Net Impact</span></div></div>
+      ${u.u2uPieces?`<div class="profitRow"><span>🛒 U→U Sell</span><b>${u.u2uPieces} পিস • ${money(u.u2uGross)}</b></div><div class="profitRow"><span>🧾 U→U Fee</span><b>${money(u.u2uFee)}</b></div>`:""}
+      ${u.withdrawFee?`<div class="profitRow"><span>💸 Approved Withdraw</span><b>${money(u.withdrawAmount)}</b></div><div class="profitRow"><span>🧾 Withdraw Fee (${ADMIN_WITHDRAW_FEE_PERCENT}%)</span><b>${money(u.withdrawFee)}</b></div>`:""}
+      ${u.depositAmount?`<div class="profitRow"><span>🏦 Deposit</span><b>${money(u.depositAmount)}</b></div>`:""}
+      ${(u.depositCommission||u.depositBonus)?`<div class="profitRow"><span>🎁 Referral/Bonus Cost</span><b>-${money(u.depositCommission+u.depositBonus)}</b></div>`:""}
+      ${u.uaPieces?`<div class="profitRow"><span>👤 User → Admin</span><b>${u.uaPieces} পিস • ${money(u.uaPurchase)}</b></div><div class="profitRow"><span>📈 সম্ভাব্য Margin</span><b>${money(u.uaPotentialMargin)}</b></div>`:""}
+      ${u.auPieces?`<div class="profitRow"><span>🛍️ Admin → User</span><b>${u.auPieces} পিস • ${money(u.auRevenue)}</b></div><div class="profitRow"><span>📊 Estimated Margin</span><b>${money(u.auMargin)}</b></div>`:""}
+    </div>`;
+  }).join(""):"কোনো Profit/Loss Record পাওয়া যায়নি।";
+}
+
+async function loadProfitReportSettings(){
+  try{const s=(await db.ref("settings/userToUserSellFee").once("value")).val()||{};window.currentU2UFeePercent=(s.percent!==undefined?Number(s.percent):10);}catch(e){window.currentU2UFeePercent=10;}
+  renderProfitReport();
+}
+
 function renderHistory(){
   const a=vals(data.transactions).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0)).slice(0,300);
   $("historyList").innerHTML=a.length?a.map(t=>`<div class="item"><b>${esc(t.type||"transaction")}</b><br>🆔 ${esc(t.uid||"-")} ${t.amount!==undefined?"• 💰 "+money(t.amount):""}<br>🕐 ${t.createdAt?new Date(t.createdAt).toLocaleString("bn-BD"):"-"}</div>`).join(""):"কোনো History নেই।";
 }
-
-function recoveryActuals(uid){
-  const u=data.users[uid]||{};
-  let stockCount=0;
-  const st=u.stock||u.myStock||{};
-  if(typeof st==="number")stockCount=Number(st);
-  else Object.values(st||{}).forEach(v=>stockCount+=typeof v==="number"?Number(v):Number(v?.quantity||0));
-  const deps=vals(data.deposits).filter(x=>x.uid===uid).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  const wds=vals(data.withdrawals).filter(x=>x.uid===uid).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  return {name:u.name||"",phone:u.phone||"",balance:Number(u.balance||0),stockCount,lastDeposit:deps.length?Number(deps[0].amount||0):0,lastWithdraw:wds.length?Number(wds[0].amount||0):0};
-}
-function recoveryCompare(r,uid){
-  const a=recoveryActuals(uid),near=(x,y)=>Math.abs(Number(x||0)-Number(y||0))<0.01;
-  return {actual:a,name:a.name===r.name,phone:a.phone===r.phone,balance:near(a.balance,r.claimedBalance),stockCount:Number(a.stockCount)===Number(r.claimedStockCount),
-    lastDeposit:near(a.lastDeposit,r.claimedLastDeposit??r.lastDeposit),lastWithdraw:near(a.lastWithdraw,r.claimedLastWithdraw??r.lastWithdraw)};
-}
-function hasClaim(r,key){
-  const v=r[key];return v!==null&&v!==undefined&&v!=="";
-}
-function renderPinRecovery(){
-  const a=vals(data.pinRecoveryRequests).sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
-  $("recoveryList").innerHTML=a.length?a.map(r=>{
-    const u=vals(data.users).find(x=>x.phone===r.phone),uid=u?.uid||u?.id||"";
-    const c=uid?recoveryCompare(r,uid):null;
-    const hd=hasClaim(r,"claimedLastDeposit")||hasClaim(r,"lastDeposit"),hw=hasClaim(r,"claimedLastWithdraw")||hasClaim(r,"lastWithdraw");
-    const allOk=!!c&&c.name&&c.phone&&c.balance&&c.stockCount&&(hd?c.lastDeposit:true)&&(hw?c.lastWithdraw:true)&&(hd||hw);
-    return `<div class="item">
-      <b>🔑 ${esc(r.name||"-")}</b><br>📱 ${esc(r.phone||"-")}<br>
-      💰 Claimed Balance: <b>${money(r.claimedBalance)}</b><br>📦 Claimed Stock: <b>${esc(r.claimedStockCount??"-")}</b><br>
-      💳 Last Deposit: <b>${hd?money(r.claimedLastDeposit??r.lastDeposit):"দেওয়া হয়নি"}</b><br>
-      💸 Last Withdraw: <b>${hw?money(r.claimedLastWithdraw??r.lastWithdraw):"দেওয়া হয়নি"}</b><br>
-      📌 <span class="badge ${r.status==="approved"?"approved":r.status==="rejected"?"rejected":""}">${esc(r.status||"pending")}</span>
-      ${c?`<div style="margin-top:8px;line-height:1.6"><b>Admin যাচাই:</b><br>
-        নাম ${c.name?"✅":"❌"} • মোবাইল ${c.phone?"✅":"❌"} • ব্যালেন্স ${c.balance?"✅":"❌"} • স্টক ${c.stockCount?"✅":"❌"} •
-        ডিপোজিট ${hd?(c.lastDeposit?"✅":"❌"):"⚪"} • উইথড্র ${hw?(c.lastWithdraw?"✅":"❌"):"⚪"}<br>
-        <span class="small">Actual: Balance ${money(c.actual.balance)} • Stock ${c.actual.stockCount} • Deposit ${money(c.actual.lastDeposit)} • Withdraw ${money(c.actual.lastWithdraw)}</span>
-      </div>`:`<div class="small">⚠️ এই মোবাইল নম্বরের User account পাওয়া যায়নি।</div>`}
-      <div class="wrap" style="margin-top:10px">
-        ${r.status==="pending"?`<button class="ok" onclick="approvePinRecovery('${esc(r.id)}')">✅ Verify</button><button class="danger" onclick="rejectPinRecovery('${esc(r.id)}')">❌ Reject</button>`:""}
-        <button class="blue" onclick="sendRecoveryTelegram('${esc(r.id)}')">📨 Telegram</button>
-        ${r.status==="approved"?`<button class="blue" onclick="openRecoverySms('${esc(r.id)}')">📲 SMS-এ PIN পাঠান</button><button class="light" onclick="markRecoverySmsSent('${esc(r.id)}')">✅ SMS Sent</button>`:""}
-        <button class="danger" onclick="deletePinRecovery('${esc(r.id)}')">🗑️ Delete</button>
-      </div>
-    </div>`;
-  }).join(""):"কোনো PIN Recovery আবেদন নেই।";
-  $("cRecovery").textContent=vals(data.pinRecoveryRequests).filter(x=>x.status==="pending").length;
-}
-async function approvePinRecovery(id){
-  const r=data.pinRecoveryRequests[id];if(!r)return;
-  const u=vals(data.users).find(x=>x.phone===r.phone);if(!u)return alert("❌ এই মোবাইল নম্বরের User account পাওয়া যায়নি।");
-  const c=recoveryCompare(r,u.uid||u.id),hd=hasClaim(r,"claimedLastDeposit")||hasClaim(r,"lastDeposit"),hw=hasClaim(r,"claimedLastWithdraw")||hasClaim(r,"lastWithdraw");
-  const valid=c.name&&c.phone&&c.balance&&c.stockCount&&(hd?c.lastDeposit:true)&&(hw?c.lastWithdraw:true)&&(hd||hw);
-  if(!valid)return alert("❌ তথ্য মেলেনি। Balance/Stock সঠিক হতে হবে এবং Last Deposit অথবা Last Withdraw-এর অন্তত একটি সঠিক তথ্য দিতে হবে।");
-  if(!confirm("সব তথ্য মিলে গেছে। Verified করবেন?\n\nPIN Firebase-এ লিখবেন না। সঠিক মোবাইল নম্বরে SMS পাঠান।"))return;
-  try{await db.ref("pinRecoveryRequests/"+id).update({status:"approved",verifiedAt:Date.now(),verifiedBy:ADMIN_UID});await refresh();renderPinRecovery();alert("✅ Verified। এখন User-এর সঠিক নম্বরে SMS-এ PIN পাঠান।")}
-  catch(e){alert("❌ "+e.message)}
-}
-async function rejectPinRecovery(id){
-  if(!confirm("এই Recovery আবেদন Reject করবেন?"))return;
-  try{await db.ref("pinRecoveryRequests/"+id).update({status:"rejected",rejectedAt:Date.now(),verifiedBy:ADMIN_UID});await refresh();renderPinRecovery()}
-  catch(e){alert("❌ "+e.message)}
-}
-async function deletePinRecovery(id){
-  if(!confirm("এই PIN Recovery আবেদনটি স্থায়ীভাবে Delete করবেন?"))return;
-  try{await db.ref("pinRecoveryRequests/"+id).remove();await refresh();renderPinRecovery();alert("✅ Delete হয়েছে।")}
-  catch(e){alert("❌ "+e.message)}
-}
-async function openRecoverySms(id){
-  const r=data.pinRecoveryRequests[id];
-  if(!r)return;
-  if(r.status!=="approved")return alert("❌ আগে আবেদনটি Verify করুন।");
-  const phone=String(r.phone||"").trim();
-  if(!phone)return alert("❌ User-এর মোবাইল নম্বর পাওয়া যায়নি।");
-  const pin=prompt("🔐 User-এর নতুন PIN Code লিখুন:\n\nএই PIN-টি আপনার নিজের নিরাপদভাবে তৈরি করা PIN হবে।");
-  if(pin===null)return;
-  const cleanPin=String(pin).trim();
-  if(!cleanPin)return alert("❌ PIN Code খালি রাখা যাবে না।");
-  const body=`ক্রয়-বিক্রয় PIN Recovery\n\nআপনার PIN Code: ${cleanPin}\n\nএই PIN গোপন রাখুন।`;
-  const smsUrl="sms:"+phone+"?body="+encodeURIComponent(body);
-  try{
-    await db.ref("pinRecoveryRequests/"+id).update({smsPreparedAt:Date.now(),smsPreparedBy:ADMIN_UID});
-  }catch(e){}
-  window.location.href=smsUrl;
-}
-async function markRecoverySmsSent(id){
-  try{await db.ref("pinRecoveryRequests/"+id).update({status:"sms_sent",smsSentAt:Date.now(),smsSentBy:ADMIN_UID});await refresh();renderPinRecovery();alert("📲 SMS Sent হিসেবে সংরক্ষণ হয়েছে।")}
-  catch(e){alert("❌ "+e.message)}
-}
-async function sendRecoveryTelegram(id){
-  const r=data.pinRecoveryRequests[id];if(!r)return;
-  const cfg=getTelegramSettings();
-  let token=cfg.token,chat=cfg.chatId;
-  if(!token){token=prompt("Telegram Bot Token দিন:");if(!token)return;}
-  if(!chat){chat=prompt("Telegram Chat ID দিন:");if(!chat)return;}
-  const text=`🔑 PIN Recovery Request\n\nনাম: ${r.name||"-"}\nমোবাইল: ${r.phone||"-"}\nবর্তমান ব্যালেন্স: ${money(r.claimedBalance)}\nস্টক: ${r.claimedStockCount??"-"}\nলাস্ট ডিপোজিট: ${hasClaim(r,"claimedLastDeposit")?money(r.claimedLastDeposit):"দেওয়া হয়নি"}\nলাস্ট উইথড্র: ${hasClaim(r,"claimedLastWithdraw")?money(r.claimedLastWithdraw):"দেওয়া হয়নি"}\nস্ট্যাটাস: ${r.status||"pending"}`;
-  try{
-    const res=await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chat,text})});
-    const j=await res.json();if(!j.ok)throw Error(j.description||"Telegram error");
-    if(!cfg.token||!cfg.chatId)saveTelegramSettingsValues(token,chat);
-    await db.ref("pinRecoveryRequests/"+id).update({telegramSentAt:Date.now(),telegramSentBy:ADMIN_UID});
-    alert("✅ Telegram-এ Recovery আবেদন পাঠানো হয়েছে।");
-  }catch(e){alert("❌ Telegram পাঠানো যায়নি: "+e.message)}
-}
-function getTelegramSettings(){return {token:localStorage.getItem("kroybikroy_tg_token")||"",chatId:localStorage.getItem("kroybikroy_tg_chat")||""}}
-async function saveTelegramSettingsValues(token,chat){
-  token=String(token||"").trim(); chat=String(chat||"").trim();
-  localStorage.setItem("kroybikroy_tg_token",token);
-  localStorage.setItem("kroybikroy_tg_chat",chat);
-  try{
-    await db.ref("settings/telegram").set({botToken:token,chatId:chat,updatedAt:firebase.database.ServerValue.TIMESTAMP,updatedBy:ADMIN_UID});
-  }catch(e){ console.error("Telegram settings Firebase save failed:",e); }
-}
-function loadTelegramSettings(){const c=getTelegramSettings();if($("tgToken"))$("tgToken").value=c.token;if($("tgChatId"))$("tgChatId").value=c.chatId;}
-async function saveTelegramSettings(){const token=$("tgToken").value.trim(),chat=$("tgChatId").value.trim();if(!token||!chat)return alert("❌ Bot Token এবং Chat ID দুটোই দিন।");try{await saveTelegramSettingsValues(token,chat);alert("✅ Telegram Settings সংরক্ষণ হয়েছে।");}catch(e){alert("❌ Telegram Settings save করা যায়নি: "+e.message);}}
-async function testTelegram(){
-  const token=$("tgToken").value.trim()||getTelegramSettings().token,chat=$("tgChatId").value.trim()||getTelegramSettings().chatId;
-  if(!token||!chat)return alert("❌ আগে Bot Token এবং Chat ID দিন।");
-  try{const res=await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chat,text:"✅ ক্রয়-বিক্রয় Admin Panel\nTelegram connection সফল হয়েছে।"})});const j=await res.json();if(!j.ok)throw Error(j.description||"Telegram error");saveTelegramSettingsValues(token,chat);alert("✅ Test Message Telegram-এ পাঠানো হয়েছে।");}catch(e){alert("❌ Test Message পাঠানো যায়নি: "+e.message)}
-}
-async function clearTelegramSettings(){if(!confirm("Telegram Token ও Chat ID মুছে ফেলবেন?"))return;localStorage.removeItem("kroybikroy_tg_token");localStorage.removeItem("kroybikroy_tg_chat");try{await db.ref("settings/telegram").remove();}catch(e){console.error(e);}loadTelegramSettings();alert("✅ Telegram Settings মুছে ফেলা হয়েছে।");}
-
 
 function supportMsgsHtml(msgs){
   return msgs.map(m=>{
@@ -1214,6 +1200,37 @@ async function saveYoutubeSettings(){
   }
 }
 
+function normalizeWhatsappNumber(v){
+  let n=String(v||"").replace(/\D/g,"");
+  if(n.startsWith("00880")) n=n.slice(2);
+  if(n.startsWith("0")) n="880"+n.slice(1);
+  if(!n.startsWith("880")) n="880"+n;
+  return n;
+}
+
+async function loadWhatsappSettings(){
+  try{
+    const s=(await db.ref("settings/whatsapp").once("value")).val()||{};
+    $("whatsappNumber").value=s.number||"";
+    $("whatsappMessage").value=s.message||"হ্যালো, Login করতে সাহায্য চাই।";
+  }catch(e){
+    alert("❌ WhatsApp Settings load করা যায়নি: "+e.message);
+  }
+}
+
+async function saveWhatsappSettings(){
+  const number=normalizeWhatsappNumber($("whatsappNumber").value);
+  const message=$("whatsappMessage").value.trim()||"হ্যালো, Login করতে সাহায্য চাই।";
+  if(!/^8801[3-9]\d{8}$/.test(number)) return alert("❌ সঠিক বাংলাদেশি WhatsApp নম্বর দিন।");
+  try{
+    await db.ref("settings/whatsapp").set({number,message,updatedAt:firebase.database.ServerValue.TIMESTAMP,updatedBy:ADMIN_UID});
+    $("whatsappNumber").value=number;
+    alert("✅ WhatsApp Settings Save হয়েছে।");
+  }catch(e){
+    alert("❌ WhatsApp Settings save করা যায়নি: "+e.message);
+  }
+}
+
 async function saveNotice(){
   try{await db.ref("settings/notice").set({text:$("noticeText").value.trim(),updatedAt:firebase.database.ServerValue.TIMESTAMP});alert("📢 Notice Publish হয়েছে।")}
   catch(e){alert("❌ Notice save করা যায়নি: "+e.message)}
@@ -1226,9 +1243,7 @@ loadYoutubeSettings();
 setInterval(()=>{
   if($("app").classList.contains("hidden"))return;
   if(!$("support").classList.contains("hidden"))renderSupport();
-  if(!$("recovery").classList.contains("hidden"))refresh();
 },10000);
-loadTelegramSettings();
 </script>
 </body>
 </html>

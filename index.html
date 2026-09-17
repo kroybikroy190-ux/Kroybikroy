@@ -664,6 +664,12 @@ LOGIN
 🔐 Login
 </button>
 
+<button class="btn" style="margin-top:10px;background:#25D366"
+        type="button"
+        onclick="openWhatsappHelp()">
+💬 Login করতে সাহায্য চাই (WhatsApp)
+</button>
+
 </div>
 
 <!-- REGISTER -->
@@ -775,36 +781,10 @@ LOGIN
 })();
 </script>
 
-<div class="card" style="margin-top:15px;border:1px solid #dbeafe;background:#f8fbff">
-  <div style="font-size:17px;font-weight:800">🔑 PIN Recovery</div>
-  <div class="small" style="margin:6px 0 10px">PIN ভুলে গেলে নিচের তথ্য দিয়ে যাচাইয়ের জন্য আবেদন করুন।</div>
-  <button class="btn purpleBtn" type="button" onclick="openPinRecovery()">🔐 PIN Recovery আবেদন</button>
-</div>
-
 </div>
 
 </section>
 
-
-<!-- PIN RECOVERY MODAL -->
-<div id="pinRecoveryModal" class="modal hidden">
-  <div class="modalBox">
-    <div class="modalHeader">
-      <h3 style="margin:0">🔐 PIN Recovery আবেদন</h3>
-      <button class="close" type="button" onclick="closePinRecovery()">✕</button>
-    </div>
-    <p class="small" style="line-height:1.55">আপনার তথ্য Admin যাচাই করবেন। সঠিক হলে আপনার দেওয়া মোবাইল নম্বরে SMS-এর মাধ্যমে PIN জানানো হবে। যাচাই ও SMS পেতে সর্বোচ্চ <b>১২ ঘণ্টা</b> সময় লাগতে পারে।</p>
-    <label>১. আপনার নাম</label><input id="recName" placeholder="আপনার নাম">
-    <label>২. আপনার মোবাইল নাম্বার</label><input id="recPhone" type="tel" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX">
-    <label>৩. আপনার বর্তমান ব্যালেন্স</label><input id="recBalance" type="number" min="0" step="0.01" placeholder="যেমন 457.00">
-    <label>৪. আপনার স্টক করা পণ্য কয়টি</label><input id="recStockCount" type="number" min="0" step="1" placeholder="মোট পণ্য সংখ্যা">
-    <label>৫. আপনার লাস্ট ডিপোজিট কত টাকা হয়েছিল <span class="small">(না জানলে খালি রাখুন)</span></label><input id="recLastDeposit" type="number" min="0" step="0.01" placeholder="যেমন 1000">
-    <label>৬. আপনার লাস্ট উইথড্র কত টাকা ছিল <span class="small">(না জানলে খালি রাখুন)</span></label><input id="recLastWithdraw" type="number" min="0" step="0.01" placeholder="যেমন 500">
-    <div class="small" style="margin:-4px 0 10px">ℹ️ লাস্ট ডিপোজিট অথবা লাস্ট উইথড্র—অন্তত একটি তথ্য দিতে হবে।</div>
-    <div id="pinRecoveryMsg" class="msg"></div>
-    <button class="btn purpleBtn" type="button" onclick="submitPinRecovery()">📨 Recovery আবেদন পাঠান</button>
-  </div>
-</div>
 
 <!-- =================================================
 APP
@@ -1342,120 +1322,24 @@ window.togglePin = function(inputId,eyeId){
 
 
 /* =================================================
-PIN RECOVERY
+WHATSAPP HELP
 ================================================= */
-window.openPinRecovery=function(){
-  document.getElementById("pinRecoveryModal").classList.remove("hidden");
-  const phone=document.getElementById("loginPhone")?.value||"";
-  if(phone && !document.getElementById("recPhone").value) document.getElementById("recPhone").value=cleanPhone(phone);
-  const name=document.getElementById("registerName")?.value||"";
-  if(name && !document.getElementById("recName").value) document.getElementById("recName").value=name;
-};
-window.closePinRecovery=function(){document.getElementById("pinRecoveryModal").classList.add("hidden");};
-window.submitPinRecovery=async function(){
-
-  const msgEl=document.getElementById("pinRecoveryMsg");
-
-  const name=document.getElementById("recName").value.trim();
-  const phone=cleanPhone(document.getElementById("recPhone").value);
-
-  const balance=Number(document.getElementById("recBalance").value);
-  const stockCount=Number(document.getElementById("recStockCount").value);
-
-  const lastDepositRaw=document.getElementById("recLastDeposit").value.trim();
-  const lastWithdrawRaw=document.getElementById("recLastWithdraw").value.trim();
-
-  const hasDeposit =
-    lastDepositRaw !== "" &&
-    Number.isFinite(Number(lastDepositRaw)) &&
-    Number(lastDepositRaw) >= 0;
-
-  const hasWithdraw =
-    lastWithdrawRaw !== "" &&
-    Number.isFinite(Number(lastWithdrawRaw)) &&
-    Number(lastWithdrawRaw) >= 0;
-
-  if(!name)
-    return msgEl.textContent="❌ নাম দিন।";
-
-  if(!validPhone(phone))
-    return msgEl.textContent="❌ সঠিক বাংলাদেশি মোবাইল নম্বর দিন।";
-
-  if(!Number.isFinite(balance) || balance < 0)
-    return msgEl.textContent="❌ বর্তমান ব্যালেন্স সঠিকভাবে দিন।";
-
-  if(!Number.isInteger(stockCount) || stockCount < 0)
-    return msgEl.textContent="❌ স্টক করা পণ্যের সংখ্যা সঠিকভাবে দিন।";
-
-  if(lastDepositRaw !== "" && !hasDeposit)
-    return msgEl.textContent="❌ লাস্ট ডিপোজিট সঠিকভাবে দিন।";
-
-  if(lastWithdrawRaw !== "" && !hasWithdraw)
-    return msgEl.textContent="❌ লাস্ট উইথড্র সঠিকভাবে দিন।";
-
-  if(!hasDeposit && !hasWithdraw)
-    return msgEl.textContent="❌ লাস্ট ডিপোজিট অথবা লাস্ট উইথড্র—অন্তত একটি তথ্য দিন।";
-
-  msgEl.style.color="#2563eb";
-  msgEl.textContent="⏳ আবেদন পাঠানো হচ্ছে...";
-
+window.openWhatsappHelp = async function(){
   try{
-
-    const requestRef=push(ref(db,"pinRecoveryRequests"));
-
-    /* Do not send null/empty optional fields to Firebase */
-    const requestData={
-      name:name,
-      phone:phone,
-      claimedBalance:balance,
-      claimedStockCount:stockCount,
-      status:"pending",
-      createdAt:Date.now()
-    };
-
-    // User লগইন করা থাকলে UID-টিও সংরক্ষণ হবে; লগইন না থাকলেও
-    // PIN Recovery আবেদন পাঠানো যাবে। Firebase Rules-এর জন্য UID বাধ্যতামূলক নয়।
-    if(currentUser && currentUser.uid){
-      requestData.uid=currentUser.uid;
+    const snap = await get(ref(db,"settings/whatsapp"));
+    const setting = snap.exists() ? (snap.val() || {}) : {};
+    let phone = String(setting.number || "").replace(/\D/g, "");
+    if(phone.startsWith("00880")) phone = phone.slice(2);
+    if(phone.startsWith("0")) phone = "880" + phone.slice(1);
+    if(!/^8801[3-9]\d{8}$/.test(phone)){
+      return alert("❌ Admin-এর WhatsApp নম্বর এখনো সেট করা হয়নি।");
     }
-
-    if(hasDeposit)
-      requestData.claimedLastDeposit=Number(lastDepositRaw);
-
-    if(hasWithdraw)
-      requestData.claimedLastWithdraw=Number(lastWithdrawRaw);
-
-    await set(requestRef,requestData);
-
-    document.getElementById("pinRecoveryModal").classList.add("hidden");
-
-    [
-      "recName",
-      "recPhone",
-      "recBalance",
-      "recStockCount",
-      "recLastDeposit",
-      "recLastWithdraw"
-    ].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.value="";
-    });
-
-    alert(
-      "✅ আপনার PIN Recovery আবেদন সফলভাবে জমা হয়েছে।\n\n"+
-      "Admin আপনার তথ্য যাচাই করার পরে আপনার সঠিক মোবাইল নম্বরে SMS-এর মাধ্যমে PIN Code জানাবেন।\n\n"+
-      "⏳ সময় লাগতে পারে সর্বোচ্চ ১২ ঘণ্টা।\n\n"+
-      "PIN পাওয়ার পরে আপনার মোবাইল নম্বর ও PIN দিয়ে Login করুন।"
-    );
-
+    const text = String(setting.message || "হ্যালো, Login করতে সাহায্য চাই।");
+    const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
+    window.location.href = url;
   }catch(e){
-
-    console.error("PIN Recovery Error:",e);
-
-    msgEl.style.color="#dc2626";
-    msgEl.textContent=
-      "❌ আবেদন পাঠানো যায়নি। "+
-      (e?.message || "Unknown error");
+    console.error("WhatsApp Help Error:", e);
+    alert("❌ WhatsApp Help খোলা যায়নি।");
   }
 };
 
