@@ -125,7 +125,7 @@ nav button b{display:block;font-size:21px}.hidden{display:none!important}
       <option>জুতা</option><option>টুপি</option><option>মোবাইল</option>
       <option>টিভি</option><option>প্লিজ</option><option>অন্যান্য</option>
     </select>
-    <label>👥 User → User Rate</label>
+    <label>🔒 User Max Sell Price (সর্বোচ্চ)</label>
     <input id="pUU" type="number" min="0" step="0.01" placeholder="যেমন: 70">
     <label>👑 User → Admin Rate</label>
     <input id="pUA" type="number" min="0" step="0.01" placeholder="যেমন: 65">
@@ -510,7 +510,7 @@ function renderProducts(){
       <h3>${esc(p.name||"Product")}</h3>
       <div class="muted">${esc(p.category||"-")} • 📦 Stock: ${Number(p.stock||0)}</div>
       <div class="rates">
-        <div class="rate">👥 User → User<b>${money(r.uu)}</b></div>
+        <div class="rate">🔒 User Max Sell Price<b>${money(r.uu)}</b></div>
         <div class="rate">👑 User → Admin<b>${money(r.ua)}</b></div>
         <div class="rate">🛒 Admin → User<b>${money(r.au)}</b></div>
       </div>
@@ -530,7 +530,7 @@ async function addProduct(){
     if(!name||uu<0||ua<0||au<0||stock<0)return alert("Product তথ্য সঠিকভাবে দিন।");
     const id=db.ref("products").push().key;
     await db.ref("products/"+id).set({
-      name,category,userToUserRate:uu,userToAdminRate:ua,adminToUserRate:au,
+      name,category,userToUserRate:uu,userToUserMaxPrice:uu,userToAdminRate:ua,adminToUserRate:au,
       userSellPrice:uu,adminBuyPrice:ua,price:uu,stock,imageUrl:image,image:image,
       description,createdAt:firebase.database.ServerValue.TIMESTAMP,updatedAt:firebase.database.ServerValue.TIMESTAMP
     });
@@ -545,7 +545,7 @@ function openProductEdit(id,p){
     <input type="hidden" id="editProductId" value="${esc(id)}">
     <label>Product Name</label><input id="eName" value="${esc(p.name||"")}">
     <label>Category</label><select id="eCategory">${CATS.map(c=>`<option ${p.category===c?"selected":""}>${c}</option>`).join("")}</select>
-    <label>👥 User → User Rate</label><input id="eUU" type="number" min="0" step="0.01" value="${r.uu}">
+    <label>🔒 User Max Sell Price (সর্বোচ্চ)</label><input id="eUU" type="number" min="0" step="0.01" value="${r.uu}">
     <label>👑 User → Admin Rate</label><input id="eUA" type="number" min="0" step="0.01" value="${r.ua}">
     <label>🛒 Admin → User Rate</label><input id="eAU" type="number" min="0" step="0.01" value="${r.au}">
     <label>📦 Stock</label><input id="eStock" type="number" min="0" value="${Number(p.stock||0)}">
@@ -560,7 +560,7 @@ async function saveProductEdit(){
     const image=$("eImage").value.trim(),description=$("eDesc").value.trim();
     if(!id||!name||uu<0||ua<0||au<0||stock<0)return alert("তথ্য সঠিকভাবে দিন।");
     await db.ref("products/"+id).update({
-      name,category,userToUserRate:uu,userToAdminRate:ua,adminToUserRate:au,
+      name,category,userToUserRate:uu,userToUserMaxPrice:uu,userToAdminRate:ua,adminToUserRate:au,
       userSellPrice:uu,adminBuyPrice:ua,price:uu,stock,imageUrl:image,image:image,
       description,updatedAt:firebase.database.ServerValue.TIMESTAMP
     });

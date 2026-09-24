@@ -1369,7 +1369,140 @@ body{
 }
 </style>
 
+
+<style id="reference-layout-v3">
+/* ===== Reference-style home + in-page navigation (visual only) ===== */
+body{background:#f4f8f9!important;color:#18383d!important}
+.header{background:linear-gradient(135deg,#063f46,#0b6971 60%,#08a9b4)!important;padding:10px 12px!important}
+.headerTop{max-width:440px!important}
+.container{max-width:440px!important;margin:0 auto!important;padding:8px 8px 82px!important}
+.menu{grid-template-columns:repeat(2,1fr)!important;gap:6px!important;margin-bottom:8px!important}
+.menu button{min-height:72px!important;border-radius:13px!important;padding:8px 5px!important;font-size:13px!important;box-shadow:0 3px 9px #063f4620!important}
+.menuIcon{font-size:23px!important;margin-bottom:1px!important}
+.balanceCard{border-radius:14px!important;padding:13px!important;margin-bottom:8px!important}
+.balanceAmount{font-size:25px!important}
+.stats{gap:6px!important}
+.stat{border-radius:12px!important;padding:10px 8px!important}
+.statIcon{font-size:22px!important}.statValue{font-size:18px!important}
+.bottomNav{max-width:440px;margin:auto!important;left:0;right:0}
+/* Hide dashboard-only blocks while inside a subpage; original business logic remains untouched. */
+#pageBackBar{display:flex;align-items:center;gap:8px;margin:0 0 8px;background:#fff;border:1px solid #d7e9eb;border-radius:12px;padding:8px;box-shadow:0 3px 10px #063f4614;position:sticky;top:0;z-index:40}
+#pageBackBar button{border:0;border-radius:9px;padding:9px 13px;background:linear-gradient(135deg,#063f46,#08727b);color:#fff;font-weight:800}
+#pageBackBar strong{font-size:15px;color:#063f46;flex:1}
+#subPageTitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:650px){
+ .headerTop{max-width:440px!important}
+ .bottomNav{max-width:440px}
+}
+</style>
+
+
+<style id="final-polish-2026">
+/* Final visual polish — UI/navigation only */
+body{
+  background:linear-gradient(180deg,#eef8f8 0%,#f8fbfc 55%,#edf5f6 100%)!important;
+}
+#app{max-width:100%;margin:0 auto;}
+.header{
+  background:linear-gradient(135deg,#06464e 0%,#08737c 55%,#12b7bf 100%)!important;
+  border-radius:0 0 16px 16px;
+}
+.headerTop{padding:0 2px;}
+.container{max-width:440px!important;padding:10px 8px 88px!important;}
+.menu{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:9px!important;
+  margin:10px 0 14px!important;
+}
+.menu button{
+  position:relative!important;
+  overflow:hidden!important;
+  min-height:82px!important;
+  padding:10px 7px!important;
+  border:0!important;
+  border-radius:15px!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:800!important;
+  box-shadow:0 4px 0 rgba(0,0,0,.16),0 7px 14px rgba(6,63,70,.16)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+}
+.menu button::before{
+  content:"";position:absolute;left:8%;right:8%;top:7px;height:2px;
+  background:rgba(255,255,255,.32);border-radius:99px;
+}
+.menu button:nth-child(1){background:linear-gradient(135deg,#1fc993,#079b76)!important;}
+.menu button:nth-child(2){background:linear-gradient(135deg,#3488ed,#2166ca)!important;}
+.menu button:nth-child(3){background:linear-gradient(135deg,#ff4c79,#df315d)!important;}
+.menu button:nth-child(4){background:linear-gradient(135deg,#ff9428,#e76b12)!important;}
+.menu button:nth-child(5){background:linear-gradient(135deg,#7051e8,#5330c4)!important;}
+.menu button:nth-child(6){background:linear-gradient(135deg,#17b7c2,#0796a4)!important;}
+.menu button:nth-child(7){background:linear-gradient(135deg,#f24e68,#d52d48)!important;}
+.menu button:nth-child(8){background:linear-gradient(135deg,#3387e8,#2468c9)!important;}
+.menu button:nth-child(9){background:linear-gradient(135deg,#ff8b24,#e9650d)!important;}
+.menu button:nth-child(10){background:linear-gradient(135deg,#19b98d,#07956f)!important;}
+.menu button:nth-child(11){background:linear-gradient(135deg,#22bf7d,#07945c)!important;}
+.menu button:nth-child(12){background:linear-gradient(135deg,#7654e8,#5030c5)!important;}
+.menu button:active{transform:translateY(2px)!important;box-shadow:0 2px 0 rgba(0,0,0,.16),0 4px 8px rgba(6,63,70,.14)!important;}
+.menuIcon{font-size:29px!important;line-height:1.05!important;display:block!important;margin-bottom:5px!important;}
+.bottomNav{max-width:440px!important;margin:auto!important;border-radius:16px 16px 0 0;}
+
+/* Clean subpage header */
+#app.inner-mode .menu,#app.inner-mode .bottomNav{display:none!important;}
+#app.inner-mode .container{padding-bottom:20px!important;}
+#app.inner-mode #noticeBox{display:none;}
+#app:not(.inner-mode) #noticeBox{display:none!important;}
+#app:not(.inner-mode) #transactionStatusNotice{display:none!important;}
+#pageBackBar{display:none!important;}
+.pageBackBarDynamic{
+  display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:9px;
+  background:#fff;border:1px solid #d5e9eb;border-radius:14px;
+  box-shadow:0 4px 12px rgba(6,63,70,.10);
+  position:sticky;top:4px;z-index:45;
+}
+.pageBackBarDynamic strong{font-size:16px;color:#063f46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pageBackBtnDynamic{
+  border:0;border-radius:10px;padding:10px 14px;
+  background:linear-gradient(135deg,#063f46,#087f89);color:#fff;font-weight:900;
+  box-shadow:0 3px 8px rgba(6,63,70,.20);
+}
+#content>.card,#content>.product,#content>.request,#content>.transaction{
+  border:1px solid #d9eaec;box-shadow:0 4px 12px rgba(6,63,70,.08);
+}
+@media(max-width:650px){
+  .menu button{min-height:76px!important;font-size:13px!important;border-radius:14px!important;}
+  .menuIcon{font-size:27px!important;}
+}
+</style>
 </head>
+
+
+<style id="reference-navigation-polish">
+/* ===== Reference-style navigation / inner pages ===== */
+#app.inner-mode .menu{display:none!important}
+#app.inner-mode .bottomNav{display:none!important}
+#app.inner-mode .container{padding-bottom:20px}
+#app.inner-mode #noticeBox{display:none}
+#pageBackBar{display:none;position:sticky;top:0;z-index:40;margin:-2px -2px 10px;padding:8px 0;background:#eef5f6}
+#app.inner-mode #pageBackBar{display:flex;align-items:center;gap:9px}
+.pageBackBtn{border:0!important;border-radius:11px!important;padding:9px 13px!important;background:linear-gradient(135deg,#063f46,#087e89)!important;color:#fff!important;font-weight:800;box-shadow:0 4px 10px #063f4630!important}
+.pageBackTitle{font-weight:800;color:#17363b;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inner-page-title{margin:0 0 10px;font-size:20px;color:#063f46;font-weight:900}
+.inner-page-sub{margin:-4px 0 12px;color:#64748b;font-size:12px;line-height:1.45}
+#content > .card:first-child,#content > .product:first-child,#content > .request:first-child,#content > .transaction:first-child{margin-top:0}
+#content .card{background:linear-gradient(145deg,#fff,#f6fbfc);border:1px solid #d9eaec}
+#content input,#content select,#content textarea{border:1px solid #cfe2e5;background:#fff;border-radius:10px}
+#content .btn{border-radius:11px;font-weight:800}
+.reference-section{background:#fff;border:1px solid #d9eaec;border-radius:15px;padding:13px;margin:0 0 10px;box-shadow:0 4px 12px #063f4612}
+.reference-section h3{margin:0 0 8px;color:#063f46;font-size:16px}
+.page-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.page-action-grid .btn{margin:0!important;min-height:48px}
+@media(max-width:650px){
+  .inner-page-title{font-size:18px}
+  .pageBackTitle{font-size:15px}
+  .page-action-grid{grid-template-columns:1fr 1fr}
+}
+</style>
 
 <body>
 
@@ -1598,6 +1731,11 @@ Balance: ৳0.00
 
 <div id="noticeBox"></div>
 
+<div id="pageBackBar">
+  <button type="button" class="pageBackBtn" onclick="dashboard()">← হোম</button>
+  <div id="pageBackTitle" class="pageBackTitle">পেজ</div>
+</div>
+
 <div class="menu">
 
 <button onclick="dashboard()">
@@ -1638,6 +1776,16 @@ Withdraw
 <button onclick="transactionsPage()">
 <span class="menuIcon">📜</span>
 History
+</button>
+
+<button onclick="depositHistoryPage()">
+<span class="menuIcon">💰</span>
+ডিপোজিট হিস্ট্রি
+</button>
+
+<button onclick="withdrawHistoryPage()">
+<span class="menuIcon">💸</span>
+উত্তোলন হিস্ট্রি
 </button>
 
 <button onclick="requestsPage()">
@@ -1774,6 +1922,14 @@ SELL MODAL
 
 </select>
 
+<div id="userSellPriceBox" class="hidden">
+
+<label>💰 আপনার User Sell Price (Admin-এর সর্বোচ্চ দামের বেশি নয়)</label>
+<input id="sellUserPrice" type="number" min="0" step="0.01" value="0" oninput="calculateSell()">
+<div class="small">Admin যে সর্বোচ্চ দাম নির্ধারণ করেছেন: <b id="sellUserMaxPrice">৳0.00</b></div>
+
+</div>
+
 <div id="buyerBox">
 
 <label>🔎 Buyer User Search</label>
@@ -1818,6 +1974,24 @@ SELL MODAL
 </div>
 </div>
 
+<!-- =================================================
+USER PRODUCT PUBLISH MODAL
+================================================= -->
+<div id="publishModal" class="modal hidden">
+  <div class="modalBox">
+    <div class="modalHeader">
+      <h3>📢 পণ্য Publish করুন</h3>
+      <button class="close" onclick="closeModal('publishModal')">✕</button>
+    </div>
+    <div id="publishInfo"></div>
+    <label>📦 কত পিস বিক্রি করবেন?</label>
+    <input id="publishQty" type="number" min="1" step="1" value="1" oninput="calculatePublish()">
+    <label>💰 প্রতি পিস কত টাকায় বিক্রি করবেন?</label>
+    <input id="publishPrice" type="number" min="0" step="0.01" value="0" oninput="calculatePublish()">
+    <div id="publishTotal" class="card">মোট সম্ভাব্য বিক্রি: ৳0.00</div>
+    <button class="btn greenBtn" onclick="confirmPublish()">📢 Publish করুন</button>
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -1898,6 +2072,8 @@ function update(r,v){ return r.update(v); }
 function push(r,v){ return r.push(v); }
 function remove(r){ return r.remove(); }
 function onValue(r,cb){ return r.on("value",cb); }
+function off(r,event,cb){ return r.off(event,cb); }
+function transaction(r,updateFn){ return r.transaction(updateFn); }
 
 const content =
 document.getElementById("content");
@@ -1911,6 +2087,7 @@ let needRequestInitialLoad = true;
 
 
 let transactionStatusListener = null;
+let selectedPublish = null;
 let transactionStatusInitialized = false;
 
 /* =================================================
@@ -1964,8 +2141,8 @@ function startTransactionStatusWatcher(){
   const scan=async ()=>{
     try{
       const [depSnap,wdSnap]=await Promise.all([
-        get(ref(db,"deposits")),
-        get(ref(db,"withdrawals"))
+        get(ref(db,"deposits").orderByChild("uid").equalTo(uid).limitToLast(10)),
+        get(ref(db,"withdrawals").orderByChild("uid").equalTo(uid).limitToLast(10))
       ]);
 
       const items=[];
@@ -2798,13 +2975,9 @@ function renderNotice(notice, showPopup=true){
   const text = notice.text || notice.message || "";
   const key = String(notice.updatedAt || notice.createdAt || title + text);
 
-  box.innerHTML = `
-    <div class="notice">
-      <button class="noticeClose" onclick="this.parentElement.parentElement.innerHTML=''">×</button>
-      <div class="noticeTitle">📢 ${escapeHtml(title)}</div>
-      <div class="noticeText">${escapeHtml(text)}</div>
-      ${notice.updatedAt ? `<div class="noticeTime">${new Date(notice.updatedAt).toLocaleString("bn-BD")}</div>` : ""}
-    </div>`;
+  // Home-page notice card is intentionally disabled.
+  // Notifications still appear as a popup.
+  box.innerHTML = "";
 
   if(showPopup && key !== lastNoticeKey){
     lastNoticeKey = key;
@@ -2841,12 +3014,28 @@ async function loadNotice(){
   }
 }
 
+
+function showHomeMode(){
+  const app=document.getElementById("app");
+  if(app) app.classList.remove("inner-mode");
+  const title=document.getElementById("pageBackTitle");
+  if(title) title.textContent="";
+}
+
+function showInnerMode(title){
+  const app=document.getElementById("app");
+  if(app) app.classList.add("inner-mode");
+  const el=document.getElementById("pageBackTitle");
+  if(el) el.textContent=title||"পেজ";
+}
+
 /* =================================================
 DASHBOARD
 ================================================= */
 
 window.dashboard = async function(){
 
+  showHomeMode();
   setActiveNav("navHome");
 
 
@@ -2936,141 +3125,23 @@ window.dashboard = async function(){
 
   content.innerHTML = `
 
-    <div class="balanceCard">
-
-      <div class="balanceLabel">
-        💰 আপনার বর্তমান Balance
-      </div>
-
-      <div class="balanceAmount">
-        ৳${Number(
-          u.balance || 0
-        ).toFixed(2)}
-      </div>
-
-      <div style="margin-top:10px">
-        👤 ${escapeHtml(
-          u.name || "User"
-        )}
-      </div>
-
+    <div class="reference-section dashboard-video-wrap">
+      ${youtubeLink ? `
+      <h3>▶️ ${youtubeTitle}</h3>
+      <div class="inner-page-sub">${youtubeDescription}</div>
+      <a class="youtubeWatchBtn" href="${escapeAttribute(youtubeLink)}" target="_blank" rel="noopener noreferrer">▶️ YouTube Video দেখে শিখুন</a>
+      ` : `
+      <h3>🛒 ক্রয়-বিক্রয় App</h3>
+      <div class="inner-page-sub">Products, Stock, Sell, Deposit, Withdraw ও History সহজে ব্যবহার করুন।</div>
+      `}
     </div>
-
-    ${youtubeLink ? `
-    <div class="card youtubePromo" style="margin-top:12px">
-      <h3 style="margin-top:0">▶️ ${youtubeTitle}</h3>
-      <p class="small" style="line-height:1.55">${youtubeDescription}</p>
-      <a class="youtubeWatchBtn" href="${escapeAttribute(youtubeLink)}" target="_blank" rel="noopener noreferrer">
-        ▶️ YouTube Video দেখে শিখুন
-      </a>
-    </div>
-    ` : ""}
-
 
     <div class="stats">
-
-      <div class="stat">
-
-        <div class="statIcon">
-          📦
-        </div>
-
-        <div class="statValue">
-          ${stockCount}
-        </div>
-
-        <div class="small">
-          আমার Stock
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="statIcon">
-          🛒
-        </div>
-
-        <div class="statValue">
-          ${productCount}
-        </div>
-
-        <div class="small">
-          Available Product
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="statIcon">
-          🔔
-        </div>
-
-        <div class="statValue">
-          ${pending}
-        </div>
-
-        <div class="small">
-          Pending Request
-        </div>
-
-      </div>
-
+      <div class="stat"><div class="statIcon">📦</div><div class="statValue">${stockCount}</div><div class="small">আমার Stock</div></div>
+      <div class="stat"><div class="statIcon">🛒</div><div class="statValue">${productCount}</div><div class="small">Available Product</div></div>
+      <div class="stat"><div class="statIcon">🔔</div><div class="statValue">${pending}</div><div class="small">Pending Request</div></div>
     </div>
 
-
-    <div class="card"
-         style="margin-top:12px">
-
-      <h3>
-        ⚡ Quick Actions
-      </h3>
-
-      <button
-        class="btn"
-        onclick="productsPage()">
-
-        🛒 Product কিনুন
-
-      </button>
-
-      <br><br>
-
-      <button
-        class="btn purpleBtn"
-        onclick="sellPage()">
-
-        🔄 Product Sell
-
-      </button>
-
-      <br><br>
-
-      <button
-        class="btn cyanBtn"
-        onclick="requestsPage()">
-
-        🔔 Product Request
-
-      </button>
-
-    </div>
-
-    <div class="transactionHistoryBox">
-      <h3>🕒 লেনদেন ইতিহাস</h3>
-      <div class="historySub">আপনার সব Deposit ও Withdraw-এর বিস্তারিত ইতিহাস এবং Status দেখুন।</div>
-      <div class="historyTwoButtons">
-        <button class="historyActionBtn depositHistoryBtn" onclick="depositHistoryPage()">
-          <span>💰</span>ডিপোজিট হিস্ট্রি
-        </button>
-        <button class="historyActionBtn withdrawHistoryBtn" onclick="withdrawHistoryPage()">
-          <span>💸</span>উত্তোলন হিস্ট্রি
-        </button>
-      </div>
-    </div>
 
   `;
 
@@ -3115,6 +3186,7 @@ window.shareApp = async function(){
 };
 
 window.referralPage = async function(){
+  showInnerMode("🎁 Referral & Earn");
   if(!currentUser){alert("❌ আগে Login করুন।");return;}
   setActiveNav("navReferral");
   try{
@@ -3124,8 +3196,8 @@ window.referralPage = async function(){
     const allUsersSnap=await get(ref(db,"users"));
     const allUsers=allUsersSnap.exists()?allUsersSnap.val()||{}:{};
     const referred=Object.values(allUsers).filter(x=>x&&x.referredBy===currentUser.uid);
-    const histSnap=await get(ref(db,"referrals/"+currentUser.uid+"/history"));
-    const history=histSnap.exists()?Object.entries(histSnap.val()||{}).map(([id,x])=>({id,...(x||{})})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,100):[];
+    const histSnap=await get(ref(db,"referrals/"+currentUser.uid+"/history").orderByChild("createdAt").limitToLast(10));
+    const history=histSnap.exists()?Object.entries(histSnap.val()||{}).map(([id,x])=>({id,...(x||{})})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)):[];
     const stats=u.referralStats||{};
 
     let html=`
@@ -3174,175 +3246,107 @@ PRODUCTS
 ================================================= */
 
 window.productsPage = async function(){
-
+  showInnerMode("📦 Products");
   setActiveNav("navProducts");
 
+  const [snap, userSnap, publishedSnap] = await Promise.all([
+    get(ref(db,"products")),
+    get(ref(db,"users/"+currentUser.uid)),
+    get(ref(db,"publishedProducts"))
+  ]);
 
-  const snap =
-    await get(
-      ref(db,"products")
-    );
-
+  const products = snap.exists() ? snap.val() || {} : {};
+  const me = userSnap.exists() ? userSnap.val() || {} : {};
+  const published = publishedSnap.exists() ? publishedSnap.val() || {} : {};
+  const myStock = me.stock || {};
 
   let html = `
     <div class="card" style="margin-bottom:12px">
       <h3>📢 কোনো পণ্য দরকার?</h3>
       <p class="small">আপনার প্রয়োজনীয় পণ্য ও পরিমাণ লিখে Request প্রকাশ করুন। Stock থাকা User আপনার মোবাইল নম্বর দেখে আগের Sell System-এ আপনাকে পণ্য দিতে পারবে।</p>
-      <button class="btn cyanBtn" onclick="openNeedRequest()">
-        📢 পণ্য দরকার — Request পাঠান
-      </button>
+      <button class="btn cyanBtn" onclick="openNeedRequest()">📢 পণ্য দরকার — Request পাঠান</button>
     </div>
-    <h2>📦 Products</h2>
+    <h2>📦 Admin Products</h2>
   `;
 
-
-  if(!snap.exists()){
-
-    content.innerHTML =
-      html +
-      `
-      <div class="card">
-        ❌ কোনো Product নেই।
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  Object.entries(
-    snap.val()
-  )
-  .forEach(([id,p]) => {
-
-    if(p.active === false)
-      return;
-
-
-    const price = getAdminToUserRate(p);
-
-
-    const stock =
-      Number(p.stock || 0);
-
-
+  let adminCount=0;
+  Object.entries(products).forEach(([id,p])=>{
+    if(p.active === false) return;
+    adminCount++;
+    const price=getAdminToUserRate(p);
+    const stock=Number(p.stock||0);
+    const myQty=getQty(myStock[id]);
     html += `
-
       <div class="product">
-
         <div class="productTop">
-
-          ${
-            p.image
-            ?
-            `
-            <img
-              class="productImage"
-              src="${escapeAttribute(
-                p.image
-              )}"
-              onerror="
-                this.style.display='none'
-              ">
-            `
-            :
-            `
-            <div
-              class="productImage"
-              style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:35px;
-              ">
-              📦
-            </div>
-            `
-          }
-
-
+          ${p.image ? `<img class="productImage" src="${escapeAttribute(p.image)}" onerror="this.style.display='none'">` : `<div class="productImage" style="display:flex;align-items:center;justify-content:center;font-size:35px">📦</div>`}
           <div class="productInfo">
-
-            <div class="productName">
-
-              ${escapeHtml(
-                p.name || "Product"
-              )}
-
-            </div>
-
-            <div class="small">
-
-              ${escapeHtml(
-                p.category || ""
-              )}
-
-            </div>
-
-            <div class="price">
-
-              ৳${price.toFixed(2)}
-
-            </div>
-
-            <div class="stock">
-
-              Available:
-              ${stock} টি
-
-            </div>
-
+            <div class="productName">${escapeHtml(p.name||"Product")}</div>
+            <div class="small">${escapeHtml(p.category||"")}</div>
+            <div class="price">৳${price.toFixed(2)}</div>
+            <div class="stock">Available: ${stock} টি</div>
           </div>
-
         </div>
-
-
         <div class="productActions">
-
-          <button
-            class="btn greenBtn"
-            onclick="
-              openBuy('${id}')
-            ">
-
-            🛒 কিনুন
-
-          </button>
-
-
-          <button
-            class="btn cyanBtn"
-            onclick="
-              productDetails('${id}')
-            ">
-
-            ℹ️ Details
-
-          </button>
-
-          <button
-            class="btn"
-            style="background:#f59e0b;color:#fff"
-            onclick="openNeedRequest('${id}')">
-
-            📢 এই পণ্য দরকার
-
-          </button>
-
+          <button class="btn greenBtn" onclick="openBuy('${id}')">🛒 কিনুন</button>
+          <button class="btn cyanBtn" onclick="productDetails('${id}')">ℹ️ Details</button>
+          <button class="btn" style="background:#f59e0b;color:#fff" onclick="openNeedRequest('${id}')">📢 এই পণ্য দরকার</button>
+          ${myQty>0 ? `<button class="btn purpleBtn" onclick="openPublish('${id}')">📢 আমার পণ্য Publish</button>` : ``}
         </div>
-
-      </div>
-
-    `;
-
+      </div>`;
   });
 
+  if(!adminCount) html += `<div class="card">❌ কোনো Admin Product নেই।</div>`;
 
-  content.innerHTML = html;
+  html += `<div style="height:8px"></div><div class="card" style="background:#0f4fa8;color:#fff;border-radius:0;text-align:center"><h2 style="margin:0">👥 Userদের প্রকাশিত পণ্য</h2><div class="small" style="color:#eaf4ff">এখানে Userরা নিজেদের Stock থেকে পণ্য Publish করে নিজেদের দাম নির্ধারণ করতে পারবে।</div></div>`;
 
+  const listings=Object.entries(published)
+    .map(([id,x])=>({id,r:x||{}}))
+    .filter(x=>x.r.active!==false && Number(x.r.quantity||0)>0 && x.r.sellerUid!==currentUser.uid)
+    .sort((a,b)=>(b.r.createdAt||0)-(a.r.createdAt||0));
+
+  const mine=Object.entries(published)
+    .map(([id,x])=>({id,r:x||{}}))
+    .filter(x=>x.r.sellerUid===currentUser.uid && x.r.active!==false && Number(x.r.quantity||0)>0)
+    .sort((a,b)=>(b.r.createdAt||0)-(a.r.createdAt||0));
+
+  if(!listings.length && !mine.length){
+    html += `<div class="card">📢 এখনো কোনো User Product Publish হয়নি। আপনার Stock থাকলে উপরের <b>আমার পণ্য Publish</b> বাটন ব্যবহার করুন।</div>`;
+  }
+
+  const renderListing=(id,r,isMine)=>{
+    const qty=Number(r.quantity||0), price=Number(r.price||0);
+    return `<div class="product" style="border:2px solid #dbeafe">
+      <div class="productTop">
+        ${r.image ? `<img class="productImage" src="${escapeAttribute(r.image)}" onerror="this.style.display='none'">` : `<div class="productImage" style="display:flex;align-items:center;justify-content:center;font-size:35px">📦</div>`}
+        <div class="productInfo">
+          <div class="productName">${escapeHtml(r.productName||"Product")}</div>
+          <div class="small">👤 Seller: <b>${escapeHtml(r.sellerName||"User")}</b></div>
+          <div class="small">📱 ${escapeHtml(r.sellerPhone||"")}</div>
+          <div class="price">৳${price.toFixed(2)} / পিস</div>
+          <div class="stock">📦 বিক্রির জন্য: ${qty} টি</div>
+          ${isMine ? `<div class="small" style="color:#7c3aed">এটি আপনার প্রকাশিত Product</div>` : ``}
+        </div>
+      </div>
+      <div class="productActions">
+        <button class="btn cyanBtn" onclick="publishedProductDetails('${id}')">ℹ️ Details</button>
+        ${!isMine ? `<button class="btn greenBtn" onclick="openPublishedBuy('${id}')">🛒 কিনুন</button>` : `<button class="btn redBtn" onclick="unpublishProduct('${id}')">🗑️ Unpublish</button>`}
+        <button class="btn" style="background:#f59e0b;color:#fff" onclick="openNeedRequest('${escapeAttribute(r.productId||'')}')">📢 এই পণ্য দরকার</button>
+      </div>
+    </div>`;
+  };
+
+  if(listings.length){
+    html += `<h3 style="margin:14px 4px 8px">🛍️ অন্য Userদের পণ্য</h3>`;
+    listings.forEach(x=>{html += renderListing(x.id,x.r,false);});
+  }
+  if(mine.length){
+    html += `<h3 style="margin:14px 4px 8px">📢 আমার Published Products</h3>`;
+    mine.forEach(x=>{html += renderListing(x.id,x.r,true);});
+  }
+
+  content.innerHTML=html;
 };
-
 
 /* =================================================
 PRODUCT DETAILS
@@ -3401,6 +3405,122 @@ window.productDetails = async function(id){
 
 };
 
+
+window.publishedProductDetails = async function(listingId){
+  const snap=await get(ref(db,"publishedProducts/"+listingId));
+  if(!snap.exists()) return alert("❌ Published Product পাওয়া যায়নি।");
+  const r=snap.val()||{};
+  const max=Number(r.maxPrice||0);
+  alert(
+    "📦 "+(r.productName||"Product")+
+    "\n👤 Seller: "+(r.sellerName||"User")+
+    "\n📱 Mobile: "+(r.sellerPhone||"")+
+    "\n🔢 Available for sale: "+Number(r.quantity||0)+" টি"+
+    "\n💰 Seller Price: ৳"+Number(r.price||0).toFixed(2)+
+    "\n🔒 Admin Maximum: ৳"+max.toFixed(2)
+  );
+};
+
+/* =================================================
+USER PRODUCT PUBLISH
+================================================= */
+window.openPublish = async function(productId){
+  if(!currentUser) return alert("❌ আগে Login করুন।");
+  const [uSnap,pSnap]=await Promise.all([
+    get(ref(db,"users/"+currentUser.uid)),
+    get(ref(db,"products/"+productId))
+  ]);
+  if(!uSnap.exists()||!pSnap.exists()) return alert("❌ Product/User তথ্য পাওয়া যায়নি।");
+  const u=uSnap.val()||{}, p=pSnap.val()||{};
+  const stock=getQty(u.stock?.[productId]);
+  const max=Number(p.userToUserMaxPrice ?? p.userToUserRate ?? p.userSellPrice ?? 0);
+  if(stock<=0) return alert("❌ এই Product আপনার Stock-এ নেই।");
+  if(max<=0) return alert("❌ Admin এই Product-এর সর্বোচ্চ User Sell Price সেট করেননি।");
+  selectedPublish={productId,product:p,available:stock,maxPrice:max};
+  document.getElementById("publishInfo").innerHTML=`<div class="card"><b>📦 ${escapeHtml(p.name||"Product")}</b><p>আপনার Stock: <b>${stock} টি</b></p><p>Admin Maximum Price: <b>৳${max.toFixed(2)}</b></p><p class="small">আপনি এই দামের সমান বা কম দামে নিজের Product Publish করতে পারবেন।</p></div>`;
+  document.getElementById("publishQty").value=1;
+  document.getElementById("publishQty").max=stock;
+  document.getElementById("publishPrice").value=max.toFixed(2);
+  calculatePublish();
+  document.getElementById("publishModal").classList.remove("hidden");
+};
+
+window.calculatePublish=function(){
+  if(!selectedPublish) return;
+  const qty=Number(document.getElementById("publishQty")?.value||0);
+  const price=Number(document.getElementById("publishPrice")?.value||0);
+  const total=qty>0&&price>0?qty*price:0;
+  document.getElementById("publishTotal").innerHTML=`💰 মোট সম্ভাব্য বিক্রি: <b>৳${total.toFixed(2)}</b>`;
+};
+
+window.confirmPublish=async function(){
+  if(!currentUser||!selectedPublish) return;
+  try{
+    const qty=Number(document.getElementById("publishQty").value||0);
+    const price=Number(document.getElementById("publishPrice").value||0);
+    if(!Number.isInteger(qty)||qty<=0) throw new Error("সঠিক Quantity দিন।");
+    if(qty>selectedPublish.available) throw new Error("আপনার Stock-এর চেয়ে বেশি Quantity Publish করা যাবে না।");
+    if(!Number.isFinite(price)||price<=0) throw new Error("সঠিক Sell Price দিন।");
+    if(price>selectedPublish.maxPrice) throw new Error("Admin নির্ধারিত সর্বোচ্চ দামের বেশি Price দেওয়া যাবে না। সর্বোচ্চ: ৳"+selectedPublish.maxPrice.toFixed(2));
+    const [uSnap,pSnap]=await Promise.all([
+      get(ref(db,"users/"+currentUser.uid)),
+      get(ref(db,"products/"+selectedPublish.productId))
+    ]);
+    if(!uSnap.exists()||!pSnap.exists()) throw new Error("Product/User তথ্য পাওয়া যায়নি।");
+    const u=uSnap.val()||{}, p=pSnap.val()||{};
+    const stock=getQty(u.stock?.[selectedPublish.productId]);
+    const max=Number(p.userToUserMaxPrice ?? p.userToUserRate ?? p.userSellPrice ?? 0);
+    if(stock<qty) throw new Error("আপনার বর্তমান Stock কমে গেছে। আবার চেষ্টা করুন।");
+    if(price>max) throw new Error("Admin Maximum Price-এর বেশি দেওয়া যাবে না।");
+    const listingRef=push(ref(db,"publishedProducts"));
+    const updates={};
+    updates["users/"+currentUser.uid+"/stock/"+selectedPublish.productId]=stock-qty;
+    updates["publishedProducts/"+listingRef.key]={
+      listingId:listingRef.key,
+      sellerUid:currentUser.uid,
+      sellerName:u.name||"User",
+      sellerPhone:cleanPhone(u.phone||""),
+      productId:selectedPublish.productId,
+      productName:p.name||"Product",
+      category:p.category||"",
+      image:p.image||p.imageUrl||"",
+      quantity:qty,
+      price:Number(price.toFixed(2)),
+      maxPrice:Number(max.toFixed(2)),
+      active:true,
+      createdAt:Date.now(),
+      updatedAt:Date.now()
+    };
+    await update(ref(db),updates);
+    closeModal("publishModal");
+    selectedPublish=null;
+    alert("✅ আপনার Product সফলভাবে Publish হয়েছে।\n\n📦 Quantity: "+qty+" টি\n💰 Price: ৳"+price.toFixed(2)+" / পিস\n🔒 Admin Maximum: ৳"+max.toFixed(2)+"\n🧾 User-to-User Sell Fee: 10% (সেটিং অনুযায়ী)");
+    productsPage();
+  }catch(e){alert("❌ Publish করা যায়নি।\n"+(e?.message||"Unknown error"));}
+};
+
+window.unpublishProduct=async function(listingId){
+  try{
+    const rRef=ref(db,"publishedProducts/"+listingId), snap=await get(rRef);
+    if(!snap.exists()) return alert("❌ Published Product পাওয়া যায়নি।");
+    const r=snap.val()||{};
+    if(r.sellerUid!==currentUser.uid) return alert("❌ এই Product আপনার নয়।");
+    if(!confirm("এই Product-এর Publish বন্ধ করবেন?\n\nঅবশিষ্ট Published Quantity আপনার My Stock-এ ফেরত যাবে।")) return;
+    const uSnap=await get(ref(db,"users/"+currentUser.uid));
+    if(!uSnap.exists()) throw new Error("আপনার User Account পাওয়া যায়নি।");
+    const u=uSnap.val()||{};
+    const oldStock=getQty(u.stock?.[r.productId]);
+    const remaining=Math.max(0,Number(r.quantity||0));
+    const updates={};
+    updates["users/"+currentUser.uid+"/stock/"+r.productId]=oldStock+remaining;
+    updates["publishedProducts/"+listingId+"/quantity"]=0;
+    updates["publishedProducts/"+listingId+"/active"]=false;
+    updates["publishedProducts/"+listingId+"/updatedAt"]=Date.now();
+    await update(ref(db),updates);
+    alert("✅ Product Unpublish হয়েছে।\n\n📦 অবশিষ্ট "+remaining+" টি আপনার My Stock-এ ফেরত গেছে।");
+    productsPage();
+  }catch(e){alert("❌ Unpublish করা যায়নি।\n"+(e?.message||"Unknown error"));}
+};
 
 /* =================================================
 OPEN BUY
@@ -3464,13 +3584,10 @@ window.openBuy = async function(id){
 
 
   selectedBuy = {
-
+    kind:"admin",
     id:id,
-
     product:p,
-
     price:price
-
   };
 
 
@@ -3519,6 +3636,22 @@ window.openBuy = async function(id){
 
 };
 
+
+window.openPublishedBuy=async function(listingId){
+  const snap=await get(ref(db,"publishedProducts/"+listingId));
+  if(!snap.exists()) return alert("❌ Published Product পাওয়া যায়নি।");
+  const r=snap.val()||{};
+  if(r.sellerUid===currentUser.uid) return alert("❌ নিজের Product নিজে কিনতে পারবেন না।");
+  if(r.active===false || Number(r.quantity||0)<=0) return alert("❌ এই Product এখন Available নেই।");
+  const price=Number(r.price||0);
+  if(price<=0) return alert("❌ Seller Price সঠিক নয়।");
+  selectedBuy={kind:"userListing",listingId,productId:r.productId,product:{name:r.productName||"Product",image:r.image||""},price,sellerUid:r.sellerUid,sellerName:r.sellerName||"User",sellerPhone:r.sellerPhone||"",listingQuantity:Number(r.quantity||0)};
+  document.getElementById("buyQty").value=1;
+  document.getElementById("buyQty").max=Number(r.quantity||0);
+  document.getElementById("buyInfo").innerHTML=`<div class="card"><b>📦 ${escapeHtml(r.productName||"Product")}</b><p>👤 Seller: <b>${escapeHtml(r.sellerName||"User")}</b></p><p>📱 ${escapeHtml(r.sellerPhone||"")}</p><p>প্রতি পিস: <b>৳${price.toFixed(2)}</b></p><p>Available: <b>${Number(r.quantity||0)} টি</b></p><p class="small">এটি User Product। Buy করলে Seller-এর কাছে Purchase Request যাবে। Seller Transfer সম্পন্ন করলে Product আপনার Stock-এ যোগ হবে।</p></div>`;
+  calculateBuy();
+  document.getElementById("buyModal").classList.remove("hidden");
+};
 
 /* =================================================
 CALCULATE BUY
@@ -3591,13 +3724,49 @@ window.confirmBuy = async function(){
   }
 
 
-  const productId =
-    selectedBuy.id;
+  if(selectedBuy.kind === "userListing"){
+    try{
+      const listingSnap=await get(ref(db,"publishedProducts/"+selectedBuy.listingId));
+      if(!listingSnap.exists()) throw new Error("Published Product পাওয়া যায়নি।");
+      const listing=listingSnap.val()||{};
+      if(listing.active===false) throw new Error("Seller Product Unpublish করেছেন।");
+      const available=Number(listing.quantity||0);
+      if(available<qty) throw new Error("Seller-এর প্রকাশিত Stock এখন এতটি নেই।");
+      const price=Number(listing.price||0), total=qty*price;
+      if(price<=0) throw new Error("Seller Price সঠিক নয়।");
+      const buyerSnap=await get(ref(db,"users/"+currentUser.uid));
+      if(!buyerSnap.exists()) throw new Error("Buyer Account পাওয়া যায়নি।");
+      const buyer=buyerSnap.val()||{};
+      if(Number(buyer.balance||0)<total) throw new Error("আপনার Balance যথেষ্ট নয়।");
+      if(!confirm("🛒 User Product কিনতে Request পাঠাবেন?\n\nSeller: "+(listing.sellerName||"User")+"\nProduct: "+(listing.productName||"Product")+"\nQuantity: "+qty+"\nRate: ৳"+price.toFixed(2)+"\nমোট: ৳"+total.toFixed(2)+"\n\nBuyer Accept করার পর আপনার Balance থেকে টাকা কাটা হবে এবং Seller-এর Transfer সম্পন্ন হলে Product আপনার Stock-এ যোগ হবে।")) return;
+      const requestRef=push(ref(db,"productRequests"));
+      await set(requestRef,{
+        requestId:requestRef.key,
+        requestType:"publicListing",
+        listingId:selectedBuy.listingId,
+        sellerUid:listing.sellerUid,
+        sellerName:listing.sellerName||"User",
+        sellerPhone:listing.sellerPhone||"",
+        buyerUid:currentUser.uid,
+        buyerName:buyer.name||"User",
+        buyerPhone:buyer.phone||"",
+        productId:listing.productId,
+        productName:listing.productName||"Product",
+        quantity:qty,
+        price,
+        total,
+        status:"pending",
+        createdAt:Date.now()
+      });
+      closeModal("buyModal");
+      alert("✅ Purchase Request পাঠানো হয়েছে।\n\nSeller-এর কাছে আপনার Request গেছে। Request Accept করার পর Product Transfer হবে।");
+      requestsPage();
+    }catch(e){alert("❌ Purchase Request পাঠানো যায়নি।\n"+(e?.message||"Unknown error"));}
+    return;
+  }
 
-
-  const total =
-    qty * selectedBuy.price;
-
+  const productId = selectedBuy.id;
+  const total = qty * selectedBuy.price;
 
   try{
 
@@ -3790,6 +3959,7 @@ MY STOCK
 ================================================= */
 
 window.myStockPage = async function(){
+  showInnerMode("🧺 My Stock");
 
   setActiveNav("navStock");
 
@@ -3876,10 +4046,7 @@ window.myStockPage = async function(){
               </div>
 
               <div class="small">
-
-                User Sell:
-                ৳${getUserToUserRate(p).toFixed(2)}
-
+                🔒 Admin Max User Sell Price: ৳${getUserToUserRate(p).toFixed(2)}
               </div>
 
               <div class="small">
@@ -3898,16 +4065,8 @@ window.myStockPage = async function(){
             </div>
 
 
-            <button
-              class="btn purpleBtn"
-              style="width:auto"
-              onclick="
-                openSell('${productId}')
-              ">
-
-              🔄 Sell
-
-            </button>
+            <button class="btn purpleBtn" style="width:auto" onclick="openSell('${productId}')">🔄 Sell</button>
+            <button class="btn cyanBtn" style="width:auto" onclick="openPublish('${productId}')">📢 Publish</button>
 
           </div>
 
@@ -3950,6 +4109,7 @@ SELL PAGE
 ================================================= */
 
 window.sellPage = async function(){
+  showInnerMode("🔄 Sell");
 
   const userSnap =
     await get(
@@ -4030,12 +4190,7 @@ window.sellPage = async function(){
             </div>
 
             <div class="small">
-
-              👤 User Sell Rate:
-              <b>
-                ৳${getUserToUserRate(p).toFixed(2)}
-              </b>
-
+              🔒 Admin Max User Sell Price: <b>৳${getUserToUserRate(p).toFixed(2)}</b>
             </div>
 
             <div class="small">
@@ -4049,15 +4204,8 @@ window.sellPage = async function(){
 
             <br>
 
-            <button
-              class="btn purpleBtn"
-              onclick="
-                openSell('${id}')
-              ">
-
-              🔄 Sell করুন
-
-            </button>
+            <button class="btn purpleBtn" onclick="openSell('${id}')">🔄 Sell করুন</button>
+            <button class="btn cyanBtn" onclick="openPublish('${id}')">📢 Publish করুন</button>
 
           </div>
 
@@ -4164,38 +4312,16 @@ window.openSell = async function(productId){
   }
 
 
-  const userRate = getUserToUserRate(p);
-
-
+  const userMaxPrice = getUserToUserRate(p);
   const adminRate = getUserToAdminRate(p);
-
-
-  if(
-    userRate <= 0 &&
-    adminRate <= 0
-  ){
-
-    alert(
-      "❌ Sell Rate সেট করা নেই।"
-    );
-
-    return;
-
-  }
-
+  if(userMaxPrice<=0 && adminRate<=0) return alert("❌ Sell Price/Maximum Price সেট করা নেই।");
 
   selectedSell = {
-
     id:productId,
-
     product:p,
-
     available:available,
-
-    userRate:userRate,
-
+    userMaxPrice:userMaxPrice,
     adminRate:adminRate
-
   };
 
 
@@ -4217,10 +4343,8 @@ window.openSell = async function(productId){
         </p>
 
         <p>
-          👤 User Rate:
-          <b>
-            ৳${userRate.toFixed(2)}
-          </b>
+          🔒 User Sell-এর সর্বোচ্চ দাম:
+          <b>৳${userMaxPrice.toFixed(2)}</b>
         </p>
 
         <p>
@@ -4240,9 +4364,11 @@ window.openSell = async function(productId){
     .value = 1;
 
 
-  document
-    .getElementById("sellType")
-    .value = "admin";
+  document.getElementById("sellType").value = "admin";
+  document.getElementById("buyerBox").classList.add("hidden");
+  document.getElementById("userSellPriceBox").classList.add("hidden");
+  document.getElementById("sellUserPrice").value = userMaxPrice>0 ? userMaxPrice.toFixed(2) : "0";
+  document.getElementById("sellUserMaxPrice").textContent = "৳"+userMaxPrice.toFixed(2);
 
 
   document
@@ -4295,17 +4421,11 @@ document
     function(){
 
       if(this.value === "user"){
-
-        document
-          .getElementById("buyerBox")
-          .classList.remove("hidden");
-
+        document.getElementById("buyerBox").classList.remove("hidden");
+        document.getElementById("userSellPriceBox").classList.remove("hidden");
       }else{
-
-        document
-          .getElementById("buyerBox")
-          .classList.add("hidden");
-
+        document.getElementById("buyerBox").classList.add("hidden");
+        document.getElementById("userSellPriceBox").classList.add("hidden");
       }
 
       calculateSell();
@@ -4639,10 +4759,8 @@ window.calculateSell = function(){
     );
 
 
-  const rate =
-    type === "admin"
-      ? Number(selectedSell?.adminRate || 0)
-      : Number(selectedSell?.userRate || 0);
+  const rate = type === "admin" ? Number(selectedSell?.adminRate||0) : Number(document.getElementById("sellUserPrice")?.value||0);
+  if(type === "user" && rate > Number(selectedSell?.userMaxPrice||0)) return alert("❌ Admin নির্ধারিত সর্বোচ্চ দামের বেশি Sell Price দেওয়া যাবে না। সর্বোচ্চ: ৳"+Number(selectedSell?.userMaxPrice||0).toFixed(2));
 
 
   const total =
@@ -5136,9 +5254,8 @@ window.confirmSell = async function(){
         quantity:qty,
 
         price:rate,
-
+        maxAllowedPrice:Number(selectedSell?.userMaxPrice||0),
         total:total,
-
         status:"pending",
 
         createdAt:Date.now()
@@ -5205,6 +5322,7 @@ window.openNeedRequest = function(productId=""){
 };
 
 window.requestsPage = async function(){
+  showInnerMode("🔔 Requests");
 
   if(!currentUser){
     alert("❌ আগে Login করুন।");
@@ -5296,7 +5414,7 @@ window.requestsPage = async function(){
     html += `
       <div class="card" style="margin-top:14px">
         <h3>🔄 আপনার User-to-User Sell Requests</h3>
-        <p class="small">এখানে আগের Sell System-এর Request/Status দেখা যাবে। User-to-User Sell Rate আগের নিয়মেই থাকবে।</p>
+        <p class="small">এখানে User-to-User Sell এবং Published Product-এর Purchase Request/Status দেখা যাবে। User নিজের Price নির্ধারণ করবে, তবে Admin Maximum Price-এর বেশি দিতে পারবে না।</p>
       </div>
     `;
 
@@ -5316,14 +5434,14 @@ window.requestsPage = async function(){
             <b>📦 ${escapeHtml(r.productName||"Product")}</b>
             <p>👤 Seller: ${escapeHtml(r.sellerName||"")} </p>
             <p>👤 Buyer: ${escapeHtml(r.buyerName||"")} </p>
-            <p>🔢 ${Number(r.quantity||0)} টি × ৳${Number(r.price||0).toFixed(2)}</p>
+            <p>🔢 ${Number(r.quantity||0)} টি × ৳${Number(r.price||0).toFixed(2)} ${r.requestType==="publicListing"?"(Published Product)":""}</p>
             <p>💰 মোট: <b>৳${Number(r.total||0).toFixed(2)}</b></p>
             <p><b>${statusText}</b></p>
             ${incoming ? `<div class="requestButtons">
               <button class="btn redBtn" onclick="rejectRequest('${id}')">❌ না</button>
               <button class="btn greenBtn" onclick="acceptRequest('${id}')">✅ হ্যাঁ</button>
             </div>` : ""}
-            ${sellerComplete ? `<p class="small" style="color:#15803d">⏳ Buyer গ্রহণ করেছে। Seller-এর Stock/Balance এবং Buyer-এর Stock Transfer হচ্ছে।</p><button class="btn greenBtn" onclick="completeRequest('${id}',false)">✅ Sell Complete / Transfer করুন</button>` : ""}
+            ${sellerComplete ? `<p class="small" style="color:#15803d">⏳ Buyer গ্রহণ করেছে। Seller-এর Stock/Balance এবং Buyer-এর Stock Transfer হচ্ছে। Published Product হলে Publish করা Quantity থেকেই কমবে।</p><button class="btn greenBtn" onclick="completeRequest('${id}',false)">✅ Sell Complete / Transfer করুন</button>` : ""}
           </div>
         `;
       });
@@ -5450,6 +5568,13 @@ window.acceptRequest = async function(requestId){
     const buyer=buyerSnap.val()||{};
     const total=Number(r.total||0), qty=Number(r.quantity||0);
     if(!Number.isInteger(qty)||qty<=0) throw new Error("Quantity সঠিক নয়।");
+    if(r.requestType==="publicListing") {
+      const lSnap=await get(ref(db,"publishedProducts/"+r.listingId));
+      if(!lSnap.exists()) throw new Error("Published Product আর নেই।");
+      const l=lSnap.val()||{};
+      if(l.active===false || Number(l.quantity||0)<qty) throw new Error("Seller-এর Published Stock এখন পর্যাপ্ত নেই।");
+      if(Number(l.price||0)!==Number(r.price||0)) throw new Error("Seller Price পরিবর্তিত হয়েছে। আবার নতুন করে Purchase Request পাঠান।");
+    }
     if(total<=0) throw new Error("Total amount সঠিক নয়।");
     if(Number(buyer.balance||0)<total)
       return alert("❌ আপনার Balance যথেষ্ট নয়।\n\nপ্রয়োজন: ৳"+total.toFixed(2)+"\nআপনার Balance: ৳"+Number(buyer.balance||0).toFixed(2));
@@ -5569,7 +5694,15 @@ window.completeRequest = async function(requestId,autoMode=false){
     const netTotal=Number((total-fee).toFixed(2));
     const stock=getQty(seller.stock?.[r.productId]);
     if(!Number.isInteger(qty)||qty<=0) throw new Error("Quantity সঠিক নয়।");
-    if(stock<qty) return alert("❌ আপনার Stock-এ এই Product-এর পর্যাপ্ত পরিমাণ নেই। Request বাতিল/সমাধান করুন।");
+    let publicListing=null;
+    if(r.requestType==="publicListing") {
+      const lSnap=await get(ref(db,"publishedProducts/"+r.listingId));
+      if(!lSnap.exists()) throw new Error("Published Product আর নেই।");
+      publicListing=lSnap.val()||{};
+      if(publicListing.active===false || Number(publicListing.quantity||0)<qty) throw new Error("Published listing-এ এখন পর্যাপ্ত Quantity নেই।");
+    } else if(stock<qty) {
+      return alert("❌ আপনার Stock-এ এই Product-এর পর্যাপ্ত পরিমাণ নেই। Request বাতিল/সমাধান করুন।");
+    }
 
     if(!autoMode){
       if(!confirm("✅ Sell Complete করবেন?\n\nBuyer: "+(r.buyerName||"User")+"\nProduct: "+(r.productName||"Product")+"\nQuantity: "+qty+"\nমোট Sell: ৳"+total.toFixed(2)+"\nFee ("+feePercent+"%): ৳"+fee.toFixed(2)+"\nআপনি পাবেন: ৳"+netTotal.toFixed(2)+"\n\nFee সফল Sell-এর সময় কাটা হবে এবং Stock কমবে।")) return;
@@ -5578,7 +5711,7 @@ window.completeRequest = async function(requestId,autoMode=false){
     const txId=push(ref(db,"transactions")).key;
     const updates={};
     updates["users/"+currentUser.uid+"/balance"]=Number(seller.balance||0)+netTotal;
-    updates["users/"+currentUser.uid+"/stock/"+r.productId]=stock-qty;
+    if(r.requestType!=="publicListing") updates["users/"+currentUser.uid+"/stock/"+r.productId]=stock-qty;
     updates["productRequests/"+requestId+"/status"]="completed";
     updates["productRequests/"+requestId+"/completedAt"]=Date.now();
     updates["productRequests/"+requestId+"/sellerStockDebited"]=true;
@@ -5586,6 +5719,12 @@ window.completeRequest = async function(requestId,autoMode=false){
     updates["productRequests/"+requestId+"/feePercent"]=feePercent;
     updates["productRequests/"+requestId+"/fee"]=fee;
     updates["productRequests/"+requestId+"/netTotal"]=netTotal;
+    if(r.requestType==="publicListing" && publicListing){
+      const left=Math.max(0,Number(publicListing.quantity||0)-qty);
+      updates["publishedProducts/"+r.listingId+"/quantity"]=left;
+      updates["publishedProducts/"+r.listingId+"/active"]=left>0;
+      updates["publishedProducts/"+r.listingId+"/updatedAt"]=Date.now();
+    }
     updates["transactions/"+txId]={
       uid:currentUser.uid,
       type:"user_sell_to_user",
@@ -5747,6 +5886,7 @@ window.copyDepositNumber = async function(number){
 };
 
 window.depositPage = async function(){
+  showInnerMode("💰 Deposit");
 
   if(!currentUser){
 
@@ -6705,6 +6845,7 @@ WITHDRAW PAGE
 ================================================= */
 
 window.withdrawPage = async function(){
+  showInnerMode("💸 Withdraw");
 
   if(!currentUser){
 
@@ -7812,14 +7953,15 @@ function renderStatusBadge(status,type){
 }
 
 window.depositHistoryPage = async function(){
+  showInnerMode("💰 Deposit History");
   if(!currentUser){alert("❌ আগে Login করুন।");return;}
   setActiveNav("navHistory");
   content.innerHTML=`<h2 class="historyPageTitle">💰 Deposit History</h2><div class="card">⏳ Deposit History লোড হচ্ছে...</div>`;
   try{
-    const snap=await get(ref(db,"deposits"));
-    const list=snap.exists()?Object.entries(snap.val()||{}).filter(([id,d])=>d&&d.uid===currentUser.uid).sort((a,b)=>Number(b[1].createdAt||0)-Number(a[1].createdAt||0)):[];
+    const snap=await get(ref(db,"deposits").orderByChild("uid").equalTo(currentUser.uid).limitToLast(10));
+    const list=snap.exists()?Object.entries(snap.val()||{}).sort((a,b)=>Number(b[1].createdAt||0)-Number(a[1].createdAt||0)).slice(0,10):[];
     let html=`<h2 class="historyPageTitle">💰 Deposit History</h2>`;
-    html+=`<button class="btn" style="margin-bottom:10px" onclick="dashboard()">← Dashboard</button>`;
+    html+=`<button class="btn" style="margin-bottom:10px" onclick="dashboard()">← হোম</button>`;
     if(!list.length){content.innerHTML=html+`<div class="card">📭 এখনো কোনো Deposit History নেই।</div>`;return;}
     list.forEach(([id,d])=>{
       html+=`<div class="transaction">
@@ -7835,14 +7977,15 @@ window.depositHistoryPage = async function(){
 };
 
 window.withdrawHistoryPage = async function(){
+  showInnerMode("💸 Withdraw History");
   if(!currentUser){alert("❌ আগে Login করুন।");return;}
   setActiveNav("navHistory");
   content.innerHTML=`<h2 class="historyPageTitle">💸 Withdraw History</h2><div class="card">⏳ Withdraw History লোড হচ্ছে...</div>`;
   try{
-    const snap=await get(ref(db,"withdrawals"));
-    const list=snap.exists()?Object.entries(snap.val()||{}).filter(([id,w])=>w&&w.uid===currentUser.uid).sort((a,b)=>Number(b[1].createdAt||0)-Number(a[1].createdAt||0)):[];
+    const snap=await get(ref(db,"withdrawals").orderByChild("uid").equalTo(currentUser.uid).limitToLast(10));
+    const list=snap.exists()?Object.entries(snap.val()||{}).sort((a,b)=>Number(b[1].createdAt||0)-Number(a[1].createdAt||0)).slice(0,10):[];
     let html=`<h2 class="historyPageTitle">💸 Withdraw History</h2>`;
-    html+=`<button class="btn" style="margin-bottom:10px" onclick="dashboard()">← Dashboard</button>`;
+    html+=`<button class="btn" style="margin-bottom:10px" onclick="dashboard()">← হোম</button>`;
     if(!list.length){content.innerHTML=html+`<div class="card">📭 এখনো কোনো Withdraw History নেই।</div>`;return;}
     list.forEach(([id,w])=>{
       html+=`<div class="transaction">
@@ -7863,22 +8006,36 @@ TRANSACTIONS
 ================================================= */
 
 window.transactionsPage = async function(){
+  showInnerMode("📜 History");
 
   setActiveNav("navHistory");
 
 
-  const snap =
-    await get(
-      ref(db,"transactions")
-    );
-
+  // User App-এ একবারে সর্বোচ্চ ১০টি সর্বশেষ transaction load হবে।
+  // Firebase-এর পুরো transactions node আর download করা হবে না।
+  const uid=currentUser.uid;
+  const [uidSnap,sellerSnap,buyerSnap]=await Promise.all([
+    get(ref(db,"transactions").orderByChild("uid").equalTo(uid).limitToLast(10)),
+    get(ref(db,"transactions").orderByChild("sellerUid").equalTo(uid).limitToLast(10)),
+    get(ref(db,"transactions").orderByChild("buyerUid").equalTo(uid).limitToLast(10))
+  ]);
 
   let html =
-    "<h2>📜 Transaction History</h2>";
+    `<h2>📜 Transaction History</h2><div class="small" style="margin-bottom:10px">সর্বশেষ ১০টি Transaction দেখানো হচ্ছে। পুরোনো রেকর্ড Firebase-এ নিরাপদে সংরক্ষিত থাকবে।</div>`;
 
+  const merged={};
+  [uidSnap,sellerSnap,buyerSnap].forEach(snap=>{
+    if(!snap.exists()) return;
+    Object.entries(snap.val()||{}).forEach(([id,t])=>{
+      if(t) merged[id]=t;
+    });
+  });
 
-  if(!snap.exists()){
+  const list=Object.entries(merged)
+    .sort((a,b)=>Number(b[1]?.createdAt||b[1]?.timestamp||0)-Number(a[1]?.createdAt||a[1]?.timestamp||0))
+    .slice(0,10);
 
+  if(!list.length){
     content.innerHTML =
       html +
       `
@@ -7886,35 +8043,8 @@ window.transactionsPage = async function(){
         কোনো Transaction নেই।
       </div>
       `;
-
     return;
-
   }
-
-
-  const list =
-    Object.entries(
-      snap.val()
-    )
-    .filter(
-      ([id,t]) => {
-
-        return (
-
-          t.uid ===
-            currentUser.uid ||
-
-          t.sellerUid ===
-            currentUser.uid ||
-
-          t.buyerUid ===
-            currentUser.uid
-
-        );
-
-      }
-    )
-    .reverse();
 
 
   if(!list.length){
@@ -8062,6 +8192,7 @@ PROFILE
 ================================================= */
 
 window.profilePage = async function(){
+  showInnerMode("👤 Profile");
 
   setActiveNav("navProfile");
 
@@ -8960,6 +9091,101 @@ window.closeModal = function(id){
     .classList.add("hidden");
 
 };
+
+
+/* =================================================
+CLEAN HOME / SUBPAGE NAVIGATION
+Keeps existing business/Firebase functions intact.
+================================================= */
+(function(){
+  const menu=document.querySelector('.menu');
+  const content=document.getElementById('content');
+  const app=document.getElementById('app');
+  if(!menu || !content || !app) return;
+
+  const titles={
+    productsPage:'📦 Products',
+    myStockPage:'🧺 My Stock',
+    sellPage:'🔄 Sell',
+    depositPage:'💰 Deposit',
+    withdrawPage:'💸 Withdraw',
+    transactionsPage:'📜 History',
+    depositHistoryPage:'💰 ডিপোজিট হিস্ট্রি',
+    withdrawHistoryPage:'💸 উত্তোলন হিস্ট্রি',
+    requestsPage:'🔔 Requests',
+    profilePage:'👤 Profile',
+    referralPage:'🎁 Referral'
+  };
+
+  let installed=false;
+  let inSubPage=false;
+
+  function cleanupBack(){
+    document.querySelectorAll('[data-dynamic-back="1"]').forEach(x=>x.remove());
+  }
+
+  function showHomeChrome(){
+    inSubPage=false;
+    app.classList.remove('inner-mode');
+    menu.style.display='grid';
+    cleanupBack();
+  }
+
+  function showSubChrome(name){
+    inSubPage=true;
+    app.classList.add('inner-mode');
+    menu.style.display='none';
+    cleanupBack();
+    const bar=document.createElement('div');
+    bar.setAttribute('data-dynamic-back','1');
+    bar.className='pageBackBarDynamic';
+    bar.innerHTML=`<button type="button" class="pageBackBtnDynamic">← হোম</button><strong>${titles[name]||'পেজ'}</strong>`;
+    content.prepend(bar);
+    bar.querySelector('button').onclick=()=>{
+      history.replaceState({home:true},'',location.href.split('#')[0]);
+      if(typeof window.dashboard==='function') window.dashboard();
+    };
+  }
+
+  function wrap(name){
+    if(typeof window[name]!=='function') return;
+    const original=window[name];
+    window[name]=function(...args){
+      if(name==='dashboard'){
+        showHomeChrome();
+        return original.apply(this,args);
+      }
+      const result=original.apply(this,args);
+      const after=()=>{
+        showSubChrome(name);
+        history.pushState({subPage:name},'',location.href.split('#')[0]+'#'+name);
+        return result;
+      };
+      if(result && typeof result.then==='function') return result.then(after);
+      return after();
+    };
+  }
+
+  function install(){
+    if(installed) return;
+    installed=true;
+    ['productsPage','myStockPage','sellPage','depositPage','withdrawPage','transactionsPage','depositHistoryPage','withdrawHistoryPage','requestsPage','profilePage','referralPage','dashboard'].forEach(wrap);
+    history.replaceState({home:true},'',location.href.split('#')[0]);
+  }
+
+  // Functions are declared before this final script executes.
+  install();
+
+  window.addEventListener('popstate',function(){
+    if(inSubPage && typeof window.dashboard==='function'){
+      history.replaceState({home:true},'',location.href.split('#')[0]);
+      window.dashboard();
+    }
+  });
+
+  // If page was loaded with a known subpage hash, still start safely at Home.
+  showHomeChrome();
+})();
 
 </script>
 
