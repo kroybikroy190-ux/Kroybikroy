@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>GameNest BD • Carrom Online</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#061126;--panel:#0a2145;--blue:#168cff;--purple:#6b27e8;--muted:#c9d8ee;--green:#16d66b}
+html,body{margin:0;background:radial-gradient(circle at 50% 0,#0b3270 0,#06152f 42%,#020817 100%);color:#fff;font-family:Arial,sans-serif}
+body{min-height:100vh}
+#app{width:min(100%,760px);margin:auto;padding:10px 10px 24px}
+.card{background:linear-gradient(135deg,#0b2348,#0a1833);border:1px solid #176bd0;border-radius:20px;padding:12px;margin-bottom:10px;box-shadow:0 8px 24px #0007}
+.top{display:flex;justify-content:space-between;align-items:center;gap:7px;background:linear-gradient(135deg,#084fb4,#102b63);border:1px solid #188cff;border-radius:18px;padding:8px 10px;box-shadow:0 8px 25px #0008}
+.topTitle{font-size:19px;font-weight:800;line-height:1.1}.topSub{color:#9ec8ff;font-size:10px;margin-top:3px}
+.roomBox{min-width:128px;text-align:center;background:#061a3a;border:1px solid #258fff;border-radius:15px;padding:5px 7px}.roomLabel{font-size:10px;color:#9ec8ff}.roomCode{font-size:18px;font-weight:900;letter-spacing:1px}.count{font-size:11px;color:#69f39c;margin-top:2px}
+.playerCard{display:grid;grid-template-columns:62px minmax(0,1fr);gap:9px;align-items:center;padding:6px 8px;border-radius:16px;margin:5px 0;background:linear-gradient(135deg,#084d9f,#0d2e63);border:1px solid #1994ff;box-shadow:0 7px 20px #0007}
+.playerCard.p2{background:linear-gradient(135deg,#3b11a4,#5a20dd);border-color:#8f5cff}
+.avatarBig{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;background:#6c432e;border:3px solid #22a0ff;overflow:hidden}.p2 .avatarBig{border-color:#c084ff}
+.avatarBig img{width:100%;height:100%;object-fit:cover}.pInfo{min-width:0}.pTop{display:flex;justify-content:space-between;gap:6px;align-items:center}.pName{font-size:17px;font-weight:900}.online{font-size:11px;color:#6aff9a}.pId{font-size:11px;color:#c8dcf7;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:5px}.detail{background:#061735aa;border:1px solid #2875bd;border-radius:11px;padding:7px 8px;min-width:0}.detailLabel{font-size:10px;color:#a9c6e8}.detailValue{font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.joined{color:#65f59a}.colorDot{display:inline-block;width:13px;height:13px;border-radius:50%;vertical-align:-2px;border:1px solid #999;margin-right:4px}.blackDot{background:#111}.whiteDot{background:#fff}
+.vs{height:18px;display:flex;align-items:center;justify-content:center;margin:2px auto;color:#fff;font-size:17px;font-weight:900}.vs span{background:linear-gradient(135deg,#123c78,#2d116d);border:2px solid #47aaff;border-radius:9px;padding:2px 10px;box-shadow:0 0 14px #168cff66}
+.boardTitle{text-align:center;color:#cfe7ff;font-weight:800;font-size:12px;margin:2px auto 2px;letter-spacing:.4px}.boardWrap{position:relative;width:min(92vw,500px);margin:6px auto 8px;padding:5px;border-radius:22px;background:linear-gradient(135deg,#0b6bcf,#5a21c8,#0b6bcf);box-shadow:0 12px 30px #0009}.boardInner{background:#241108;border-radius:18px;padding:4px}.boardInner canvas{width:100%;height:auto;display:block;border-radius:14px;touch-action:none}
+#game{display:block}#msg{min-height:20px;color:#e9c9a7;font-size:13px;margin-top:6px}
+input{width:100%;background:#120d0a;color:#fff;border:1px solid #6b4734;border-radius:10px;padding:12px;margin:5px 0}button{background:#c97932;color:#fff;border:0;border-radius:10px;padding:11px 14px;font-weight:700;margin:4px;cursor:pointer}.small{font-size:11px;color:#bfaea1}.muted{color:#b9cbe3;font-size:12px;line-height:1.5}
+.claimbox{background:#10243a;border:1px solid #2a8cff;border-radius:14px;padding:12px;margin-top:10px}.claimbox input[type=file]{background:#091625;border:1px solid #2a4968;border-radius:10px;padding:8px;width:100%;color:#fff}.claimbox button{width:100%;margin:6px 0 0}
+.matchJoin{padding:12px}.joinTitle{font-size:17px;font-weight:900;margin-bottom:5px}.joinBtns{display:grid;grid-template-columns:1fr 1fr;gap:6px}.joinBtns button{margin:0;font-size:13px}.matchJoin input{font-size:16px;text-transform:uppercase}.matchJoin input:focus{outline:2px solid #42a5ff;border-color:#42a5ff}.matchInfo{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.matchInfo .badge{background:#061735;border:1px solid #2869aa;border-radius:12px;padding:9px;color:#dceeff;font-size:12px}.matchInfo b{font-size:14px}
+@media(max-width:420px){#app{padding:4px 6px 18px}.top{padding:7px 8px;border-radius:16px}.topTitle{font-size:16px}.topSub{font-size:9px}.roomBox{min-width:108px;padding:4px 6px}.roomLabel{font-size:9px}.roomCode{font-size:15px}.count{font-size:10px}.playerCard{grid-template-columns:43px minmax(0,1fr);padding:5px 6px;margin:4px 0;border-radius:15px}.avatarBig{width:40px;height:40px;font-size:18px}.pName{font-size:14px}.pId{font-size:9px}.details{gap:3px;margin-top:4px}.detail{padding:4px 5px;border-radius:8px}.detailLabel{font-size:8px}.detailValue{font-size:10px}.vs{height:16px;margin:0 auto}.vs span{padding:1px 8px;font-size:14px;border-width:1px}.boardWrap{width:min(94vw,390px);margin:4px auto 6px;padding:3px;border-radius:18px}.boardInner{padding:2px;border-radius:13px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="game">
+    <div class="top">
+      <div><div class="topTitle">👑 GameNest BD • Carrom</div><div class="topSub">Play • Win • Earn • Secure Match</div></div>
+      <div class="roomBox"><div class="roomLabel">Match / Room Code</div><div class="roomCode" id="roomCodeText">—</div><div class="count">🟢 <span id="playerCount">0/2</span> Players</div></div>
+    </div>
+
+    <div class="card matchJoin">
+      <div class="joinTitle">🎟️ Auto Matchmaking</div>
+      <div class="muted">আপনার কেনা Package Code দিন। একই মূল্যের আরেকজন ইউজার খুঁজে পেলে Firebase অটোমেটিক ম্যাচ তৈরি করবে। আলাদা Match Code পাঠাতে হবে না।</div>
+      <input id="packageCodeInput" type="text" inputmode="text" autocomplete="off" placeholder="আপনার Package Code" aria-label="Package Code">
+      <div class="joinBtns"><button id="findMatchBtn" type="button">🔎 প্রতিপক্ষ খুঁজুন</button><button id="cancelMatchBtn" type="button" style="background:#45546b" disabled>✖ অপেক্ষা বাতিল</button></div>
+      <div class="small">ম্যাচ না পাওয়া পর্যন্ত প্যাকেজ ব্যবহার হবে না। ম্যাচ নিশ্চিত হলে এই প্যাকেজ অন্য ম্যাচে ব্যবহার করা যাবে না।</div>
+    </div>
+
+    <div id="player2Card" class="playerCard p2">
+      <div class="avatarBig">2</div><div class="pInfo"><div class="pTop"><div class="pName">Player 2</div><div class="online">● অপেক্ষা</div></div><div class="pId">User ID: —</div><div class="details"><div class="detail"><div class="detailLabel">🎟️ Package Code</div><div class="detailValue" data-package>—</div></div><div class="detail"><div class="detailLabel">🆔 Match Code</div><div class="detailValue" data-room>—</div></div><div class="detail"><div class="detailLabel">💰 Entry</div><div class="detailValue" data-bet>৳0</div></div><div class="detail"><div class="detailLabel">🎨 রঙ</div><div class="detailValue" data-color><span class="colorDot whiteDot"></span>সাদা</div></div></div></div>
+    </div>
+
+    <div class="vs"><span>VS</span></div>
+
+    <div class="boardTitle">🎯 Carrom</div><div class="boardWrap"><div class="boardInner"><canvas id="board" width="800" height="800"></canvas></div></div>
+
+    <div id="player1Card" class="playerCard">
+      <div class="avatarBig">1</div><div class="pInfo"><div class="pTop"><div class="pName">Player 1</div><div class="online">● অপেক্ষা</div></div><div class="pId">User ID: —</div><div class="details"><div class="detail"><div class="detailLabel">🎟️ Package Code</div><div class="detailValue" data-package>—</div></div><div class="detail"><div class="detailLabel">🆔 Match Code</div><div class="detailValue" data-room>—</div></div><div class="detail"><div class="detailLabel">💰 Entry</div><div class="detailValue" data-bet>৳0</div></div><div class="detail"><div class="detailLabel">🎨 রঙ</div><div class="detailValue" data-color><span class="colorDot blackDot"></span>কালো</div></div></div></div>
+    </div>
+
+    <div class="card matchHeader">
+      <div class="matchInfo"><div class="badge">🎟️ আপনার Package: <b id="packageCodeText">—</b></div><div class="badge">🆔 Match: <b id="roomCodeText2">—</b></div></div>
+      <div class="matchInfo"><div class="badge">💰 Entry: <b id="betText">৳0</b></div><div class="badge">🏆 Winner: <b id="prizeText">৳0</b></div></div>
+      <div id="roomText" class="muted">Package যাচাই হচ্ছে...</div>
+      <div id="gameMsg" class="muted">Package Code থেকেই Entry Amount নির্ধারিত। কোনো Amount Input নেই।</div><div id="claimArea"></div>
+    </div>
+
+    <div class="card">
+      <b>Game Rules</b>
+      <div class="muted">
+        ২ জন খেলোয়াড়ের Room। নিজের turn-এ striker টেনে ছেড়ে shot দিন।
+        এই সংস্করণে game state Firebase-এ sync হয়। লগইন/সাইনআপ এই গেমে প্রয়োজন নেই; এগুলো আলাদা অ্যাপে থাকবে।
+      </div>
+      <div class="small">🔒 Match শুরু হলে Board Reset বন্ধ থাকে। Match ফলাফল Firebase-এ সংরক্ষিত হবে।</div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {getDatabase,ref,set,get,update,onValue,runTransaction} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+import {getFunctions,httpsCallable} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-functions.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyD2DBF_GTIkQfa6G_3gZLfZ5n0MaUEBQ48",
+ authDomain:"gamenest-bd.firebaseapp.com",
+ databaseURL:"https://gamenest-bd-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId:"gamenest-bd",
+ storageBucket:"gamenest-bd.firebasestorage.app",
+ messagingSenderId:"1020093526765",
+ appId:"1:1020093526765:web:525b5f303e0f08d7b692e4",
+ measurementId:"G-Z66KWE43M6"
+};
+
+// Authentication, purchases, package tokens and user profiles belong to gamenest-bd.
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
+// Spark-safe architecture: game board data uses a dedicated /carromRooms
+// path in the same project, so auth.uid is consistent with gameTokens/users.
+const carromDb=db;
+const functions=getFunctions(app,"asia-southeast1");
+const findCarromMatchCall=httpsCallable(functions,"findCarromMatch");
+const cancelCarromSearchCall=httpsCallable(functions,"cancelCarromSearch");
+let matchmakingActive=false,matchmakingTimer=null;
+
+const $=id=>document.getElementById(id);
+const gameBox=$("game");
+let currentUser=null,currentProfile=null,roomId=null,roomUnsub=null,purchaseId=null,packageCode="",accessPackage=null;
+const board=$("board"),ctx=board.getContext("2d");
+const R=22,SR=28;
+const qs=new URLSearchParams(location.search);
+const initialGameId=qs.get("gameId")||"";
+purchaseId=qs.get("purchaseId")||""; packageCode=qs.get("packageCode")||"";
+const pockets=[{x:38,y:38},{x:762,y:38},{x:38,y:762},{x:762,y:762}];
+let state=null,drag=false,ax=400,ay=690,dragStartX=400,dragStartY=690,rawAimX=400,rawAimY=690;
+
+/* প্রতিটি player-এর নিজের baseline */
+function strikerBaseY(uid, st=state){
+  const players=st?.players||[];
+  return players.indexOf(uid)===1 ? 110 : 690;
+}
+
+function resetStrikerForTurn(st=state){
+  if(!st||!st.turn)return;
+  st.striker=st.striker||{x:400,y:690,vx:0,vy:0};
+  st.striker.x=400;
+  st.striker.y=strikerBaseY(st.turn,st);
+  st.striker.vx=0;
+  st.striker.vy=0;
+  st.shotActive=false;
+  for(const c of (st.coins||[])){if(c.vx===undefined)c.vx=0;if(c.vy===undefined)c.vy=0;}
+}
+
+function cleanMobile(v){
+ return String(v||"").replace(/\D/g,"");
+}
+function emailForMobile(m){
+ return cleanMobile(m)+"@gamenestbd.app";
+}
+function setMsg(t){msg.textContent=t}
+function gameMsg(t){$("gameMsg").textContent=t}
+
+function initialState(p1){
+ const coins=[{id:"q",x:400,y:400,c:"red",in:false}];
+ let n=0;
+ for(const ring of [{r:52,n:6},{r:102,n:12}]){
+   for(let i=0;i<ring.n;i++){
+     const a=2*Math.PI*i/ring.n+(ring.r>60?Math.PI/ring.n:0);
+     coins.push({id:"c"+(++n),x:400+Math.cos(a)*ring.r,y:400+Math.sin(a)*ring.r,c:n%2?"white":"black",in:false});
+   }
+ }
+ return {
+   players:[p1],
+   playerMap:{[p1]:true},
+   turn:p1,
+   striker:{x:400,y:690,vx:0,vy:0},
+   coins,
+   playerColors:{[p1]:"black"},
+   playerProfiles:{[p1]:{name:"Player 1",photo:""}},
+   playerPackages:{[p1]:{packageCode:"",purchaseId:"",betAmount:0}},
+   queenPending:false,
+   queenOwner:null,
+   queenCovered:false,
+   turnOwnCoinPocketed:false,
+   shotOwner:null,
+   version:Date.now(),
+   winner:null,
+   betAmount:0,
+   winningAmount:0
+ };
+}
+
+function ensureGameMeta(st){
+  if(!st)return;
+  st.players=st.players||[];
+  st.playerMap=st.playerMap||{};
+  for(const uid of st.players){ if(uid) st.playerMap[uid]=true; }
+  st.playerColors=st.playerColors||{};
+  st.playerProfiles=st.playerProfiles||{};
+  st.playerPackages=st.playerPackages||{};
+  if(st.players[0]&&!st.playerColors[st.players[0]])st.playerColors[st.players[0]]="black";
+  if(st.players[1]&&!st.playerColors[st.players[1]])st.playerColors[st.players[1]]="white";
+  if(st.queenPending===undefined)st.queenPending=false;
+  if(st.queenOwner===undefined)st.queenOwner=null;
+  if(st.queenCovered===undefined)st.queenCovered=false;
+  if(st.turnOwnCoinPocketed===undefined)st.turnOwnCoinPocketed=false;
+  if(st.shotOwner===undefined)st.shotOwner=null;
+  if(st.shotActive===undefined)st.shotActive=false;
+
+  // পুরোনো Room-এর গুটিগুলোতে velocity না থাকলে যোগ করি।
+  for(const c of (st.coins||[])){
+    if(c.vx===undefined)c.vx=0;
+    if(c.vy===undefined)c.vy=0;
+  }
+}
+
+function playerColor(uid,st=state){
+  ensureGameMeta(st);
+  return st?.playerColors?.[uid]||"black";
+}
+
+function returnQueenToCenter(st){
+  ensureGameMeta(st);
+  const q=(st.coins||[]).find(c=>c.id==="q");
+  if(q){
+    q.in=false;
+    q.x=400;
+    q.y=400;
+  }
+  st.queenPending=false;
+  st.queenOwner=null;
+  st.queenCovered=false;
+}
+
+function renderPlayers(){
+  const ps=state?.players||[];
+  const renderCard=(id,index)=>{
+    const el=$(id); if(!el)return;
+    const uid=ps[index];
+    const prof=state?.playerProfiles?.[uid]||{};
+    const pkg=state?.playerPackages?.[uid]||{};
+    const bet=Number(pkg.betAmount||state?.betAmount||accessPackage?.betAmount||0);
+    const color=playerColor(uid,state)==="white"?"white":"black";
+    const name=prof.name||`Player ${index+1}`;
+    const online=uid?"● Joined":"● অপেক্ষা";
+    const photo=prof.photo;
+    const av=el.querySelector('.avatarBig');
+    if(av) av.innerHTML=photo?`<img src="${String(photo).replace(/"/g,'&quot;')}" alt="">`:`${index+1}`;
+    const nameEl=el.querySelector('.pName'); if(nameEl)nameEl.textContent=name;
+    const onlineEl=el.querySelector('.online'); if(onlineEl){onlineEl.textContent=online;onlineEl.className='online'+(uid?' joined':'');}
+    const idEl=el.querySelector('.pId'); if(idEl)idEl.textContent='User ID: '+(uid||'—');
+    const packageEl=el.querySelector('[data-package]'); if(packageEl)packageEl.textContent=pkg.packageCode||'—';
+    const roomEl=el.querySelector('[data-room]'); if(roomEl)roomEl.textContent=roomId||'—';
+    const betEl=el.querySelector('[data-bet]'); if(betEl)betEl.textContent='৳'+bet.toFixed(2);
+    const colorEl=el.querySelector('[data-color]'); if(colorEl)colorEl.innerHTML=color==='white'?'<span class="colorDot whiteDot"></span>সাদা':'<span class="colorDot blackDot"></span>কালো';
+    el.style.opacity=uid?'1':'0.72';
+  };
+  renderCard('player2Card',1);
+  renderCard('player1Card',0);
+}
+
+function draw(){
+ ctx.clearRect(0,0,800,800);
+ ctx.fillStyle="#552915";ctx.fillRect(0,0,800,800);
+ ctx.fillStyle="#8b4b28";ctx.fillRect(10,10,780,780);
+ ctx.fillStyle="#e9b978";ctx.fillRect(28,28,744,744);
+ ctx.strokeStyle="#351b10";ctx.lineWidth=7;ctx.strokeRect(48,48,704,704);
+ ctx.lineWidth=4;ctx.strokeStyle="#6d351d";ctx.strokeRect(90,90,620,620);
+ ctx.lineWidth=5;ctx.strokeStyle="#5b2817";
+ for(const y of [110,690]){ctx.beginPath();ctx.moveTo(160,y);ctx.lineTo(640,y);ctx.stroke()}
+ for(const x of [110,690]){ctx.beginPath();ctx.moveTo(x,160);ctx.lineTo(x,640);ctx.stroke()}
+ pockets.forEach(p=>{ctx.beginPath();ctx.fillStyle="#120c09";ctx.arc(p.x,p.y,32,0,Math.PI*2);ctx.fill()});
+ ctx.beginPath();ctx.arc(400,400,125,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.strokeStyle="#a33b22";ctx.arc(400,400,50,0,Math.PI*2);ctx.stroke();
+
+ (state?.coins||[]).filter(c=>!c.in).forEach(c=>{
+   ctx.beginPath();ctx.shadowColor="#0008";ctx.shadowBlur=7;
+   ctx.fillStyle=c.c==="red"?"#df2020":c.c==="black"?"#171717":"#f5ead5";
+   ctx.arc(c.x,c.y,R,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+   ctx.strokeStyle="#5b3b28";ctx.lineWidth=2;ctx.stroke();
+ });
+ if(state){
+   const s=state.striker;
+   ctx.beginPath();
+   ctx.shadowColor="#0008";ctx.shadowBlur=7;
+   ctx.fillStyle="#21b35b";ctx.arc(s.x,s.y,SR,0,Math.PI*2);ctx.fill();
+   ctx.shadowBlur=0;
+   ctx.strokeStyle="#0b6b35";ctx.lineWidth=5;ctx.stroke();
+   if(drag){
+     // Aim line সবসময় striker-এর একদম center থেকে শুরু হবে।
+     // সামনে থেকে touch করলেও visual target আর উপরে সরে যাবে না।
+     const a={x:s.x,y:s.y};
+     ctx.beginPath();ctx.setLineDash([9,9]);ctx.strokeStyle="#168a45";ctx.lineWidth=3;
+     ctx.moveTo(a.x,a.y);ctx.lineTo(ax,ay);ctx.stroke();ctx.setLineDash([]);
+     // Center target marker — striker-এর মাঝখানটি পরিষ্কারভাবে বোঝাবে।
+     ctx.beginPath();ctx.strokeStyle="#0b6b35";ctx.lineWidth=2;
+     ctx.arc(a.x,a.y,7,0,Math.PI*2);ctx.stroke();
+     // যেখানে আঙুল ছেড়ে দেবেন, সেই জায়গায় target marker দেখাবে।
+     ctx.beginPath();ctx.fillStyle="#ef4444";ctx.strokeStyle="#7f1d1d";ctx.lineWidth=2;
+     ctx.arc(ax,ay,11,0,Math.PI*2);ctx.fill();ctx.stroke();
+     ctx.beginPath();ctx.strokeStyle="#ef4444";ctx.lineWidth=2;ctx.arc(ax,ay,18,0,Math.PI*2);ctx.stroke();
+   }
+ }
+}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function insidePocket(p){return pockets.some(q=>dist(p,q)<38)}
+function pos(e){
+ const r=board.getBoundingClientRect();
+ return {x:(e.clientX-r.left)*800/r.width,y:(e.clientY-r.top)*800/r.height}
+}
+
+// Striker-এর একটু সামনে থেকে টান শুরু করা যাবে, যাতে কম জায়গায়ও শক্ত shot দেওয়া যায়।
+function strikerDragAnchor(st=state){
+  if(!st||!st.striker)return {x:400,y:690};
+  const front = st.turn===st.players?.[1] ? 45 : -45;
+  return {x:st.striker.x,y:st.striker.y+front};
+}
+
+board.addEventListener("pointerdown",e=>{
+ if(!state||!roomId||state.winner)return;
+ if(state.turn!==currentUser.uid){
+   gameMsg("এখন আপনার টার্ন নয় — অন্য প্লেয়ারের টার্ন।");
+   return;
+ }
+ if(state.shotActive || anyPieceMoving())return;
+ const p=pos(e);
+ const anchor=strikerDragAnchor(state);
+ if(dist(p,anchor)<95){
+   drag=true;
+   // চাপ দেওয়ার সাথে সাথে aim সরাসরি striker-এর সামনে থাকবে।
+   // এরপর আঙুল যেখানেই ছাড়বেন, সেই জায়গাটিই final target হবে।
+   dragStartX=state.striker.x; dragStartY=state.striker.y;
+   const front = state.players?.indexOf(currentUser.uid)===1 ? 1 : -1;
+   const initialAimDistance=170;
+   ax=dragStartX; ay=dragStartY + front*initialAimDistance;
+   try{board.setPointerCapture(e.pointerId)}catch(_){ }
+   draw();
+ }
+});
+board.addEventListener("pointermove",e=>{
+ if(!drag)return;
+ const p=pos(e);
+ // আঙুল যেখানে আছে তার একটু সামনে visual target দেখাবে, যাতে হাত গুটিকে ঢেকে না ফেলে।
+ rawAimX=p.x; rawAimY=p.y;
+ const dx=p.x-dragStartX, dy=p.y-dragStartY;
+ const len=Math.hypot(dx,dy);
+ if(len>2){
+   // টার্গেট এখন আঙুলের কাছে থামবে না। যে দিকে টানছেন, সেই দিকে
+   // সামনে যতদূর ফাঁকা জায়গা পাওয়া যায় ততদূর যাবে। কোনো গুটি পথে থাকলে
+   // প্রথম যে গুটিতে aim লাগবে, টার্গেট ঠিক সেই গুটির কাছে থামবে।
+   const ux=dx/len, uy=dy/len;
+   let maxT=1000;
+   const bounds=75, maxX=725, maxY=725;
+   if(Math.abs(ux)>1e-6) maxT=Math.min(maxT, ux>0?(maxX-dragStartX)/ux:(bounds-dragStartX)/ux);
+   if(Math.abs(uy)>1e-6) maxT=Math.min(maxT, uy>0?(maxY-dragStartY)/uy:(bounds-dragStartY)/uy);
+
+   let targetT=maxT;
+   // সামনে থাকা প্রথম coin/queen-কে target হিসেবে ধরুন।
+   if(Array.isArray(state.coins)) {
+     for(const c of state.coins){
+       if(!c||c.pocketed) continue;
+       const vx=c.x-dragStartX, vy=c.y-dragStartY;
+       const t=vx*ux+vy*uy;
+       if(t<=0 || t>=targetT) continue;
+       const perp=Math.abs(vx*uy-vy*ux);
+       if(perp <= 18+7) targetT=Math.max(35,t-2);
+     }
+   }
+   const tx=dragStartX+ux*targetT;
+   const ty=dragStartY+uy*targetT;
+   ax=Math.max(bounds,Math.min(maxX,tx));
+   ay=Math.max(bounds,Math.min(maxY,ty));
+ }else{
+   ax=dragStartX; ay=dragStartY;
+ }
+ draw();
+});
+board.addEventListener("pointerup",e=>{
+ if(!drag)return;
+ drag=false;
+ try{board.releasePointerCapture(e.pointerId)}catch(_){ }
+ if(!state||!roomId||state.turn!==currentUser.uid||state.winner)return;
+ const p=pos(e),s=state.striker;
+ const a={x:dragStartX,y:dragStartY};
+ // সরাসরি সামনে টান: যে দিকে আঙুল টানবেন, striker সেই দিকেই যাবে।
+ const dx=p.x-a.x,dy=p.y-a.y,len=Math.hypot(dx,dy);
+ if(len<6){draw();return;}
+ // সামনে যত দূর টানবেন, তত বেশি power; অল্প টানেও shot হবে।
+ const power=Math.min(34,Math.max(6,len/4));
+ state.turnOwnCoinPocketed=false;
+ state.shotOwner=currentUser.uid;
+ s.vx=dx/len*power; s.vy=dy/len*power;
+ state.shotActive=true;
+ s.y=strikerBaseY(currentUser.uid,state);
+ s.x=Math.max(140,Math.min(660,s.x));
+ draw();
+ saveRoomState().catch(err=>gameMsg(dbError(err)));
+});
+board.addEventListener("pointercancel",()=>{drag=false;draw()});
+
+let lastPhysicsSave=0;
+
+function keepInsideBoard(o,r){
+  if(o.x-r<72){o.x=72+r;o.vx=Math.abs(o.vx)*0.82}
+  if(o.x+r>728){o.x=728-r;o.vx=-Math.abs(o.vx)*0.82}
+  if(o.y-r<72){o.y=72+r;o.vy=Math.abs(o.vy)*0.82}
+  if(o.y+r>728){o.y=728-r;o.vy=-Math.abs(o.vy)*0.82}
+}
+
+function resolveElastic(a,b,ra,rb){
+  let dx=b.x-a.x,dy=b.y-a.y;
+  let d=Math.hypot(dx,dy);
+  const minD=ra+rb;
+  if(!d||d>=minD)return false;
+  const nx=dx/d,ny=dy/d;
+  const overlap=minD-d;
+  a.x-=nx*overlap/2; a.y-=ny*overlap/2;
+  b.x+=nx*overlap/2; b.y+=ny*overlap/2;
+
+  const rvx=b.vx-a.vx,rvy=b.vy-a.vy;
+  const rel=rvx*nx+rvy*ny;
+  if(rel>=0)return true;
+
+  // সমান mass-এর প্রায় elastic collision।
+  const impulse=-rel*0.92;
+  a.vx-=impulse*nx; a.vy-=impulse*ny;
+  b.vx+=impulse*nx; b.vy+=impulse*ny;
+  return true;
+}
+
+function getWinningAmount(){
+  const bet=Number(state?.betAmount||0);
+  return Number.isFinite(bet)&&bet>0 ? Math.round(bet*2*100)/100 : 0;
+}
+function renderClaimArea(){
+ const el=$("claimArea"); if(!el||!state||!currentUser)return;
+ if(state.winner!==currentUser.uid){el.innerHTML="";return;}
+ const amount=getWinningAmount();
+ if(!amount){el.innerHTML='<div class="claimbox">⚠️ এই Room-এর Bet Amount পাওয়া যায়নি। Admin Game Package-এ Bet Amount সেট করুন।</div>';return;}
+ if(state.claimId){
+   el.innerHTML=`<div class="claimbox"><b>🏆 আপনি বিজয়ী!</b><div class="small">Winning Amount: <b>৳${amount}</b></div><div id="claimStatus" class="small" style="margin-top:6px">Winning Claim পাঠানো হয়েছে। Admin approval অপেক্ষা করুন।</div></div>`;
+   return;
+ }
+ el.innerHTML=`<div class="claimbox"><b>🎉 অভিনন্দন, আপনি ৳${amount} জিতেছেন!</b><div class="small">Balance-এ টাকা যোগ হওয়ার আগে Screenshot জমা দেওয়া বাধ্যতামূলক।</div><input id="winShot" type="file" accept="image/*"><button id="submitClaimBtn" onclick="submitWinningClaim()">📸 Screenshot জমা দিন</button><div class="small">Screenshot পরিষ্কার ও সম্পূর্ণ রাখুন।</div></div>`;
+}
+async function compressScreenshot(file){
+ return await new Promise((resolve,reject)=>{
+   const img=new Image(), reader=new FileReader();
+   reader.onload=()=>{img.onload=()=>{
+     const max=900, scale=Math.min(1,max/Math.max(img.width,img.height));
+     const c=document.createElement("canvas"); c.width=Math.max(1,Math.round(img.width*scale)); c.height=Math.max(1,Math.round(img.height*scale));
+     c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+     resolve(c.toDataURL("image/jpeg",0.68));
+   };img.onerror=reject;img.src=reader.result}; reader.onerror=reject; reader.readAsDataURL(file);
+ });
+}
+window.submitWinningClaim=async()=>{
+ if(!state||state.winner!==currentUser.uid)return;
+ const input=$("winShot"),btn=$("submitClaimBtn");
+ if(!input?.files?.[0])return gameMsg("Winner Screenshot দিন");
+ if(state.claimId)return gameMsg("এই Claim ইতোমধ্যে পাঠানো হয়েছে");
+ const amount=getWinningAmount(); if(!amount)return gameMsg("Bet Amount পাওয়া যায়নি");
+ if(btn){btn.disabled=true;btn.textContent="⏳ Screenshot প্রস্তুত হচ্ছে...";}
+ try{
+   const shot=await compressScreenshot(input.files[0]);
+   const id=db.ref("winningClaims").push().key;
+   const qs=new URLSearchParams(location.search);
+   const profile=currentProfile||{};
+   const claim={id,uid:currentUser.uid,userId:currentUser.uid,userName:profile.name||qs.get("name")||"User",mobile:profile.mobile||qs.get("mobile")||"",gameId:qs.get("gameId")||"",gameName:"GameNest BD • Carrom",roomId,betAmount:Number(state.betAmount||0),winningAmount:amount,screenshot:shot,status:"pending",notificationType:"winning_claim",createdAt:Date.now()};
+   await set(ref(db,"winningClaims/"+id),claim);
+   state.claimId=id;
+   renderClaimArea();
+   gameMsg("✅ Winning Claim Admin-এর কাছে পাঠানো হয়েছে।");
+ }catch(e){console.error(e);gameMsg("Screenshot/Claim পাঠানো যায়নি: "+(e.message||e));if(btn){btn.disabled=false;btn.textContent="📸 Screenshot জমা দিন";}}
+};
+function checkWinner(uid){
+ const color=playerColor(uid,state);
+ const remaining=(state.coins||[]).filter(c=>!c.in && c.id!=="q" && c.c===color).length;
+ if(remaining===0){
+   state.winner=uid;
+   state.winningAmount=getWinningAmount();
+   return true;
+ }
+ return false;
+}
+
+function pocketCoin(c){
+  if(c.in)return;
+  c.in=true;c.vx=0;c.vy=0;
+
+  if(c.id==="q"){
+    state.queenPending=true;
+    state.queenOwner=currentUser.uid;
+    state.queenCovered=false;
+  }else if(c.c===playerColor(currentUser.uid,state)){
+    state.turnOwnCoinPocketed=true;
+    if(state.queenPending && state.queenOwner===currentUser.uid){
+      state.queenCovered=true;
+      state.queenPending=false;
+    }
+  }
+}
+
+function anyPieceMoving(){
+  if(Math.abs(state.striker.vx)>0.05||Math.abs(state.striker.vy)>0.05)return true;
+  return (state.coins||[]).some(c=>!c.in && (Math.abs(c.vx)>0.05||Math.abs(c.vy)>0.05));
+}
+
+function physics(){
+ if(state){
+   ensureGameMeta(state);
+   const isShotOwner=currentUser && state.shotOwner===currentUser.uid;
+   const s=state.striker;
+
+   if(isShotOwner && state.shotActive){
+     // Striker + coins সবাই নিজেদের velocity দিয়ে চলবে।
+     s.x+=s.vx;s.y+=s.vy;
+     s.vx*=0.985;s.vy*=0.985;
+     keepInsideBoard(s,SR);
+
+     for(const c of (state.coins||[])){
+       if(c.in)continue;
+       c.x+=c.vx;c.y+=c.vy;
+       c.vx*=0.982;c.vy*=0.982;
+       keepInsideBoard(c,R);
+     }
+
+     // Striker ↔ coin collision
+     for(const c of (state.coins||[])){
+       if(c.in)continue;
+       if(resolveElastic(s,c,SR,R)){
+         const sp=Math.hypot(s.vx,s.vy);
+         if(sp<0.15){s.vx*=0.2;s.vy*=0.2}
+       }
+     }
+
+     // Coin ↔ coin collision
+     const coins=state.coins||[];
+     for(let i=0;i<coins.length;i++){
+       const a=coins[i]; if(a.in)continue;
+       for(let j=i+1;j<coins.length;j++){
+         const b=coins[j]; if(b.in)continue;
+         resolveElastic(a,b,R,R);
+       }
+     }
+
+     // Pocket detection after movement/collision.
+     for(const c of (state.coins||[])){
+       if(!c.in && insidePocket(c))pocketCoin(c);
+     }
+
+     // Striker pocket = foul; striker ফিরে যাবে।
+     if(insidePocket(s)){
+       s.x=400;s.y=strikerBaseY(currentUser.uid,state);
+       s.vx=0;s.vy=0;
+     }
+
+     // সব piece থামলে shot শেষ।
+     if(!anyPieceMoving()){
+       s.vx=0;s.vy=0;
+       for(const c of (state.coins||[])){if(!c.in){c.vx=0;c.vy=0}}
+       state.shotActive=false;
+       finishTurn();
+     }else if(Date.now()-lastPhysicsSave>80){
+       lastPhysicsSave=Date.now();
+       saveRoomState().catch(console.error);
+     }
+   }
+ }
+ draw();requestAnimationFrame(physics);
+}
+requestAnimationFrame(physics);
+
+let finishing=false;
+async function finishTurn(){
+ if(finishing||!state||!roomId)return;
+ finishing=true;
+
+ ensureGameMeta(state);
+ const active=state.players||[];
+ const oldPlayer=currentUser.uid;
+ if(checkWinner(oldPlayer)){
+   resetStrikerForTurn(state);
+   state.shotActive=false;
+   state.shotOwner=null;
+   await saveRoomState();
+   renderClaimArea();
+   gameMsg("🏆 আপনি বিজয়ী! Screenshot দিয়ে Winning Claim করুন।");
+   finishing=false;
+   return;
+ }
+
+ // Queen নিলে নিজের colour-এর গুটি দিয়ে cover না করলে Queen মাঝখানে ফেরত।
+ if(state.queenPending && state.queenOwner===oldPlayer && !state.queenCovered){
+   returnQueenToCenter(state);
+ }else if(state.queenCovered){
+   state.queenPending=false;
+   state.queenOwner=null;
+   state.queenCovered=false;
+   state.turnOwnCoinPocketed=false;
+ }
+
+ // নিজের রঙের গুটি pocket করলে একই player-এর extra turn থাকবে;
+ // miss/other case-এ opponent-এর turn হবে।
+ if(active.length>1 && !state.turnOwnCoinPocketed){
+   const i=active.indexOf(oldPlayer);
+   if(i>=0)state.turn=active[(i+1)%active.length];
+ } else {
+   state.turn=oldPlayer;
+ }
+ resetStrikerForTurn(state);
+ state.shotActive=false;
+ state.shotOwner=null;
+ state.turnOwnCoinPocketed=false;
+
+ await saveRoomState();
+ finishing=false;
+}
+
+async function saveRoomState(){
+ if(!roomId||!currentUser)return;
+ state.version=Date.now();
+ const payload={...state};
+ delete payload.roomSyncVersion;
+ state.roomSyncVersion=state.version;
+ await update(ref(carromDb,"carromRooms/"+roomId),{state:payload});
+}
+
+function dbError(e){
+  const c=e?.code||"";
+  const m=e?.message||"";
+  if(c.includes("PERMISSION_DENIED") || m.includes("PERMISSION_DENIED"))
+    return "Firebase অনুমতি নেই। Realtime Database Rules চেক করুন।";
+  if(m.toLowerCase().includes("network") || m.toLowerCase().includes("offline"))
+    return "ইন্টারনেট/Firebase সংযোগ সমস্যা হয়েছে।";
+  return "Firebase সমস্যা: "+m;
+}
+
+async function validatePackageAccess(){
+  if(!currentUser)return false;
+  const entered=String($("packageCodeInput")?.value||packageCode||"").trim().replace(/\s+/g,"").toUpperCase();
+  if(!entered)return gameMsg("আগে আপনার Package Code লিখুন।");
+  packageCode=entered;
+  try{
+    const tokenSnap=await get(ref(db,"gameTokens/"+packageCode));
+    if(!tokenSnap.exists())return gameMsg("এই Package Code পাওয়া যায়নি।");
+    const token=tokenSnap.val()||{};
+    if(token.uid!==currentUser.uid || token.status!=="active")return gameMsg("এই Package Code আপনার Active Package নয়।");
+    purchaseId=String(token.purchaseId||"");
+    if(!purchaseId)return gameMsg("Package Purchase ID পাওয়া যায়নি।");
+    const ps=await get(ref(db,"purchases/"+currentUser.uid+"/"+purchaseId));
+    if(!ps.exists())return gameMsg("Package পাওয়া যায়নি।");
+    const p=ps.val()||{};
+    if(p.status!=="active"&&p.status!=="approved")return gameMsg("এই Package Active নয়।");
+    if(String(p.packageCode||"").toUpperCase()!==packageCode)return gameMsg("Package Code সঠিক নয়।");
+    if(initialGameId && String(p.gameId||"")!==String(initialGameId))return gameMsg("ভুল Game Package।");
+    const bet=Number(p.betAmount||p.price||0);
+    if(!Number.isFinite(bet)||bet<=0)return gameMsg("Package Entry Amount সঠিক নয়।");
+    accessPackage={...p,token,betAmount:bet};
+    $("packageCodeText").textContent=packageCode;
+    $("betText").textContent="৳"+bet.toFixed(2);
+    $("prizeText").textContent="৳"+(bet*2).toFixed(2);
+    gameMsg("Package যাচাই সফল। এখন প্রতিপক্ষ খুঁজুন চাপুন।");
+    return true;
+  }catch(e){ gameMsg(dbError(e)); return false; }
+}
+
+function randomMatchCode(){
+  const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let out="GN";
+  for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];
+  return out;
+}
+
+async function findMatch(){
+  if(!currentUser)return gameMsg("GameNest User App-এ আগে Login করুন।");
+  if(matchmakingActive)return gameMsg("প্রতিপক্ষ খোঁজা হচ্ছে। একটু অপেক্ষা করুন।");
+  if(!(await validatePackageAccess()))return;
+  matchmakingActive=true;
+  $("findMatchBtn").disabled=true; $("cancelMatchBtn").disabled=false;
+  gameMsg("🔎 একই মূল্যের প্রতিপক্ষ খোঁজা হচ্ছে… ম্যাচ না হওয়া পর্যন্ত প্যাকেজ লক হবে না।");
+  try{
+    const result=await findCarromMatchCall({packageCode});
+    const data=result.data||{};
+    if(data.status==="matched" && data.roomId){
+      matchmakingActive=false; clearInterval(matchmakingTimer); matchmakingTimer=null;
+      $("findMatchBtn").disabled=false; $("cancelMatchBtn").disabled=true;
+      roomId=data.roomId; $("matchCodeInput") && ($("matchCodeInput").value=data.roomId);
+      gameMsg("✅ প্রতিপক্ষ পাওয়া গেছে! গেমে সংযোগ হচ্ছে…");
+      await watchRoom(data.roomId); return;
+    }
+    gameMsg("⏳ Waiting… একই মূল্যের অন্য ইউজার এলে ম্যাচ অটোমেটিক শুরু হবে।");
+    if(!matchmakingTimer)matchmakingTimer=setInterval(async()=>{
+      if(!matchmakingActive)return;
+      try{
+        const r=await findCarromMatchCall({packageCode});
+        const d=r.data||{};
+        if(d.status==="matched"&&d.roomId){
+          matchmakingActive=false;clearInterval(matchmakingTimer);matchmakingTimer=null;
+          $("findMatchBtn").disabled=false;$("cancelMatchBtn").disabled=true;
+          gameMsg("✅ প্রতিপক্ষ পাওয়া গেছে! গেমে সংযোগ হচ্ছে…");await watchRoom(d.roomId);
+        }
+      }catch(e){console.error(e);gameMsg(dbError(e));}
+    },4000);
+  }catch(e){
+    matchmakingActive=false;$("findMatchBtn").disabled=false;$("cancelMatchBtn").disabled=true;
+    gameMsg(e?.message||dbError(e));
+  }
+}
+async function cancelMatchSearch(){
+  if(!currentUser||!packageCode)return;
+  try{
+    const r=await cancelCarromSearchCall({packageCode});
+    if(r.data?.status==="matched"&&r.data?.roomId){
+      matchmakingActive=false;clearInterval(matchmakingTimer);matchmakingTimer=null;
+      $("findMatchBtn").disabled=false;$("cancelMatchBtn").disabled=true;
+      gameMsg("ম্যাচ ইতোমধ্যে নিশ্চিত হয়েছে। গেমে সংযোগ হচ্ছে…");await watchRoom(r.data.roomId);return;
+    }
+    matchmakingActive=false;clearInterval(matchmakingTimer);matchmakingTimer=null;
+    $("findMatchBtn").disabled=false;$("cancelMatchBtn").disabled=true;
+    gameMsg("অপেক্ষা বাতিল হয়েছে। আপনার প্যাকেজ ব্যবহার হয়নি; পরে আবার চেষ্টা করতে পারবেন।");
+  }catch(e){gameMsg(e?.message||dbError(e));}
+}
+
+async function watchRoom(id){
+  if(roomUnsub)roomUnsub();
+  roomId=id;
+  gameMsg("Room সংযোগ হচ্ছে...");
+  roomUnsub=onValue(
+    ref(carromDb,"carromRooms/"+id),
+    snap=>{
+      const v=snap.val();
+      if(!v){
+        $("roomText").textContent="Room ID: "+id;
+        gameMsg("Room পাওয়া যায়নি");
+        return;
+      }
+      const incoming=v.state||null;
+      if(state && state.roomSyncVersion && incoming?.version && incoming.version < state.roomSyncVersion){
+        return;
+      }
+      state=incoming;
+      if(state?.version)state.roomSyncVersion=state.version;
+      ensureGameMeta(state);
+
+      // পুরোনো Room-এ striker ভুল পাশে থাকলে, বর্তমান turn-এর
+      // player-এর সঠিক baseline-এ একবার ঠিক করে দেওয়া হবে।
+      if(state?.turn===currentUser.uid && !state?.shotActive){
+        const expectedY=strikerBaseY(currentUser.uid,state);
+
+        // Firebase-এ পুরোনো shot-এর striker position এলে সেটি গ্রহণ করা হবে না।
+        // বর্তমান turn-এর player-এর fixed shooting position-এ ফেরত যাবে।
+        if(!state.striker ||
+           Math.abs((state.striker.y??expectedY)-expectedY)>2 ||
+           Math.abs((state.striker.x??400)-400)>2 ||
+           Math.abs(state.striker.vx||0)>0.001 ||
+           Math.abs(state.striker.vy||0)>0.001){
+          resetStrikerForTurn(state);
+          saveRoomState().catch(console.error);
+        }
+      }
+
+      $("roomText").textContent="Match Code: "+id+" • Entry: ৳"+Number(state?.betAmount||accessPackage?.betAmount||0).toFixed(2)+" • Players: "+(state?.players?.length||0)+"/2";
+      $("roomCodeText").textContent=id;
+      $("roomCodeText2").textContent=id;
+      $("playerCount").textContent=(state?.players?.length||0)+"/2";
+      $("betText").textContent="৳"+Number(state?.betAmount||accessPackage?.betAmount||0).toFixed(2);
+      $("prizeText").textContent="৳"+(Number(state?.betAmount||accessPackage?.betAmount||0)*2).toFixed(2);
+      renderPlayers();
+      renderClaimArea();
+      if(state?.winner)gameMsg(state.winner===currentUser.uid?"🏆 আপনি বিজয়ী! Screenshot দিয়ে Winning Claim করুন।":"🏆 প্রতিপক্ষ Winner হয়েছে।");
+      else if(state?.queenPending && state?.queenOwner===currentUser.uid)
+        gameMsg("👑 লাল Queen নিয়েছেন — নিজের "+playerColor(currentUser.uid,state)+" গুটি দিয়ে Cover করুন");
+      else if(state?.queenPending)
+        gameMsg("👑 Queen Cover বাকি — Cover না হলে Queen মাঝখানে ফিরবে");
+      else if(state?.shotActive && state?.turn===currentUser.uid)gameMsg("🎯 Shot চলছে...");
+      else if(state?.turn===currentUser.uid)gameMsg(state?.turnOwnCoinPocketed?"আপনি গুটি নিয়েছেন — আবার স্টিক মারুন":"আপনার টার্ন — সবুজ striker টেনে ছেড়ে দিন");
+      else gameMsg("অন্য প্লেয়ারের টার্ন");
+      draw();
+    },
+    err=>gameMsg(dbError(err))
+  );
+}
+
+async function joinRoom(){
+  if(!currentUser)return gameMsg("GameNest User App-এ আগে Login করুন।");
+  try{
+    if(!(await validatePackageAccess()))return;
+    const id=String($("matchCodeInput")?.value||"").trim().replace(/\s+/g,"").toUpperCase();
+    if(!id)return gameMsg("Join করার জন্য Match Code লিখুন।");
+    const roomRef=ref(carromDb,"carromRooms/"+id),snap=await get(roomRef);
+    if(!snap.exists())return gameMsg("এই Match Code পাওয়া যায়নি: "+id);
+    const room=snap.val()||{};
+    const roomGame=String(room.gameId||"");
+    const myGame=String(accessPackage.gameId||initialGameId||"carrom");
+    if(roomGame && roomGame!==myGame)return gameMsg("এই Room অন্য Game-এর।");
+    const roomBet=Number(room.betAmount||room.state?.betAmount||0), myBet=Number(accessPackage.betAmount||0);
+    if(Math.abs(roomBet-myBet)>0.0001)return gameMsg(`Entry Amount mismatch: Room ৳${roomBet.toFixed(2)}, আপনার Package ৳${myBet.toFixed(2)}। Join বন্ধ।`);
+    const st=room.state||{};
+    if(st.winner)return gameMsg("এই Match ইতোমধ্যে শেষ হয়েছে।");
+    const players=Array.isArray(st.players)?st.players.filter(Boolean):[];
+    if(players.length>=2 && !players.includes(currentUser.uid))return gameMsg("এই Match 2/2 পূর্ণ।");
+    if(players.length===1 && players[0]===currentUser.uid)return watchRoom(id);
+    const memberRef=ref(carromDb,"carromRooms/"+id+"/members/"+currentUser.uid);
+    await set(memberRef,{uid:currentUser.uid,gameId:myGame,purchaseId,packageCode,betAmount:myBet,joinedAt:Date.now(),name:currentProfile?.name||"Player 2"});
+    const nextPlayers=players.includes(currentUser.uid)?players:[...players,currentUser.uid];
+    const profilesNow=st.playerProfiles||{};
+    const packagesNow=st.playerPackages||{};
+    profilesNow[currentUser.uid]={name:currentProfile?.name||"Player 2",photo:currentProfile?.photo||currentProfile?.photoURL||""};
+    packagesNow[currentUser.uid]={packageCode,purchaseId,betAmount:myBet};
+    if(!st.playerColors)st.playerColors={};
+    st.playerColors[players[0]||currentUser.uid]=st.playerColors[players[0]||currentUser.uid]||"black";
+    st.playerColors[currentUser.uid]=st.playerColors[currentUser.uid]||"white";
+    st.players=nextPlayers;
+    st.playerMap=st.playerMap||{}; st.playerMap[currentUser.uid]=true;
+    st.playerProfiles=profilesNow; st.playerPackages=packagesNow; st.betAmount=roomBet; st.winningAmount=roomBet*2;
+    st.turn=st.turn||nextPlayers[0];
+    await update(ref(carromDb,"carromRooms/"+id),{status:nextPlayers.length>=2?"ready":"waiting",state:st});
+    $("matchCodeInput").value=id;
+    await watchRoom(id);
+    gameMsg(nextPlayers.length>=2?"✅ দুই Player যুক্ত হয়েছে। Game শুরু করা যাবে।":"Match-এ যুক্ত হয়েছেন। দ্বিতীয় Player-এর অপেক্ষা করুন।");
+  }catch(e){console.error(e);gameMsg(dbError(e));}
+}
+
+$("findMatchBtn").addEventListener("click",findMatch);
+$("cancelMatchBtn").addEventListener("click",cancelMatchSearch);
+$("packageCodeInput").addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase();packageCode=e.target.value.trim();});
+
+
+
+onAuthStateChanged(auth,async user=>{
+ currentUser=user;
+ if(!user){
+   gameBox.style.display="block";
+   gameMsg("⚠️ GameNest BD User App-এ আগে Login করুন, তারপর Carrom খুলুন।");
+   return;
+ }
+ gameBox.style.display="block";
+ try{
+   const ps=await get(ref(db,"users/"+user.uid));
+   currentProfile=ps.exists()?(ps.val()||{}):{};
+ }catch(e){currentProfile={};}
+ draw();
+ try{ if(packageCode){ $("packageCodeInput").value=packageCode; } if(purchaseId&&packageCode){ setTimeout(()=>findMatch(),600); } }catch(e){}
+});
+</script>
+</body>
+</html>
